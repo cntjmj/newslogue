@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="nlapp">
+<head>
+<meta charset="UTF-8">
+<title>AngularJS Debate Test</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="DebateController">
+  <section>
+    <div>newsID: {{news.newsID}}</div>
+    <div>{{dt|date:'dd-MM-yy'}}</div>
+    <div style="float:right">{{userID}}</div>
+    <div style="float:right">{{displayName}}</div>
+    <div>Title: {{news.newsTitle}}</div>
+    <div><img src="{{news.newsBannerSource}}"></div>
+    <div>Question: {{news.newsQuestion}}</div>
+    <div>
+      <div> {{percenty | number:0}}% agree</div>
+      <div style="float:right"> {{percentn | number:0}}% disagree</div>
+    </div>
+    <div>
+      <button name="voteyes" id="voteyes">vote yes {{userVoteNo()?"disabled":""}}</button>
+      <button name="voteno" id="voteno">vote no {{userVoteYes()?"disabled":""}}</button>
+    </div>
+    <div ng-show="userVoteYes()">
+      <form name="yesform" id="yesform">
+      <p>tell us why yes</p>
+      <textarea name="yesarea" id="yesarea" ng-model="yesarea"></textarea>
+      <button>submit yes</button>
+      </form>
+    </div>
+    <div ng-show="userVoteNo()">
+      <form name="noform" id="noform">
+      <p>tell us why no</p>
+      <textarea name="noarea" id="noarea" ng-model="noarea"></textarea>
+      <button>submit no</button>
+      </form>
+    </div>
+    <div ng-repeat="reply in replyList" style="border: 1px solid black">
+      <div>{{reply.replyID}}</div>
+      <div>{{reply.replyType}}</div>
+      <div>{{reply.displayName}}</div>
+      <div>{{str2date(reply.replyCreatedDateTime) | date:'dd-MM-yy'}}</div>
+      <div>{{reply.replyContent}}</div>
+      <div>Reply {{reply.subReplies.count}}</div>
+      <div>{{userLikeThisReply(reply)?"LIKE":"like"}} {{reply.likes.count}}</div>
+      <div ng-repeat="sub in reply.subReplies.list" style="border: 1px solid blue">
+        <div>{{sub.replyID}}</div>
+        <div>{{sub.displayName}}</div>
+        <div>{{str2date(sub.subreplyCreatedDateTime) | date:'dd-MM-yy'}}</div>
+        <div>{{sub.replyContent}}</div>
+      </div>
+    </div>
+  </section>
+  <script>
+	angular.module("nlapp", []).config(function($httpProvider) {
+	    //Enable cross domain calls
+	    $httpProvider.defaults.useXDomain = true;
+	}).controller("DebateController", function($scope, $http){
+		var newsID = 272;
+		
+		$http({method: 'GET', url: '//api.nl.com/auth', withCredentials: true}).success(
+			function (data, status, headers, config, statusText) {
+				if (typeof data.userID != 'undefined') {
+					$scope.userID = data.userID;
+					$scope.displayName = data.displayName;
+				}
+			}
+		);
+
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID, withCredentials: true}).success(
+			function (data, status, headers, config, statusText) {
+				if (typeof data.news != 'undefined') {
+					if (data.news.newsBannerSource.indexOf("://") < 0)
+						data.news.newsBannerSource = "//"+data.news.newsBannerSource;
+					$scope.news = data.news;
+				}
+			}
+		);
+		
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/reply', withCredentials: true}).success(
+			function (data, status, headers, config, statusText) {
+				if (typeof data.replyList != 'undefined') {
+					$scope.replyList = data.replyList;
+				}
+			}
+		);
+		
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/vote', withCredentials: true}).success(
+			function (data, status, headers, config, statusText) {
+				if (typeof data.vote != 'undefined') {
+					var vy = data.vote.agree.count;
+					var vn = data.vote.disagree.count;
+					
+					if (vy+vn > 0) {
+						$scope.percenty = vy * 100 / (vy+vn);
+						$scope.percentn = vn * 100 / (vy+vn);
+					} else {
+						$scope.percenty = 0;
+						$scope.percentn = 0;
+					}
+					
+					$scope.vote = data.vote;
+				}
+			}
+		);
+		
+		$scope.userVoteYes = function() {
+			for (i in $scope.vote.agree.votes) {
+				if ($scope.userID == $scope.vote.agree.votes[i].userID) {
+					return true;
+				}
+			}
+			
+			return false;
+		};
+		
+		$scope.userVoteNo = function() {
+			for (i in $scope.vote.disagree.votes) {
+				if ($scope.userID == $scope.vote.disagree.votes[i].userID)
+					return true;
+			}
+			return false;
+		}
+		
+		$scope.userLikeThisReply = function(reply) {
+			if (typeof reply.likes != 'undefined') {
+				for (i in reply.likes.list) {
+					if ($scope.userID == reply.likes.list[i].userID)
+						return true;
+				}
+			}
+
+			return false;
+		}
+		
+		$scope.str2date = function(str) {
+			return new Date(str);
+		}
+	});
+  </script>
+</body>
+</html>

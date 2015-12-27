@@ -1,0 +1,371 @@
+div.success,div.error{
+    color:#333333;
+    margin: 10px auto;
+    padding: 10px;
+    width: 95% ;
+    font-weight: bold
+}
+
+.success{
+    background: #6faa55;
+    border: 1px solid #3b6e22;
+}
+div.error{
+    background: #ffebe8;
+    border: 1px solid #dd3c10
+}
+label.error{
+    color: red;
+    display: block
+}
+
+.button.icon:before {
+    content: "";
+    position: relative; 
+    top: 1px; 
+    float:left;
+    width: 12px; 
+    height: 12px; 
+    margin: 0 0.75em 0 -0.25em; 
+    background: url(../graphic/gh-icons.png) 0 99px no-repeat;
+}
+
+
+.button.remove.icon:before { background-position: 0 -60px; }
+.button.remove.icon:hover:before,
+.button.remove.icon:focus:before,
+.button.remove.icon:active:before { background-position: -12px -60px; }
+
+
+.button.edit.icon:before { background-position: 0 -264px; }
+.button.edit.icon:hover:before,
+.button.edit.icon:focus:before,
+.button.edit.icon:active:before { background-position: -12px -264px; }
+
+
+.button.favorite.icon:before { background-position: 0 -348px; }
+.button.favorite.icon:hover:before,
+.button.favorite.icon:focus:before,
+.button.favorite.icon:active:before { background-position: -12px -348px; }
+
+
+.button.add.icon:before { background-position: 0 -288px; }
+.button.add.icon:hover:before,
+.button.add.icon:focus:before,
+.button.add.icon:active:before { background-position: -12px -288px; }
+
+
+.button.tag.icon:before { background-position: 0 -324px; }
+.button.tag.icon:hover:before,
+.button.tag.icon:focus:before,
+.button.tag.icon:active:before { background-position: -12px -324px; }
+
+
+
+.button.danger {
+    color: #900;
+}
+
+.button.danger:hover,
+.button.danger:focus,
+.button.danger:active {     
+    border-color: #b53f3a;
+    border-bottom-color: #a0302a;
+    color: #fff; 
+    background-color: #dc5f59;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc5f59), to(#b33630));
+    background-image: -moz-linear-gradient(#dc5f59, #b33630);
+    background-image: -o-linear-gradient(#dc5f59, #b33630);
+    background-image: linear-gradient(#dc5f59, #b33630);
+}
+
+
+.button { 
+    position: relative; 
+    overflow: visible; 
+    display: inline-block; 
+    padding: 0.5em 1em; 
+    border: 1px solid #d4d4d4; 
+    margin: 0;
+    text-decoration: none; 
+    text-shadow: 1px 1px 0 #fff; 
+    font:11px/normal sans-serif; 
+    color: #333; 
+    white-space: nowrap; 
+    cursor: pointer; 
+    outline: none; 
+    background-color: #ececec;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
+    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
+    background-image: -o-linear-gradient(#f4f4f4, #ececec);
+    background-image: linear-gradient(#f4f4f4, #ececec);
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    -o-background-clip: padding-box; 
+    /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
+    -webkit-border-radius: 0.2em; 
+    -moz-border-radius: 0.2em; 
+    border-radius: 0.2em; 
+    /* IE hacks */
+    zoom: 1; 
+    *display: inline; 
+}
+
+.button:hover,
+.button:focus,
+.button:active,
+.button.active {
+    border-color: #3072b3;
+    border-bottom-color: #2a65a0;
+    text-decoration: none; 
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
+    color: #fff; 
+    background-color: #3C8DDE;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+    background-image: -moz-linear-gradient(#599bdc, #3072b3);
+    background-image: -o-linear-gradient(#599bdc, #3072b3);
+    background-image: linear-gradient(#599bdc, #3072b3);
+}
+
+.button:active,
+.button.active, {
+    border-color: #2a65a0;
+    border-bottom-color: #3884CF;
+    background-color: #3072b3;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3072b3), to(#599bdc));
+    background-image: -moz-linear-gradient(#3072b3, #599bdc);
+    background-image: -o-linear-gradient(#3072b3, #599bdc);
+    background-image: linear-gradient(#3072b3, #599bdc);
+}
+
+
+/* overrides extra padding on button elements in Firefox */
+.button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+
+.button.primary {
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------------- BUTTON GROUPS */
+
+/* ............................................................................................................. Standard */
+
+.button-group {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* IE hacks */
+    zoom: 1; 
+    *display: inline; 
+}
+
+.button + .button,
+.button + .button-group,
+.button-group + .button,
+.button-group + .button-group {
+    margin-left: 15px;
+}
+
+.button-group li {
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+.button-group .button {
+    float: left;
+    margin-left: -1px; 
+}
+
+.button-group > .button:not(:first-child):not(:last-child),
+.button-group li:not(:first-child):not(:last-child) .button { 
+    -webkit-border-radius: 0; 
+    -moz-border-radius: 0; 
+    border-radius: 0; 
+}
+
+.button-group > .button:first-child,
+.button-group li:first-child .button { 
+    margin-left: 0; 
+    -webkit-border-top-right-radius: 0; 
+    -webkit-border-bottom-right-radius: 0; 
+    -moz-border-radius-topright: 0; 
+    -moz-border-radius-bottomright: 0; 
+    border-top-right-radius: 0; 
+    border-bottom-right-radius: 0; 
+}
+
+.button-group > .button:last-child,
+.button-group li:last-child > .button { 
+    -webkit-border-top-left-radius: 0; 
+    -webkit-border-bottom-left-radius: 0; 
+    -moz-border-radius-topleft: 0; 
+    -moz-border-radius-bottomleft: 0; 
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0; 
+}
+
+/* ............................................................................................................. Minor */
+
+.button-group.minor-group .button {
+    border: 1px solid #d4d4d4; 
+    text-shadow: none;
+    background-image: none;
+    background-color: #fff;
+}
+
+.button-group.minor-group .button:hover,
+.button-group.minor-group .button:focus,
+.button-group.minor-group .button:active {
+    background-color: #599bdc;
+}
+
+.button-group.minor-group .button:active,
+.button-group.minor-group .button.active {
+    background-color: #3072b3;
+}
+
+.button-group.minor-group .button.icon:before {
+    opacity: 0.8;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- BUTTON CONTAINER */
+/* For mixing buttons and button groups, e.g., in a navigation bar */
+
+.button-container .button,
+.button-container .button-group {
+    vertical-align: top;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+table {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #282828;
+  margin-bottom: 16px;
+  padding: 5px;
+  width: 100%;
+}
+
+thead, th {
+  background: #eee;
+  font-weight: bold;
+  text-align: left;
+}
+
+tr { border-bottom: 1px solid #ddd }
+td{
+    font-weight: normal
+}
+td, th {
+  border-right: 1px solid #ddd;
+  padding: 10px;
+  font-size: 12px;
+  
+}
+th{
+    height: 20px;
+    
+}
+
+#form_list li{
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    padding: 13px 0;
+}
+
+#form_list li:first-child { border-top: none }
+#form_list li:last-child { border-bottom: none }
+
+#form_list .field_label{
+    float: left;
+	padding: 8px 4px 4px 4px;
+	height: 18px;
+    width: 15%;
+}
+
+#form_list .field_input{
+    float: left;
+	margin-left: 20px;
+    width: 80%
+}
+
+#form_list input[type=text],#form_list input[type=password]{
+    
+}
+
+
+
+select{
+    text-transform: none;
+    border-radius: 3px;
+    border: 1px solid #c9c9c9;
+    color: #404040;
+    font-size: 11px;
+    height: 30px;
+    margin-bottom: 3px;
+    padding: 7px 6px 5px 6px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+select option{
+    padding: 5px 6px;
+}
+
+
+/* Pagination nested */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+	height: 19px;
+	width: 19px;
+	margin-left: 3px;
+	float: left;
+}
+
+.paginate_disabled_previous {
+	background-image: url('../graphic/back_disabled.png');
+}
+
+.paginate_enabled_previous {
+	background-image: url('../graphic/back_enabled.png');
+	cursor: pointer;
+}
+
+.paginate_disabled_next {
+	background-image: url('../graphic/forward_disabled.png');
+}
+
+.paginate_enabled_next {
+	background-image: url('../graphic/forward_enabled.png');
+	cursor: pointer;
+}
+
+
+#subtable { border: 0; border-collapse: collapse}
+#subtable tr td{ background: #e1e1e1; border: 0; padding: 3px; vertical-align: top}

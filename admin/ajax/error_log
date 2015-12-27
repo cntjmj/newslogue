@@ -1,0 +1,13 @@
+[22-Apr-2015 08:26:24 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[22-Apr-2015 08:29:06 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:11:49 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:14:15 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:15:18 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:16:16 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:23:13 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[23-Apr-2015 00:23:59 UTC] PHP Fatal error:  Class 'ImageManipulator' not found in /home/newslogu/public_html/staging2015/admin/ajax/ajax_crop_banner.php on line 9
+[20-Jul-2015 01:15:18 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/soap.so' - /usr/lib/php/modules/soap.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[20-Jul-2015 01:15:25 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/soap.so' - /usr/lib/php/modules/soap.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Aug-2015 05:15:13 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/soap.so' - /usr/lib/php/modules/soap.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Aug-2015 05:15:31 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/soap.so' - /usr/lib/php/modules/soap.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Aug-2015 05:15:54 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/soap.so' - /usr/lib/php/modules/soap.so: cannot open shared object file: No such file or directory in Unknown on line 0
