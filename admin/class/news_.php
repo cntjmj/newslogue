@@ -43,8 +43,8 @@
                 if($newsStatus == "")
                     $errorArray[] = "News Status is required.";
 
-                if($newsBanner == "" && $action == "Add")
-                    $errorArray[] = "News Banner is required.";
+                //if($newsBanner == "" && $action == "Add")
+                //    $errorArray[] = "News Banner is required.";
 
                 return $errorArray;
             }
@@ -61,27 +61,28 @@
             $newsStartDate = $admin_database->cleanXSS($postVar["newsStartDate"]);
             $newsStatus = $admin_database->cleanXSS(@$postVar["newsStatus"]);
             $newsQuestion = $admin_database->cleanXSS(@$postVar["newsQuestion"]);
-            $newsBanner = @$_FILES["banner"]["name"];
+            $newsBanner = ""; //@$_FILES["banner"]["name"];
             $newsBannerSource = $admin_database->cleanXSS(@$postVar['newsBannerSource']);
             $newsSource = $admin_database->cleanXSS(@$postVar['newsSource']);
             $nowDateTime = date("Y-m-d H:i:s");
+            $adminID = $_SESSION["adminID"];
 
             if($newsPermalink == "")
                 $newsPermalink == str_ireplace(" ","-",$newsTitle);
 
             if($newsBanner != ""){
-            	$banner_str_replaced = $this->ProcessBanner($_FILES["banner"]);
+            	$newsBanner = $this->ProcessBanner($_FILES["banner"]);
             }
             $newsStartDateArr = explode("-",$newsStartDate);
             $newsStartDate = $newsStartDateArr[2]."-".$newsStartDateArr[1]."-".$newsStartDateArr[0];
 
             unset($variable);
-            $qry = "insert into newsarticle ( categoryID,newsPermalink,newsBanner, newsBannerSource, newsSource,newsTitle,newsDesc,newsTag,newsContent,newsQuestion,newsStartDate,newsStatus,createdDateTime,updatedDateTime )
-                    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $qry = "insert into newsarticle ( categoryID,newsPermalink,newsBanner, newsBannerSource, newsSource,newsTitle,newsDesc,newsTag,newsContent,newsQuestion,newsStartDate,newsStatus,adminID,createdDateTime,updatedDateTime )
+                    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             $variable[] = array("i", $categoryID);
             $variable[] = array("s", $newsPermalink);
-            $variable[] = array("s", $banner_str_replaced);
+            $variable[] = array("s", $newsBanner);
 //           Testing
             $variable[] = array("s", $newsBannerSource);
             $variable[] = array("s", $newsSource);
@@ -95,6 +96,7 @@
             $variable[] = array("s", $newsQuestion);
             $variable[] = array("s", $newsStartDate);
             $variable[] = array("s", $newsStatus);
+            $variable[] = array("s", $adminID);
             $variable[] = array("s", $nowDateTime);
             $variable[] = array("s", $nowDateTime);
             $result = $admin_database->query("insert",$qry,$connection,$variable);
@@ -124,13 +126,14 @@
             $newsStartDate = $admin_database->cleanXSS($postVar["newsStartDate"]);
             $newsStatus = $admin_database->cleanXSS(@$postVar["newsStatus"]);
             $newsQuestion = $admin_database->cleanXSS(@$postVar["newsQuestion"]);
-            $newsBanner = @$_FILES["banner"]["name"];
+            $newsBanner = ""; //@$_FILES["banner"]["name"];
 
 //            Testing
             $newsBannerSource = $admin_database->cleanXSS(@$postVar['newsBannerSource']);
             $newsSource = $admin_database->cleanXSS(@$postVar['newsSource']);
 
             $nowDateTime = date("Y-m-d H:i:s");
+            $adminID = $_SESSION["adminID"];
 
             $variable = array();
             $extraSQL = "";
@@ -141,10 +144,10 @@
 
 
             if($newsBanner != ""){
-            	$banner_str_replaced = $this->ProcessBanner($_FILES["banner"]);
+            	$newsBanner = $this->ProcessBanner($_FILES["banner"]);
 
                 $extraSQL = "newsBanner= ?,";
-                $variable[] = array("s", $banner_str_replaced);
+                $variable[] = array("s", $newsBanner);
             }
             $newsStartDateArr = explode("-",$newsStartDate);
             $newsStartDate = $newsStartDateArr[2]."-".$newsStartDateArr[1]."-".$newsStartDateArr[0];
@@ -165,6 +168,7 @@
                     newsQuestion= ?,
                     newsStartDate= ?,
                     newsStatus= ?,
+                    adminID=?,
                     updatedDateTime = ?
                     where newsID = ?";
             $variable[] = array("i", $categoryID);
@@ -183,6 +187,7 @@
             $variable[] = array("s", $newsQuestion);
             $variable[] = array("s", $newsStartDate);
             $variable[] = array("s", $newsStatus);
+            $variable[] = array("s", $adminID);
             $variable[] = array("s", $nowDateTime);
             $variable[] = array("i", $newsID);
 
@@ -210,7 +215,9 @@
 
 			$returnArray["TotalResult"] = $totalItem;
 
-			$statement = "select * from `newsarticle` order by createdDateTime desc limit ".($pageNo-1)*$itemPerPage.",".$itemPerPage;
+			$statement = "select newsarticle.*, administrator.username as adminName from `newsarticle`
+					inner join `administrator` on newsarticle.adminID=administrator.adminID 
+					order by createdDateTime desc limit ".($pageNo-1)*$itemPerPage.",".$itemPerPage;
 			$result2 = $admin_database->query("select",$statement,$connection,$variable);
 
 

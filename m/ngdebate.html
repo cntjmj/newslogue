@@ -5,6 +5,7 @@
 <title>AngularJS Debate Test</title>
 <script src="js/jquery.min.js"></script>
 <script src="js/angular.min.js"></script>
+<script src="js/angular-sanitize.min.js"></script>
 </head>
 <body ng-controller="DebateController">
   <section>
@@ -20,21 +21,23 @@
       <div style="float:right"> {{percentn | number:0}}% disagree</div>
     </div>
     <div>
-      <button name="voteyes" id="voteyes">vote yes {{userVoteNo()?"disabled":""}}</button>
-      <button name="voteno" id="voteno">vote no {{userVoteYes()?"disabled":""}}</button>
+      <button name="voteAgree" id="voteAgree" ng-click="submitAgree()">agree {{userVoteDisagree()?"disabled":""}}</button>
+      <button name="voteNo" id="voteNo" ng-click="submitDisagree()">disagree {{userVoteAgree()?"disabled":""}}</button>
     </div>
-    <div ng-show="userVoteYes()">
-      <form name="yesform" id="yesform">
+    <div ng-show="userVoteAgree()">
+      <form name="agreeForm" id="agreeForm" ng-submit="submitReply('agree')" novalidate>
       <p>tell us why yes</p>
-      <textarea name="yesarea" id="yesarea" ng-model="yesarea"></textarea>
-      <button>submit yes</button>
+      <textarea name="agreeArea" id="agreeArea" ng-model="agreeArea" required></textarea>
+      <p style="color:red" ng-show="!agreeAreaValid">please input something here</p>
+      <button type="submit">submit yes</button>
       </form>
     </div>
-    <div ng-show="userVoteNo()">
-      <form name="noform" id="noform">
+    <div ng-show="userVoteDisagree()">
+      <form name="disagreeForm" id="disagreeForm" ng-submit="submitReply('disagree')" novalidate>
       <p>tell us why no</p>
-      <textarea name="noarea" id="noarea" ng-model="noarea"></textarea>
-      <button>submit no</button>
+      <textarea name="disagreeArea" id="disagreeArea" ng-model="disagreeArea" required></textarea>
+      <p style="color:red" ng-show="!disagreeAreaValid">please input something here</p>
+      <button type="submit">submit no</button>
       </form>
     </div>
     <div ng-repeat="reply in replyList" style="border: 1px solid black">
@@ -42,9 +45,10 @@
       <div>{{reply.replyType}}</div>
       <div>{{reply.displayName}}</div>
       <div>{{str2date(reply.replyCreatedDateTime) | date:'dd-MM-yy'}}</div>
-      <div>{{reply.replyContent}}</div>
+      <!--div>{{reply.replyContent}}</div-->
+      <div ng-bind-html="reply.replyContent"></div>
       <div>Reply {{reply.subReplies.count}}</div>
-      <div>{{userLikeThisReply(reply)?"LIKE":"like"}} {{reply.likes.count}}</div>
+      <div><a href="javascript:;" ng-click="submitReply('like', reply.replyID)">{{userLikeThisReply(reply)?"LIKE":"like"}}</a> {{reply.likes.count}}</div>
       <div ng-repeat="sub in reply.subReplies.list" style="border: 1px solid blue">
         <div>{{sub.replyID}}</div>
         <div>{{sub.displayName}}</div>
@@ -54,13 +58,17 @@
     </div>
   </section>
   <script>
-	angular.module("nlapp", []).config(function($httpProvider) {
+	angular.module("nlapp", ['ngSanitize']).config(function($httpProvider) {
 	    //Enable cross domain calls
 	    $httpProvider.defaults.useXDomain = true;
+	    $httpProvider.defaults.withCredentials = true;
+	    $httpProvider.defaults.headers.post = {
+			    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+		  };
 	}).controller("DebateController", function($scope, $http){
 		var newsID = 272;
 		
-		$http({method: 'GET', url: '//api.nl.com/auth', withCredentials: true}).success(
+		$http({method: 'GET', url: '//api.nl.com/auth'}).success(
 			function (data, status, headers, config, statusText) {
 				if (typeof data.userID != 'undefined') {
 					$scope.userID = data.userID;
@@ -69,7 +77,7 @@
 			}
 		);
 
-		$http({method: 'GET', url: '//api.nl.com/news/'+newsID, withCredentials: true}).success(
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID}).success(
 			function (data, status, headers, config, statusText) {
 				if (typeof data.news != 'undefined') {
 					if (data.news.newsBannerSource.indexOf("://") < 0)
@@ -79,7 +87,7 @@
 			}
 		);
 		
-		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/reply', withCredentials: true}).success(
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/reply'}).success(
 			function (data, status, headers, config, statusText) {
 				if (typeof data.replyList != 'undefined') {
 					$scope.replyList = data.replyList;
@@ -87,26 +95,30 @@
 			}
 		);
 		
-		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/vote', withCredentials: true}).success(
-			function (data, status, headers, config, statusText) {
-				if (typeof data.vote != 'undefined') {
-					var vy = data.vote.agree.count;
-					var vn = data.vote.disagree.count;
-					
-					if (vy+vn > 0) {
-						$scope.percenty = vy * 100 / (vy+vn);
-						$scope.percentn = vn * 100 / (vy+vn);
-					} else {
-						$scope.percenty = 0;
-						$scope.percentn = 0;
-					}
-					
-					$scope.vote = data.vote;
+		var updateVoteResult = function(data) {
+			if (typeof data.vote != 'undefined') {
+				var vy = data.vote.agree.count;
+				var vn = data.vote.disagree.count;
+
+				if (vy+vn > 0) {
+					$scope.percenty = vy * 100 / (vy+vn);
+					$scope.percentn = vn * 100 / (vy+vn);
+				} else {
+					$scope.percenty = 0;
+					$scope.percentn = 0;
 				}
+				
+				$scope.vote = data.vote;
+			}			
+		};
+		
+		$http({method: 'GET', url: '//api.nl.com/news/'+newsID+'/vote'}).success(
+			function (data, status, headers, config, statusText) {
+				updateVoteResult(data);
 			}
 		);
 		
-		$scope.userVoteYes = function() {
+		$scope.userVoteAgree = function() {
 			for (i in $scope.vote.agree.votes) {
 				if ($scope.userID == $scope.vote.agree.votes[i].userID) {
 					return true;
@@ -116,13 +128,13 @@
 			return false;
 		};
 		
-		$scope.userVoteNo = function() {
+		$scope.userVoteDisagree = function() {
 			for (i in $scope.vote.disagree.votes) {
 				if ($scope.userID == $scope.vote.disagree.votes[i].userID)
 					return true;
 			}
 			return false;
-		}
+		};
 		
 		$scope.userLikeThisReply = function(reply) {
 			if (typeof reply.likes != 'undefined') {
@@ -133,11 +145,85 @@
 			}
 
 			return false;
-		}
+		};
 		
 		$scope.str2date = function(str) {
 			return new Date(str);
+		};
+		
+		var submitVote = function(vote) {
+			var urlVote = "//api.nl.com/news/"+$scope.news.newsID+"/vote";
+			var postData = "voteType="+vote;
+			$http({	method: 'post', url: urlVote, data: postData}).success(
+					function(data, status, headers, config, statusText){
+						updateVoteResult(data);
+					});
+		};
+		
+		$scope.submitAgree = function() {
+			submitVote("agree");
+		};
+		
+		$scope.submitDisagree = function() {
+			submitVote("disagree");
+		};
+		
+		var updateReply = function(data) {
+			if (typeof data.reply != 'undefined' && data.reply.replyID > 0) {
+				var replyList = [data.reply];
+				$.merge(replyList, $scope.replyList);
+				$scope.replyList = replyList;
+				
+				return true;
+			}
+			return false;
 		}
+		
+		$scope.agreeAreaValid = true;
+		$scope.disagreeAreaValid = true;
+
+		$scope.submitReply = function(replyType, replyID) {
+			$scope.agreeAreaValid = true;
+			$scope.disagreeAreaValid = true;
+			
+			if (replyType == "agree") {
+				$scope.agreeAreaValid = $scope.agreeForm.agreeArea.$valid;
+				
+				if ($scope.agreeForm.$valid) {
+					var urlReply = "//api.nl.com/news/"+$scope.news.newsID+"/reply";
+					if (replyID > 0)
+						urlReply += "/"+replyID;
+					var postData = {
+							replyType: replyType,
+							replyContent: $scope.agreeArea
+						}
+					$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
+							function(data, status, headers, config, statusText) {
+								if (updateReply(data))
+									$scope.agreeArea = "";
+							});
+				}
+			} else if (replyType == "disagree") {
+				$scope.disagreeAreaValid = $scope.disagreeForm.disagreeArea.$valid;
+				
+				if ($scope.disagreeForm.$valid) {
+					var urlReply = "//api.nl.com/news/"+$scope.news.newsID+"/reply";
+					if (replyID > 0)
+						urlReply += "/"+replyID;
+					var postData = {
+							replyType: replyType,
+							replyContent: $scope.disagreeArea
+						}
+					$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
+							function(data, status, headers, config, statusText) {
+								if (updateReply(data))
+									$scope.disagreeArea = "";
+							});
+				}
+			} else if (replyType == "like") {
+				alert(replyID);
+			} 
+		};
 	});
   </script>
 </body>

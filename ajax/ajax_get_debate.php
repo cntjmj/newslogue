@@ -90,7 +90,14 @@
 				    <div>
 				    <!--a href="news/<?php echo $newsRstArr["newsID"] ?>/<?php echo $newsRstArr["newsPermalink"] ?>"-->
 				    <a href="<?=(false===stripos($newsRstArr["newsSource"],"http")?"http://".$newsRstArr["newsSource"]:$newsRstArr["newsSource"])?>" target="_blank">
-				      <img src="uploads/banner/thumbnail/<?=$newsRstArr['newsBanner']?>">
+				      <img src="
+				      												<?php
+																		$newsBannerSource = $newsRstArr['newsBannerSource'];
+																		if (false === strpos($newsBannerSource, "://"))
+																			$newsBannerSource = "//".$newsBannerSource;
+																		echo $newsBannerSource;
+																	?>
+							">
 				    </a>
 				    </div>
 					<img src="img/quote-mark-open.png" />

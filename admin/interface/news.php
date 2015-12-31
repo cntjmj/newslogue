@@ -86,6 +86,8 @@
             $newsSource = $getDetailsRstArray["newsSource"];
         }
 
+        if (false === strpos($newsBannerSource, "://"))
+        	$newsBannerSource = 'http://' . $newsBannerSource;
 
         if($action == "Delete" && count($getDetailsRstArray) > 0 && is_array($getDetailsRstArray))
         {
@@ -135,8 +137,9 @@
                         echo "<div class='".$notificationClass."'>".$notificationMsg."</div>";
                 ?>
                 </div>
-                <form method="post" enctype="multipart/form-data" id="user_form" name="user_form">
-                    <ul id="form_list">
+                <form method="post" enctype="multipart/form-data" id="user_form" name="user_form" ng-controller="adminController"
+                	action="<?=$_SERVER["REQUEST_URI"]?>">
+                    <ul id="form_list" >
                         <li>
                             <div class="field_label">Category Name</div>
                             <div class="field_input" >
@@ -150,9 +153,11 @@
                         <li>
                         	<div class="field_label">News Banner</div>
                         	<div class="field_input" >
+                        		<img src="{{newsBannerSource}}">
+                        		<!-- 
                                 <input type="file" size="8" name="banner" />
                                 <?php
-
+									/*
                                     if(@$getDetailsRstArray["newsBanner"] != "")
                                     {
                                         $bannerFileLocation = '../uploads/banner/thumbnail/' . $getDetailsRstArray["newsBanner"];
@@ -171,9 +176,9 @@
                                             echo "file doesn't exist";
                                         }
                                     }
-
-
+									*/
                                 ?>
+                                -->
                             </div>
                         	<div class="clr"></div>
                         </li>
@@ -181,7 +186,7 @@
                         <li>
                         	<div class="field_label">News Banner Source</div>
                         	<div class="field_input" >
-                                <?=generateInput("text","newsBannerSource","","newsBannerSource",$newsBannerSource)?>
+                                <?=generateInput("text","newsBannerSource","","newsBannerSource",@$newsBannerSource,"ng-model=\"newsBannerSource\"")?>
                             </div>
                         	<div class="clr"></div>
                         </li>
@@ -189,7 +194,7 @@
                         <li>
                         	<div class="field_label">News Source</div>
                         	<div class="field_input" >
-                                <?=generateInput("text","newsSource","","newsSource",$newsSource)?>
+                                <?=generateInput("text","newsSource","","newsSource",@$newsSource)?>
                             </div>
                         	<div class="clr"></div>
                         </li>
@@ -326,7 +331,7 @@
                         </li>
 					</ul>
                     <input type="hidden" name="cmd" value="<?=($action == "Add")? "Add": "Edit"?>" />
-                    <input type="submit" name="submit" value="Submit" class="primary button" onclick="MakeLinkSafe();"/>
+                    <input type="submit" name="submit" value="Submit" class="primary button" /><!-- onclick="MakeLinkSafe();"/>-->
                     <input type="reset" value="Reset" class="button"/>
                 </form>
             <?
@@ -343,10 +348,11 @@
                     <table>
                         <tr>
                             <th width="2%">No.</th>
-                            <th width="35%">News Title</th>
+                            <th width="30%">News Title</th>
                             <th width="30%">Question</th>
                             <th width="10%">Start Date</th>
-                            <th width="7%">Status</th>
+                            <th width="5%">Status</th>
+                            <th width="7%">Author</th>
                             <th width="15%">Action</th>
                             
                         </tr>
@@ -365,6 +371,7 @@
                                         <td><?=$value["newsQuestion"]?></td>
                                         <td><?=$newsStartDate?></td>
                                         <td><?=$value['newsStatus']?></td>
+                                        <td><?=$value['adminName']?>
                                         <td>
                                             <span class="button-group">
                                             <a title="Edit News" class="button icon edit" href="<?=$GLOBAL_ADMIN_SITE_URL.$module_name."&action=Edit&newsID=".$value["newsID"]?>">Edit</a>
@@ -399,8 +406,17 @@
     </div>
 </div>
 
+
 <script type="text/javascript">
 
+	angular.module("nlapp", ['ngSanitize']).controller("adminController", function($scope, $sce){
+			$scope.trustedBanner = function() {
+				var src = $scope.newsBannerSource;
+				alert(src);
+				return $sce.trustAsResourceUrl(src);
+			};
+			$scope.newsBannerSource = "<?=@$newsBannerSource?>";//"http://www.theage.com.au/content/dam/images/g/l/9/5/m/q/image.related.articleLeadwide.620x349.gl8xfw.png/1448630104271.jpg";
+		});
 
 
     $(function(){
@@ -563,6 +579,8 @@ var cropYAxis = 0;
             try {
             	if (document.getElementsByName('categoryID')[0].value == "")
                 	errormsg += "Category Name is required.<br>";
+                if (document.getElementsByName('newsBannerSource')[0].value == "")
+                    errormsg += "News Banner Source is required.<br>";
             	if (document.getElementsByName('newsTitle')[0].value == "")
                 	errormsg += "News Title is required.<br>";
                 if (document.getElementsByName('newsPermalink')[0].value == "")
@@ -577,6 +595,7 @@ var cropYAxis = 0;
                     errormsg += "News Start Date is required.<br>";
                 if (document.getElementsByName('newsStatus')[0].value == "")
                     errormsg += "News Status is required.<br>";
+                /*
                 if ($("#AddNewsThoughts").attr("newsID") == 0) {
 	                var banner_file = document.getElementsByName('banner')[0].value;
 	                if (banner_file == "")
@@ -587,6 +606,7 @@ var cropYAxis = 0;
 	    	        		errormsg += "News Banner field must be in jpg, jpeg, gif or png.<br>";
 	                }
                 }
+                */
             } catch(e) {
                 ;
             }
