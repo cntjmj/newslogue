@@ -9,7 +9,7 @@
 //    require_once('FirePHPCore/fb.php');
 //    ob_start();
 
-    $whitelist = array('localhost','localhost:8888', '127.0.0.1');
+    $whitelist = array('localhost','www.nl.com', '127.0.0.1');
 
     if(!in_array($_SERVER['HTTP_HOST'], $whitelist))
     {
@@ -19,7 +19,7 @@
     else
     {
 
-        $GLOBAL_WEB_ROOT                = "http://localhost/newslogue/";
+        $GLOBAL_WEB_ROOT                = "http://www.nl.com/";
         $connection = new mysqli('127.0.0.1', 'root', 'passw0rd', 'newslogu_v1');
         
         error_reporting(-1);

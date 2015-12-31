@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="nlapp">
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -21,6 +21,8 @@
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>jquery.limit-1.2.source.js"></script>
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>cropper.min.js"></script>
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>main.js"></script>
+    <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>angular.min.js"></script>
+    <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>angular-sanitize.min.js"></script>
 
 	<title>Admin CMS</title>
 </head>
