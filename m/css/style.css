@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/* CSS Document */
+
+*{margin:0; padding:0;}
+.clear {clear:both;}
+img {vertical-align:middle;}
+#container{ width:100%; min-height:200px; min-width:480px;}
+section {padding:20px 0; width:95%; margin:0 auto; border-bottom:2px solid #2d2d2d;}
+
+
+a:link, a:visited {color:#6d7579; font-family: 'Istok Web', sans-serif; text-decoration:none;}
+a:hover {color:#2d2d2d;}
+a:active {background-color:#fff054; color:#2d2d2d; font-family: 'Istok Web', sans-serif;}
+
+h1 {font-size:16px; font-family: 'Istok Web', sans-serif; text-align:right; }
+p {}
+
+/* HEADER INDEX */
+header {padding-top:40px;}
+.photo_head img{width:100%;}
+
+
+/* ARTICLE */
+.photo_article img{width:100%; padding-top:5px;}
+.text_article {padding:10px 10px 0 10px;}
+.text_article a {color:#2d2d2d; text-decoration:none;}
+.text_article p {font-size:16px; font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; }
+
+.question_bar {width:96%; height:auto; background-color:#fff054; margin-top:10px; padding:2%;}
+.question_article {width:100%; height:auto; padding-top:5px; float:left; }
+.question_article h1 {font-family: 'Istok Web', sans-serif; font-size:12px; text-align:center; color:#2d2d2d;}
+.question_btn {width:100%; background-color:#2d2d2d; float:left; text-align:center; margin-top:10px;}
+.question_btn ul {list-style:none; padding-top:5px;}
+.question_btn ul li {display:inline; text-align:center;}
+.question_btn ul li a {color:#fff054; font-family: 'Istok Web', sans-serif; font-size:16px; text-decoration:none;}
+
+
+
+/* LOAD MORE */
+.loadmore {text-align:center; font-family: 'Istok Web', sans-serif; font-size:12px; color:#2d2d2d;}
+
+/* LOAD MORE */
+footer {padding-top:70px; padding-bottom:70px;  background-color:#2d2d2d;}
+.box_footer {width:80%; margin:0 auto; text-align: center;}
+.box_footer h1 {text-align:center; color:#fff054; font-size:20px; font-family: 'Istok Web', sans-serif; }
+.box_footer li {list-style:none; }
+.box_footer li a { color:#fff; font-family: 'Istok Web', sans-serif; font-size:20px;}
+
+.copyright { text-align:center; padding-top:40px;}
+.copyright h6 {font-size:14px; color:#fff;}
+
+
+
+@media all and (min-width: 1081px) {
+	#container{ display:none;}}
+
+
+
+
+

@@ -60,7 +60,13 @@ class Database {
 	}
 	
 	public function count($query) {
-		echo "count";
+		$count = 0;
+
+		$row = $this->mysqli->query($query)->fetch_row();
+		if (is_array($row))
+			$count = $row[0];
+		
+		return $count;
 	}
 	
 	public function insert($query) {

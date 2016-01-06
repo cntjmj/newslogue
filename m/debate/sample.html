@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Newslogue Home</title>
+
+<!--CSS-->
+<link rel="stylesheet" href="style.css">	
+
+<!--CSS MENU-->
+<link rel="stylesheet" href="css/menu.css">
+
+<!--CSS SLIDER-->
+<link rel="stylesheet" href="css/responsiveslides.css">
+
+<!--ADD COMMENT-->
+<link rel="stylesheet" href="css/comment-form.css">
+
+
+<!-- FONT AWESOME -->
+<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- GOOGLE FONT -->
+<link href="css/gfont.css" rel='stylesheet' type='text/css'>
+
+
+
+<!--JS MENU-->
+<script src="js/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/script.js"></script>
+
+<!--JS SLIDER-->
+<script src="js/jquery.min.js"></script>
+<script src="js/responsiveslides.min.js"></script>
+<script>
+	  $(function() {
+		$(".rslides").responsiveSlides();
+        $("#nl-singlearticle-agree-btn").on("click", function(){
+            $(".nl-singlearticle-commentarea-agree").css({"display":"block"});
+            $(".nl-singlearticle-commentarea-disagree").css({"display":"none"});
+            $("#nl-singlearticle-agree-btn").parent().css({"background-color":"#66d48d"});
+            $("#nl-singlearticle-disagree-btn").parent().css({"background-color":"#eeeeee"});
+        });
+        $("#nl-singlearticle-disagree-btn").on("click", function(){
+            $(".nl-singlearticle-commentarea-agree").css({"display":"none"});
+            $(".nl-singlearticle-commentarea-disagree").css({"display":"block"});
+            $("#nl-singlearticle-agree-btn").parent().css({"background-color":"#eeeeee"});
+            $("#nl-singlearticle-disagree-btn").parent().css({"background-color":"#6b8593"});
+        });
+        $(".nl-singleartile-agreecomment-href").on("click", function(){
+            if ($(this).parent().attr("class").indexOf("nl-singlearticle-agreecomment") >= 0) {
+                $(this).parent().removeClass("nl-singlearticle-agreecomment").addClass("agreecomment-open");
+                $(this).parent().find("form").css({"display":"block"});
+                $(this).parent().find(".replaycomment").css({"display":"block"});
+            } else {
+                $(this).parent().removeClass("agreecomment-open").addClass("nl-singlearticle-agreecomment");
+                $(this).parent().find("form").css({"display":"none"});
+                $(this).parent().find(".replaycomment").css({"display":"none"});
+            }
+        });
+        $(".nl-singleartile-disagreecomment-href").on("click", function(){
+            if ($(this).parent().attr("class").indexOf("nl-singlearticle-disagreecomment") >= 0) {
+                $(this).parent().removeClass("nl-singlearticle-disagreecomment").addClass("disagreecomment-open");
+                $(this).parent().find("form").css({"display":"block"});
+                $(this).parent().find(".replaycomment").css({"display":"block"});
+            } else {
+                $(this).parent().removeClass("disagreecomment-open").addClass("nl-singlearticle-disagreecomment");
+                $(this).parent().find("form").css({"display":"none"});
+                $(this).parent().find(".replaycomment").css({"display":"none"});
+            }
+        });
+        $(document).on("click", ".fa-heart-o", function(){
+            $(this).removeClass("fa-heart-o").addClass("fa-heart");
+        });
+        $(document).on("click", ".fa-heart", function(){
+            $(this).removeClass("fa-heart").addClass("fa-heart-o");
+        });
+        $(".nl-singlearticle-textarticle").on("click", function(){
+            $("#newsframe-popup").attr("src", "http://www.news.com.au/entertainment/tv/amanda-vanstone-lashes-out-at-bindi-irwin-shes-not-the-only-kid-whose-father-has-died/news-story/8f5517e10fd2d15e2446c624a198c24e");
+            $("#nl-singlearticle-main-div").css({"display":"none"});
+            $(".div-popup").css({"display":"block"});
+        });
+        $("#close-popup").on("click", function(){
+            $(".div-popup").css({"display":"none"});
+            $("#nl-singlearticle-main-div").css({"display":"block"});
+        });
+	  });
+</script>
+
+
+</head>
+
+<body>
+<div id="nl-singlearticle-main-div">
+<!--NAV-->
+	<div id="container">
+		<div id='cssmenu'>
+            <ul>
+               <li><a href='#'>Articles</a></li>
+               <li><a href='#'>About us</a></li>
+               <li><a href='#'>Contact</a></li>
+               <li><a href='#'>Login</a></li>
+            </ul>
+		</div>
+
+<!--SECTION 1-->          
+    <section class="nl-singlearticle-article" style="border:none; padding-top:100px;">
+        <div class="nl-singlearticle-title">	
+            <h1> Amanda Vanstone lashes out at Bindi Irwin: 'She's not the only kid whose father has died' </h1>
+        </div>
+        
+        <!--PHOTO ARTICLE-->
+        <div class="nl-singlearticle-photo">		 
+            <img src="http://www.newslogue.com/uploads/banner/thumbnail/8/1/bindi.jpg">
+        </div>
+        
+        <!--QUESTION--> 
+        <div class="question_bar">				
+            <div class="question_article">
+                <h1>" Amanda could have kept her comments to herself, but she chose to share them publicly. Should she have considered the context before opening her mouth? " </h1>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <!--RESULT VOTE -->
+        <div class="nl-singlearticle-resultsvote">		 
+            <div class="agree-vote">
+                <p> 30% AGREE <i class="fa fa-plus-circle"></i> </p>
+            </div>
+            <div class="disagree-vote">
+                <p> <i class="fa fa-minus-circle"></i> 70% DISAGREE </p>
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        <!--TEXT ARTICLE --> 
+        <div class="nl-singlearticle-textarticle">		
+            <a href="javascript:;"><p> "Host Karl Stefanovic congratulated Irwin on her US <i>Dancing With The Stars</i> win, saying: “I wanted to end on something light and fun and given what she’s been through, my feel good story is Bindi Irwin up there on the stage over there in America dancing up a storm, god love ..." </p>
+        </div>
+        <div class="read-more">
+            read more</a>
+        </div>
+        
+        <!-- VOTE BUTTONS -->
+        <div class="nl-singlearticle-vote">				 
+            <div class="btn" style="background-color:#66d48d;"><a href="javascript:;" id="nl-singlearticle-agree-btn">AGREE</a></div>
+            <div class="btn" style="background-color:#6b8593;"><a href="javascript:;" id="nl-singlearticle-disagree-btn">DISAGREE</a></div>
+            <!--
+            <div class="btn" style="background-color:#eeeeee;"><a href="javascript:;" id="nl-singlearticle-agree-btn">AGREE</a></div>
+            <div class="btn" style="background-color:#eeeeee;"><a href="javascript:;" id="nl-singlearticle-disagree-btn">DISAGREE</a></div>
+            -->
+        </div>
+         <div class="clear"> </div>
+    </section>
+    
+    <!-- INSERT COMMENT AGREE -->     
+    <div class="nl-singlearticle-commentarea-agree" style="display:none">		
+            <form action="" method="post" class="elegant-aero">
+                <h1 style="text-align:left;"> Why Agree? Write your opinion: </h1>
+               <!-- <label>
+                    <span>Name :</span>
+                    <input id="name" type="text" name="name" placeholder="Your Name" />
+                </label>-->
+                <!--
+                <label>
+                    <span>Your Email :</span>
+                    <input id="email" type="email" name="email" placeholder="Valid Email Address" />
+                </label>
+                -->
+                <label>
+<!--                    <span>Text :</span>-->
+                    <textarea id="message" name="message" placeholder="Your Agree Comment"></textarea>
+                </label> 
+                <!-- <label>
+                    <span>Subject :</span><select name="selection">
+                    <option value="Job Inquiry">Job Inquiry</option>
+                    <option value="General Question">General Question</option>
+                    </select>
+                </label>    -->
+                 <label >
+                <!--<span>&nbsp;</span> -->
+                    <input type="button" class="button" value="Send" /> 
+                </label>    
+            </form>
+        </div>
+        <div class="clear"> </div>
+        
+        <!-- INSERT COMMENT DISAGREE -->  
+        <div class="nl-singlearticle-commentarea-disagree" style="display:none">
+            <form action="" method="post" class="elegant-aero">
+                <h1 style="text-align:left;"> Why Disagree? Write your opinion: </h1>
+                <!--<label>
+                    <span>Name :</span>
+                    <input id="name" type="text" name="name" placeholder="Your Name" />
+                </label>-->
+                <!--
+                <label>
+                    <span>Your Email :</span>
+                    <input id="email" type="email" name="email" placeholder="Valid Email Address" />
+                </label>
+                -->
+                <label>
+<!--                    <span>Text :</span>
+-->                    <textarea id="message" name="message" placeholder="Your Disagree Comment"></textarea>
+                </label> 
+                <!-- <label>
+                    <span>Subject :</span><select name="selection">
+                    <option value="Job Inquiry">Job Inquiry</option>
+                    <option value="General Question">General Question</option>
+                    </select>
+                </label>    -->
+                 <label>
+                <!--<span>&nbsp;</span> -->
+                    <input type="button" class="button2" value="Send" /> 
+                </label>    
+            </form>
+        </div>
+        <div class="clear"> </div>
+        
+        <!-- USERS COMMENT -->  
+        <div class="nl-singlearticle-userscomment">
+        	<h1 style="text-align:center;"> <i class="fa fa-comments"></i> DEBATE </h1>
+        	
+            <!-- USERS COMMENT AGREE --> 
+            <div class="nl-singlearticle-agreecomment">
+            	<a href="javascript:;" class="nl-singleartile-agreecomment-href">
+            	<h4><i class="fa fa-user"></i> Katie Brookes Lawrence Very Long User Name <span style="float:right; color:#2d2d2d; font-size:12px; margin-top:3px;"> 02-11-15 </span></h4>
+                <p><i class="fa fa-comment"></i> It is not appropriate in that situation but definitely something we should be aware of. She has all the attention because her dad is like a 'celebrity'. This is how the society function nowadays.</p>
+                <span><i class="fa fa-reply"></i> Reply 2 </span></a> <a href="javascript:;"><span style="margin-left:10px;"> <i class="fa fa-heart-o fa fa-lg"></i> </span> </a>  <!--span style="margin-left:10px;"> <i class="fa fa-heart fa fa-lg"></i> </span-->
+                <!-- USERS COMMENT AGREE REPLAY --> 
+                <form action="" method="post" class="elegant-aero" style="display:none">
+                <h1 style="text-align:center; font-size:12px;"> Add a replay </h1>
+                <label>
+                    <textarea id="message" name="message" placeholder="Your Replay"></textarea>
+                </label> 
+                 <label >
+                    <input type="button" class="button" value="Send" /> 
+                </label>    
+            </form>
+
+                <div class="replaycomment" style="display:none">
+                    <h4><i class="fa fa-comment"></i> Anonymous Very Long User Name <span style="float:right; color:#2d2d2d; font-size:10px; margin-top:3px;"> 02-11-15 </span></h4>
+                    <p><i class="fa fa-reply"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                </div>
+                <div class="replaycomment" style="display:none">
+                    <h4><i class="fa fa-comment"></i> Anonymous User <span style="float:right; color:#2d2d2d; font-size:10px; margin-top:3px;"> 02-11-15 </span></h4>
+                    <p><i class="fa fa-reply"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            
+             <!-- USERS COMMENT DISAGREE --> 
+            <div class="nl-singlearticle-disagreecomment">
+                <a href="javascript:;" class="nl-singleartile-disagreecomment-href">
+                <h4><i class="fa fa-user"></i> K. Lawrence User <span style="float:right; color:#2d2d2d; font-size:12px; margin-top:3px;"> 02-11-15 </span></h4>
+                <p><i class="fa fa-comment"></i> Obviously my vote would be not appropriate. In this context, there's a huge difference between freedom of speech and being sensitive. They're totally different thing! She may be relating to it but not having the same level of attention which resulted in some extent of jealousy. However, it was still inappropriate to have said what she said. To me, that's simply childish.</p>
+                <span><i class="fa fa-reply"></i> Reply 2 </span></a> <a href="javascript:;"><span style="margin-left:10px;"> <i class="fa fa-heart-o fa fa-lg"></i> </span></a>
+                <!-- USERS COMMENT DISAGREE REPLAY--> 
+                <form action="" method="post" class="elegant-aero" style="display:none">
+                <h1 style="text-align:center; font-size:12px;"> Add a replay </h1>
+                <label>
+                   <textarea id="message" name="message" placeholder="Your Disagree Comment"></textarea>
+                </label> 
+                 <label>
+                    <input type="button" class="button2" value="Send" /> 
+                </label>    
+            </form>
+                <div class="replaycomment" style="display:none">
+                    <h4><i class="fa fa-comment"></i> Anonymous <span style="float:right; color:#2d2d2d; font-size:10px; margin-top:3px;"> 02-11-15 </span> </h4>
+                    <p><i class="fa fa-reply"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+               <div class="replaycomment" style="display:none">
+                    <h4><i class="fa fa-comment"></i> Anonymous <span style="float:right; color:#2d2d2d; font-size:10px; margin-top:3px;"> 02-11-15 </span> </h4>
+                    <p><i class="fa fa-reply"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            
+             <!-- USERS COMMENT AGREE OPEN --> 
+            <div class="nl-singlearticle-agreecomment">
+            	<a href="javascript:;" class="nl-singleartile-agreecomment-href">
+                <h4><i class="fa fa-user"></i> Anonymous <span style="float:right; color:#2d2d2d; font-size:12px; margin-top:3px;"> 02-11-15 </span></h4>
+                <p><i class="fa fa-comment"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <span><i class="fa fa-reply"></i> Reply 1 </span> </a> <a href="javascript:;"><span style="margin-left:10px;"> <i class="fa fa-heart-o fa fa-lg"></i> </span> </a>
+                <!-- USERS COMMENT AGREE REPLAY --> 
+                <form action="" method="post" class="elegant-aero" style="display:none">
+                <h1 style="text-align:center; font-size:12px;"> Add a replay </h1>
+                <label>
+                    <textarea id="message" name="message" placeholder="Your Replay"></textarea>
+                </label> 
+                 <label >
+                    <input type="button" class="button" value="Send" /> 
+                </label>    
+            </form>
+
+                <div class="replaycomment" style="display:none">
+                	<h4><i class="fa fa-comment"></i> Anonymous <span style="float:right; color:#2d2d2d; font-size:10px; margin-top:3px;"> 02-11-15 </span></h4>
+                	<p><i class="fa fa-reply"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                </div>
+            </div>
+            
+             <!-- USERS COMMENT DISAGREE OPEN --> 
+            <div class="nl-singlearticle-disagreecomment">
+            	<a href="javascript:;" class="nl-singleartile-disagreecomment-href">
+                <h4><i class="fa fa-user"></i> Anonymous <span style="float:right; color:#2d2d2d; font-size:12px; margin-top:3px;"> 02-11-15 </span> </h4>
+                <p><i class="fa fa-comment"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <span><i class="fa fa-reply"></i> Reply 0 </span></a> <a href="javascript:;"><span style="margin-left:10px;"> <i class="fa fa-heart-o fa fa-lg"></i> </span></a>
+                <!-- USERS COMMENT DISAGREE REPLAY--> 
+                <form action="" method="post" class="elegant-aero" style="display:none">
+                <h1 style="text-align:center; font-size:12px;"> Add a replay </h1>
+                <label>
+                   <textarea id="message" name="message" placeholder="Your Disagree Comment"></textarea>
+                </label> 
+                 <label>
+                    <input type="button" class="button2" value="Send" /> 
+                </label>    
+            </form>
+            </div>
+        </div>
+
+<!--FOOTER-->         
+        <footer>
+            <div class="box_footer">
+                <ul>
+                   <li><a href="#"><i class="fa fa-instagram fa-2x"></i></a></li>
+                   <li><a href="#"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                   <li><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                </ul>
+                <div class="copyright">
+                <h6> Copyright © Newslogue. All Right Reserved </h6>
+                </div>
+            </div>
+        </footer>
+    
+    </div>
+</div>
+
+<!-- LAYERS -->
+
+        <!-- LOADING -->
+        <div class="color-popup div-popup" style="width:100%; height:100%; background-color:RGBA(0,0,0, 0.8); position:absolute; left:0; top:0; z-index:2; display:none">
+        <div class="pop-up" style="padding:200px 40% 0 40%;">
+        <p style="font-size:24px; text-align:center; font-family: 'Istok Web', sans-serif; color:#fff;"> LOADING </p>
+        </div>
+        </div>
+
+        <!--BORDER -->
+        <div class="color-popup div-popup" style="border:none; background-color:transparent; width:100%; height: 100%; position:absolute; left:0; top:0; z-index:4; display:none">
+            <iframe id="newsframe-popup" style="height:100%;width:100%;border:none">
+            </iframe>
+        </div>
+
+        <div class="color-popup div-popup" style="background-color:transparent; width:100%; height: 100%; position:absolute; left:0; top:0; z-index:6; display:none">
+        </div>
+
+        <!--CLOSE -->
+        <div class="color-popup div-popup" style="background-color:transparent; position:absolute; right:0; top:0; z-index:8; display:none">
+            <div class="close" style="padding:10px 0px 10px 20px;text-align:right;">
+            <a href="javascript:;" id="close-popup" style="background-color: #2D2D2D; padding:2px;"> CLOSE </a>
+            </div>
+        </div>    
+    
+</body>
+</html>
