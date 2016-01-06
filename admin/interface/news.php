@@ -137,7 +137,7 @@
                         echo "<div class='".$notificationClass."'>".$notificationMsg."</div>";
                 ?>
                 </div>
-                <form method="post" enctype="multipart/form-data" id="user_form" name="user_form" ng-controller="adminController"
+                <form method="post" enctype="multipart/form-data" id="user_form" name="user_form" ng-app="nlapp" ng-controller="adminController"
                 	action="<?=$_SERVER["REQUEST_URI"]?>">
                     <ul id="form_list" >
                         <li>
@@ -153,7 +153,8 @@
                         <li>
                         	<div class="field_label">News Banner</div>
                         	<div class="field_input" >
-                        		<img src="{{newsBannerSource}}">
+                        	    <div style="width:480px; height:240px; overflow:hidden; background-size:cover; background-position: center center; background-image:url({{newsBannerSource}})"></div>
+                        		<!--img src="{{newsBannerSource}}"-->
                         		<!-- 
                                 <input type="file" size="8" name="banner" />
                                 <?php
@@ -331,7 +332,7 @@
                         </li>
 					</ul>
                     <input type="hidden" name="cmd" value="<?=($action == "Add")? "Add": "Edit"?>" />
-                    <input type="submit" name="submit" value="Submit" class="primary button" /><!-- onclick="MakeLinkSafe();"/>-->
+                    <input type="submit" name="submit" value="Submit" class="primary button" onclick="MakeLinkSafe();"/>
                     <input type="reset" value="Reset" class="button"/>
                 </form>
             <?
