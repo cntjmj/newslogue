@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Newslogue Home</title>
+
+<!--CSS-->
+<link rel="stylesheet" href="style.css">	
+
+<!--CSS MENU-->
+<link rel="stylesheet" href="css/menu.css">
+
+<!--CSS SLIDER-->
+<link rel="stylesheet" href="css/responsiveslides.css">
+
+<!--ADD COMMENT-->
+<link rel="stylesheet" href="css/comment-form.css">
+
+<!--CONTACT FORM-->
+<link rel="stylesheet" href="css/contact_form.css">
+
+<!-- FONT AWESOME -->
+<link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- GOOGLE FONT -->
+<link href="css/gfont.css" rel='stylesheet' type='text/css'>
+
+
+
+<!--JS MENU-->
+<script src="js/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/script.js"></script>
+
+<!--JS SLIDER-->
+<script src="js/jquery.min.js"></script>
+<script src="js/responsiveslides.min.js"></script>
+<script>
+	  $(function() {
+		$(".rslides").responsiveSlides();
+	  });
+</script>
+
+
+</head>
+
+<body>
+
+<!--NAV-->
+	<div id="container">
+		<div id='cssmenu'>
+            <ul>
+               <li><a href='#'>Articles</a></li>
+               <li><a href='#'>About us</a></li>
+               <li><a href='#'>Contact</a></li>
+               <li><a href='#'>Login</a></li>
+            </ul>
+		</div>
+
+<!--SECTION 1-->          
+    <section style="width:100%;padding:0;">
+		<div class="contact_box">
+        	<h1 style="text-align:center; font-size:20px;"> CONTACT</h1>
+        <div class="wrapper">
+            <div id="main">
+            <!-- Form -->
+            <form id="contact-form" method="post">
+                <h3>Any Questions?</h3>
+                <h4>Do not hesitate to contact us.</h4>
+                <div>
+                    <label>
+                        <span></span>
+                        <input placeholder="Name" type="text" tabindex="1" required >
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span></span>
+                        <input placeholder="E-Mail" type="email" tabindex="2" required>
+                    </label>
+                </div>
+                <!--<div>
+                    <label>
+                        <span>Telephone: (required)</span>
+                        <input placeholder="Please enter your number" type="tel" tabindex="3" required>
+                    </label>
+                </div>-->
+                <!--<div>
+                    <label>
+                        <span>Website: (required)</span>
+                        <input placeholder="Begin with http://" type="url" tabindex="4" required>
+                    </label>
+                </div>-->
+                <div>
+                    <label>
+                        <span></span>
+                        <textarea placeholder="Text..." tabindex="5" required></textarea>
+                    </label>
+                </div>
+                <div>
+                    <button name="submit" type="submit" id="contact-submit">Send</button>
+                </div>
+            </form>
+            <!-- /Form -->
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    <section style="padding:0; margin:0; width:100%;">
+    	<div class="photo_head">
+        	<a href="https://goo.gl/maps/ELjmUJA83o52" target="_blank"> <img src="images/map.jpg"> </a>
+    </section>
+
+        
+
+<!--FOOTER-->         
+        <footer>
+            <div class="box_footer">
+                <ul>
+                   <li><a href="#"><i class="fa fa-instagram fa-2x"></i></a></li>
+                   <li><a href="#"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                   <li><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                </ul>
+                <div class="copyright">
+                <h6> Copyright © Newslogue. All Right Reserved </h6>
+                </div>
+            </div>
+        </footer>
+    
+    </div>
+    
+    
+</body>
+</html>

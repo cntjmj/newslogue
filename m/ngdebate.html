@@ -10,7 +10,8 @@
 <body ng-controller="DebateController">
   <section>
     <div>newsID: {{news.newsID}}</div>
-    <div>{{dt|date:'dd-MM-yy'}}</div>
+    <div>{{str2date(news.createdDateTime)|date:'dd-MM-yy'}}</div>
+    <div ng-show="notification.count>0">new notifications: {{notification.count}}</div>
     <div style="float:right">{{userID}}</div>
     <div style="float:right">{{displayName}}</div>
     <div>Title: {{news.newsTitle}}</div>
@@ -21,10 +22,10 @@
       <div style="float:right"> {{percentn | number:0}}% disagree</div>
     </div>
     <div>
-      <button name="voteAgree" id="voteAgree" ng-click="submitAgree()">agree {{userVoteDisagree()?"disabled":""}}</button>
-      <button name="voteNo" id="voteNo" ng-click="submitDisagree()">disagree {{userVoteAgree()?"disabled":""}}</button>
+      <button name="voteAgree" id="voteAgree" ng-click="submitAgree()">agree {{bUserVoteDisagree()?"disabled":""}}</button>
+      <button name="voteDisagree" id="voteDisagree" ng-click="submitDisagree()">disagree {{bUserVoteAgree()?"disabled":""}}</button>
     </div>
-    <div ng-show="userVoteAgree()">
+    <div ng-show="bUserVoteAgree()">
       <form name="agreeForm" id="agreeForm" ng-submit="submitReply('agree')" novalidate>
       <p>tell us why yes</p>
       <textarea name="agreeArea" id="agreeArea" ng-model="agreeArea" required></textarea>
@@ -32,7 +33,7 @@
       <button type="submit">submit yes</button>
       </form>
     </div>
-    <div ng-show="userVoteDisagree()">
+    <div ng-show="bUserVoteDisagree()">
       <form name="disagreeForm" id="disagreeForm" ng-submit="submitReply('disagree')" novalidate>
       <p>tell us why no</p>
       <textarea name="disagreeArea" id="disagreeArea" ng-model="disagreeArea" required></textarea>
@@ -48,16 +49,25 @@
       <!--div>{{reply.replyContent}}</div-->
       <div ng-bind-html="reply.replyContent"></div>
       <div>Reply {{reply.subReplies.count}}</div>
-      <div><a href="javascript:;" ng-click="submitReply('like', reply.replyID)">{{userLikeThisReply(reply)?"LIKE":"like"}}</a> {{reply.likes.count}}</div>
+      <div><a href="javascript:;" ng-click="submitReply('like', reply.replyID)">{{bUserLikeThisReply(reply)?"LIKE":"like"}}</a> {{reply.likes.count}}</div>
+      <div ng-show="reply.userID==userID"><a href="javascript:;" ng-click="removeReply(reply.replyID)">remove</a></div>
+      <div><form ng-submit="submitSubreply(reply.replyType, reply.replyID, $index)" novalidate>
+      <textarea ng-model="subreplyArea[$index]" required></textarea>
+      <p style="color:red" ng-show="subreplyAreaNotValid[$index]">please input something here</p>
+      <button type="submit">submit subreply</button>
+      </form></div>
       <div ng-repeat="sub in reply.subReplies.list" style="border: 1px solid blue">
         <div>{{sub.replyID}}</div>
         <div>{{sub.displayName}}</div>
         <div>{{str2date(sub.subreplyCreatedDateTime) | date:'dd-MM-yy'}}</div>
         <div>{{sub.replyContent}}</div>
+        <div ng-show="sub.userID==userID"><a href="javascript:;" ng-click="removeReply(reply.replyID, sub.replyID)">remove</a></div>
       </div>
     </div>
   </section>
   <script>
+	var newsID = 272;
+	
 	angular.module("nlapp", ['ngSanitize']).config(function($httpProvider) {
 	    //Enable cross domain calls
 	    $httpProvider.defaults.useXDomain = true;
@@ -66,13 +76,22 @@
 			    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 		  };
 	}).controller("DebateController", function($scope, $http){
-		var newsID = 272;
+
 		
 		$http({method: 'GET', url: '//api.nl.com/auth'}).success(
 			function (data, status, headers, config, statusText) {
-				if (typeof data.userID != 'undefined') {
+				if (angular.isDefined(data.userID)) {
 					$scope.userID = data.userID;
 					$scope.displayName = data.displayName;
+					
+					if (true) {
+						var urlNotification = "//api.nl.com/user/"+$scope.userID+"/notification";
+						$http({method: 'get', url: urlNotification}).success(
+							function(data, status, headers, config, statusText){
+								if (angular.isDefined(data.notification))
+									$scope.notification = data.notification;
+							});
+					}
 				}
 			}
 		);
@@ -118,7 +137,7 @@
 			}
 		);
 		
-		$scope.userVoteAgree = function() {
+		$scope.bUserVoteAgree = function() {
 			for (i in $scope.vote.agree.votes) {
 				if ($scope.userID == $scope.vote.agree.votes[i].userID) {
 					return true;
@@ -128,7 +147,7 @@
 			return false;
 		};
 		
-		$scope.userVoteDisagree = function() {
+		$scope.bUserVoteDisagree = function() {
 			for (i in $scope.vote.disagree.votes) {
 				if ($scope.userID == $scope.vote.disagree.votes[i].userID)
 					return true;
@@ -136,7 +155,7 @@
 			return false;
 		};
 		
-		$scope.userLikeThisReply = function(reply) {
+		$scope.bUserLikeThisReply = function(reply) {
 			if (typeof reply.likes != 'undefined') {
 				for (i in reply.likes.list) {
 					if ($scope.userID == reply.likes.list[i].userID)
@@ -169,12 +188,27 @@
 		};
 		
 		var updateReply = function(data) {
-			if (typeof data.reply != 'undefined' && data.reply.replyID > 0) {
+			if (angular.isDefined(data.reply) && data.reply.replyID > 0) {
+				for (i in $scope.replyList) {
+					if ($scope.replyList[i].replyID == data.reply.replyID) {
+						$scope.replyList[i] = data.reply;
+						return true;
+					}
+				}
+
 				var replyList = [data.reply];
 				$.merge(replyList, $scope.replyList);
 				$scope.replyList = replyList;
 				
 				return true;
+			} else if (angular.isDefined(data.errCode) && data.errCode == 0 &&
+					angular.isDefined(data.replyID) && data.replyID > 0) {
+				for (i in $scope.replyList) {
+					if ($scope.replyList[i].replyID == data.replyID) {
+						$scope.replyList.splice(i, 1);
+						return true;
+					}
+				}
 			}
 			return false;
 		}
@@ -196,7 +230,7 @@
 					var postData = {
 							replyType: replyType,
 							replyContent: $scope.agreeArea
-						}
+						};
 					$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
 							function(data, status, headers, config, statusText) {
 								if (updateReply(data))
@@ -213,7 +247,7 @@
 					var postData = {
 							replyType: replyType,
 							replyContent: $scope.disagreeArea
-						}
+						};
 					$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
 							function(data, status, headers, config, statusText) {
 								if (updateReply(data))
@@ -221,9 +255,54 @@
 							});
 				}
 			} else if (replyType == "like") {
-				alert(replyID);
+				if (replyID > 0) {
+					var urlReply = "//api.nl.com/news/"+$scope.news.newsID+"/reply/"+replyID;
+					var postData = {
+							replyType: replyType
+						};
+					$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
+							function(data, status, headers, config, statusText) {
+								updateReply(data);
+							});
+				}
 			} 
 		};
+		
+		$scope.subreplyArea = [];
+		$scope.subreplyAreaNotValid = [];
+		
+		$scope.submitSubreply = function(replyType, replyID, index) {
+			//$scope.subreplyArea[index] = $scope.subreplyArea[index].trim();
+			if (!angular.isDefined($scope.subreplyArea[index]) || $scope.subreplyArea[index] == "") {
+				$scope.subreplyAreaNotValid[index] = true;
+			} else {
+				$scope.subreplyAreaNotValid[index] = false;
+				var urlReply = "//api.nl.com/news/"+$scope.news.newsID+"/reply/"+replyID;
+				var postData = {
+						replyType: $scope.replyList[index].replyType,
+						replyContent: $scope.subreplyArea[index]
+					};
+				$http({method: 'post', url: urlReply, data: $.param(postData)}).success(
+						function(data, status, headers, config, statusText) {
+							if (updateReply(data)) {
+								$scope.subreplyArea = [];
+								$scope.subreplyAreaNotValid = [];
+							}
+						});
+			}
+		};
+		
+		$scope.removeReply = function(replyID, subReplyID) {
+			var urlReply = "//api.nl.com/news/"+$scope.news.newsID+"/reply/"+replyID;
+			if (angular.isDefined(subReplyID) && subReplyID > 0)
+				urlReply += "/"+subReplyID;
+			
+			$http({method: 'delete', url: urlReply}).success(
+					function(data, status, headers, config, statusText) {
+						//alert(JSON.stringify(data));
+						updateReply(data);
+					});
+		}
 	});
   </script>
 </body>

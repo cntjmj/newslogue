@@ -50,15 +50,18 @@
 			$auth = Auth::getInstance();
 			
 			$replyObj = new Reply($replyID);
-			$userID = $replyObj->getVoteUserID($subReplyID);
+			$userID = $replyObj->getReplyUserID($subReplyID);
 			
 			if ($userID != $auth->getUserID())
 				throw new Exception("unauthorized deletion", -1);
 			
 			$replyObj->removeReply($subReplyID);
 			
-			if ($subReplyID == 0)
+			if ($subReplyID > 0) {
 				echo $replyObj->getJson();
+			} else {
+				echo json_encode(["errCode"=>0, "errMessage"=>"deletion succeeded", "replyID"=>$replyID]);
+			}
 		}
 	} catch (Exception $e) {
 		$result = array("errCode" => $e->getCode(), "errMessage" => $e->getMessage());
