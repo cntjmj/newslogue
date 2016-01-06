@@ -21,6 +21,8 @@
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>jquery.limit-1.2.source.js"></script>
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>cropper.min.js"></script>
     <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>main.js"></script>
+    <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>angular.min.js"></script>
+    <script type="text/javascript" src="<?=$GLOBAL_ADMIN_JS?>angular-sanitize.min.js"></script>
 
 	<title>Admin CMS</title>
 </head>

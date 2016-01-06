@@ -119,7 +119,13 @@
 								<div class="feed-item-title"><a href="news/<?php echo $val["newsID"]."/".$val["newsPermalink"]?>"><?php echo $val["newsTitle"]?></a></div>														
 
 								<a href="news/<?php echo $val["newsID"]."/".$val["newsPermalink"]?>">
-									<div class="feed-item-image" style="background-image: url(<?php echo 'uploads/banner/thumbnail/'.$val['newsBanner']?>);"></div>
+									<div class="feed-item-image" style="background-image: url(<?php 
+																		//echo 'uploads/banner/thumbnail/'.$val['newsBanner'];
+																		$newsBannerSource = $val['newsBannerSource'];
+																		if (false === strpos($newsBannerSource, "://"))
+																			$newsBannerSource = "//".$newsBannerSource;
+																		echo $newsBannerSource;
+																							?>);"></div>
 									<div class="feed-item-newstip">										
 										<?php 
 											$newsContent = html_entity_decode($val["newsContent"]);

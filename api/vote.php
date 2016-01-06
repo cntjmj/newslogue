@@ -18,7 +18,7 @@
 
 			$voteType = _post("voteType", null);
 			if ($voteType != "agree" && $voteType != "disagree")
-				throw new Exception("unknown vote type", -1);
+				throw new Exception("unknown vote type ".$voteType, -1);
 			
 			$auth = Auth::getInstance();
 			if (!$auth->canVote())

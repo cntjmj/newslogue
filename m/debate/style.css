@@ -1,0 +1,101 @@
+@charset "UTF-8";
+/* CSS Document */
+
+*{margin:0; padding:0;}
+.clear {clear:both;}
+img {vertical-align:middle;}
+#container{ width:100%; min-height:200px;}
+section {padding:30px 0 20px 0; width:80%; margin:0 auto; border-bottom:2px solid #2d2d2d;}
+h4{ font-family: 'Istok Web', sans-serif; text-decoration:none;}
+
+a:link, a:visited, a:hover {color:#fff054; font-family: 'Istok Web', sans-serif; text-decoration:none;}
+
+
+h1 {font-family: 'Istok Web', sans-serif; font-size:14px; text-align:right; color:#2d2d2d; line-height:14px;}
+
+/* HEADER INDEX */
+header {padding-top:40px;}
+
+
+/* ARTICLE */
+.photo_article img{width:100%; margin-top:5px;}
+/*.text_article {padding:10px 10px 0 10px;}
+.text_article a {color:#2d2d2d; text-decoration:none;}
+.text_article p {font-size:16px; font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; }
+*/
+.question_bar {width:96%; height:auto; background-color:#fff054; margin-top:5px; padding:2%;}
+.question_article {width:100%; height:auto; padding-top:5px; float:left; }
+.question_article h1 {font-family: 'Istok Web', sans-serif; font-size:16px; text-align:center; color:#2d2d2d; line-height:18px;}
+.question_btn {width:100%; background-color:#2d2d2d; float:left; text-align:center; margin-top:5px;}
+.question_btn ul {list-style:none; padding-top:5px;}
+.question_btn ul li {display:inline; text-align:center;}
+.question_btn ul li a {color:#fff054; font-family: 'Istok Web', sans-serif; font-size:20px; text-decoration:none;}
+
+
+/* SINLE ARTICLE PAGE */
+.nl-singlearticle-article { width:100%;}
+.nl-singlearticle-photo img {width:100%; margin-top:5px;}
+.nl-singlearticle-title {width:80%; margin:0 auto;}
+.nl-singlearticle-title h1 {text-align:right; font-size:14px;}
+.nl-singlearticle-textarticle {width:78%; height:auto; margin-top:5px; padding:1% 11%; /*max-height:50px; overflow:hidden;*/}
+.nl-singlearticle-textarticle p {color:#000; font-family: 'Istok Web', sans-serif; text-align:justify; font-size:12px;}
+.read-more { text-align:center;}
+.read-more a {color:#6d7579; font-family: 'Istok Web', sans-serif; font-size:10px; text-transform:uppercase;}
+.nl-singlearticle-vote {width:80%; margin:15px auto;}
+.btn {width:44%; float:left; text-align:center; padding:2%; margin-left:1%; margin-right:1%;}
+.btn a:link, .btn a:hover, .btn a:visited {color:#ffffff;}
+
+.nl-singlearticle-resultsvote {width:80%; margin:5px auto;}
+.agree-vote {width:45%; text-align:right; font-family: 'Istok Web'; color:#66d48d; padding:2%; font-size:14px; float:left; margin-right:1%;}
+.disagree-vote {width:45%; text-align:left; font-family: 'Istok Web'; color:#6b8593; padding:2%; font-size:14px; float:left; margin-left:1%;}
+.nl-singlearticle-commentarea-agree {width:100%; margin:1% auto; background-color:#66d48d;}
+.nl-singlearticle-commentarea-disagree {width:100%; margin:1% auto; background-color:#6b8593;}
+
+.nl-singlearticle-userscomment {width:100%; margin-top:1%; padding-top:2%; background-color:#e5e5e5; color:#2d2d2d;}
+.nl-singlearticle-userscomment a:link,.nl-singlearticle-userscomment a:visited,.nl-singlearticle-userscomment a:hover {color:#2d2d2d; font-family: 'Istok Web', sans-serif; text-decoration:none;}
+.nl-singlearticle-userscomment  h1 {font-size:20px; padding:5px;}
+.nl-singlearticle-agreecomment {width:92%; margin:5px auto; background-color:#66d48d; padding:2% 4%;}
+.nl-singlearticle-disagreecomment {width:92%; margin:5px auto; background-color:#6b8593;; padding:4%;}
+.nl-singlearticle-agreecomment p, .nl-singlearticle-disagreecomment p {font-family: 'Istok Web', sans-serif; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;}
+.nl-singlearticle-agreecomment span, .nl-singlearticle-disagreecomment span {font-family: 'Istok Web', sans-serif; font-size:10px; color:#ffffff; text-transform:uppercase;}
+
+.agreecomment-open {width:92%; margin:5px auto; background-color:#66d48d; padding:2% 4%;}
+.disagreecomment-open {width:92%; margin:5px auto; background-color:#6b8593;; padding:2% 4%;}
+.disagreecomment-open p, .agreecomment-open p {font-family: 'Istok Web', sans-serif; font-size:14px;}
+.disagreecomment-open span, .agreecomment-open span {font-family: 'Istok Web', sans-serif; font-size:10px; color:#ffffff; text-transform:uppercase;}
+.replaycomment {width:86%; margin:5px auto; border-top: 1px solid #ffffff; padding:2%;}
+.replaycomment h4 {font-family: 'Istok Web', sans-serif; text-decoration:none; font-size:12px;}
+.replaycomment p {font-family: 'Istok Web', sans-serif; font-size:12px;}
+
+/* LOAD MORE */
+.loadmore {text-align:center;}
+
+
+/* CONTACT */
+.contact_box {padding-top:30px;}
+.photo_head img{width:100%; vertical-align:middle;}
+
+
+
+/* FOOTER */
+footer {padding-top:70px; padding-bottom:70px;  background-color:#2d2d2d;}
+.box_footer {width:80%; margin:0 auto; text-align: center;}
+/*.box_footer h1 {text-align:center; color:#fff054; font-size:20px; font-family: 'Istok Web', sans-serif; }*/
+.box_footer ul  {text-align:center;}
+.box_footer li {list-style:none; display:inline-block; margin-left:2%; margin-right:2%;}
+.box_footer li a { color:#fff054; font-family: 'Istok Web', sans-serif; font-size:20px;}
+
+.copyright { text-align:center; padding-top:30px;}
+.copyright h6 {font-size:14px; color:#fff;}
+
+
+
+
+
+/*@media all and (min-width: 1081px) {
+	#container{ display:none;}}*/
+
+
+
+
+

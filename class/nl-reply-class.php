@@ -35,7 +35,7 @@ class ReplyList {
 		$this->num_per_page = $this->db->real_escape_string($this->num_per_page);
 		$this->page_num = $this->db->real_escape_string($this->page_num);
 		$this->newsID = trim($this->db->real_escape_string($this->newsID));
-		
+
 		$start_record = $this->page_num * $this->num_per_page;
 		
 		$query = "select *, nr.createdDateTime as replyCreatedDateTime from `news_reply` nr 
@@ -128,7 +128,7 @@ class Reply {
 		}
 	}
 	
-	public function getVoteUserID($subReplyID = 0) {
+	public function getReplyUserID($subReplyID = 0) {
 		$userID = "";
 
 		if ($this->replyResult == null)
@@ -149,17 +149,16 @@ class Reply {
 	}
 	
 	public function removeReply($subReplyID = 0) {
-		$this->replyID = $this->db->real_escape_string($this->ReplyID);
+		$this->replyID = $this->db->real_escape_string($this->replyID);
 		$subReplyID = $this->db->real_escape_string($subReplyID);
-
 		if ($subReplyID > 0) {
-			$query = "delete from news_vote where replyID='".$subReplyID."'";
+			$query = "delete from news_reply where replyID='".$subReplyID."'";
 			$this->db->query($query);
 			$this->loadReply();
 		} else {
-			$query = "delete from news_vote where parentReplyID='".$this->replyID."'";
+			$query = "delete from news_reply where parentReplyID='".$this->replyID."'";
 			$this->db->query($query);
-			$query = "delete from news_vote where replyID='".$this->replyID."'";
+			$query = "delete from news_reply where replyID='".$this->replyID."'";
 			$this->db->query($query);
 			$this->replyResult=array();
 		}
