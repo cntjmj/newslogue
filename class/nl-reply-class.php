@@ -1,7 +1,7 @@
 <?php
-	require_once dirname(__FILE__).'/nl-coder-class.php';
-	require_once dirname(__FILE__).'/nl-database-class.php';
-	require_once dirname(__FILE__).'/nl-user-class.php';
+	require_once __DIR__.'/nl-coder-class.php';
+	require_once __DIR__.'/nl-database-class.php';
+	require_once __DIR__.'/nl-user-class.php';
 
 class ReplyList {
 	private $newsID;

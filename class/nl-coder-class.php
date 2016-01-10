@@ -23,8 +23,8 @@ class Coder {
 	}
 	
 	public static function dbstr2date(&$dbstr, $format = "F d, Y") {
-		$dbstr = strtotime($dbstr);
-		$dbstr = date($format,$dbstr);
+		$dbstr = @strtotime($dbstr);
+		$dbstr = @date($format,$dbstr);
 		
 		return $dbstr;
 	}

@@ -1,58 +1,226 @@
 @charset "UTF-8";
 /* CSS Document */
 
+
+
 *{margin:0; padding:0;}
 .clear {clear:both;}
 img {vertical-align:middle;}
-#container{ width:100%; min-height:200px; min-width:480px;}
-section {padding:20px 0; width:95%; margin:0 auto; border-bottom:2px solid #2d2d2d;}
+a:link, a:visited, a:hover {color:#fff054; font-family: 'Istok Web', sans-serif; text-decoration:none;}
 
 
-a:link, a:visited {color:#6d7579; font-family: 'Istok Web', sans-serif; text-decoration:none;}
-a:hover {color:#2d2d2d;}
-a:active {background-color:#fff054; color:#2d2d2d; font-family: 'Istok Web', sans-serif;}
-
-h1 {font-size:16px; font-family: 'Istok Web', sans-serif; text-align:right; }
-p {}
-
-/* HEADER INDEX */
-header {padding-top:40px;}
-.photo_head img{width:100%;}
 
 
-/* ARTICLE */
-.photo_article img{width:100%; padding-top:5px;}
-.text_article {padding:10px 10px 0 10px;}
-.text_article a {color:#2d2d2d; text-decoration:none;}
-.text_article p {font-size:16px; font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; }
+h1 {font-family: 'bebasregular', sans-serif; font-size:13px; text-align:center; color:#3D3D3D;font-weight: normal; font-style: normal;line-height:18px; text-transform:uppercase;}
+h2 {font-family: 'Istok Web', sans-serif; font-size:14px; text-align:center; color:#3D3D3D; line-height:14px; text-transform:uppercase;}
+h4 {font-family: 'Istok Web', sans-serif; text-decoration:none; font-size:14px; line-height:14px; color:#3D3D3D;}
+h5 {font-family: 'Istok Web', sans-serif; text-decoration:none; font-size:10px; line-height:10px; color:#5D5D5D;}
+h6 {font-family: 'arial';  font-size:10px; color:#fff; font-weight:normal;}
 
-.question_bar {width:96%; height:auto; background-color:#fff054; margin-top:10px; padding:2%;}
-.question_article {width:100%; height:auto; padding-top:5px; float:left; }
-.question_article h1 {font-family: 'Istok Web', sans-serif; font-size:12px; text-align:center; color:#2d2d2d;}
-.question_btn {width:100%; background-color:#2d2d2d; float:left; text-align:center; margin-top:10px;}
-.question_btn ul {list-style:none; padding-top:5px;}
-.question_btn ul li {display:inline; text-align:center;}
-.question_btn ul li a {color:#fff054; font-family: 'Istok Web', sans-serif; font-size:16px; text-decoration:none;}
+/* Navigation */
+#container{ width:100%;}
+
+/* HEADER INDEX 
+header {padding-top:40px;}*/
+
+/* SECTION */
+section {padding:20px 0 0 0; width:100%;}
+.ind_question {/*width:94%; */ height:auto; background-color:#fbf6a3; padding:3% 3%;}
+.ind_photo
+{
+    background-color:#FFFEF0;
+    height: 0px;
+    padding-bottom: 50%;
+    background-position: center center;
+    margin: 20px;
+    overflow: hidden;
+    background-size: cover;
+}
+.ind_photo img {width:100%; border:2px solid #424f57;}
+.ind_photo popup-external-iframe img
+{
+    width: 480px;
+    height: 240px;
+    float: left;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}
+
+/*.ind_title_article {padding:2% 3%; position:absolute;} */
+.ind_article_bg{
+opacity: 0.5;
+    background-color: #444f55;
+    height: 65px;
+    width: 100%;
+    /* margin-left: -8px; */
+    position: relative;
+    bottom: 85px;}
+.ind_title_article h4, .ind_title_article h5{opacity: 1; color: #FFFFFF; position: relative; font-size: 10px;
+    line-height: 12px;
+    z-index: 10;
+    padding-left: 20px;
+    padding-right: 20px;}
+
+.ind_title_article h4
+{
+    bottom: 140px;
+}
+
+.ind_title_article h5
+{
+    bottom: 140px;
+}
 
 
+.ind_title_article
+{
+margin:20px;
+height:0px;
+}
+
+.ind_title_article h4 a {font-size:10px; color:#f8f1a9;}
+.ind_debate { width:40%; background-color:#444f55; margin:0 auto; text-align:center; padding:1%; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 15px; -o-border-radius: 15px; position:relative;}
+.ind_debate a {margin-top:15px;font-size:15px;font-family: 'bebasregular', sans-serif; line-height:15px; vertical-align:middle;}
+.border {width:80%; margin:0 auto; height:1px; background-color:#B3B3B3; margin-top:20px;}
 
 /* LOAD MORE */
-.loadmore {text-align:center; font-family: 'Istok Web', sans-serif; font-size:12px; color:#2d2d2d;}
+.ind_loadmore {text-align:center;}
 
-/* LOAD MORE */
-footer {padding-top:70px; padding-bottom:70px;  background-color:#2d2d2d;}
-.box_footer {width:80%; margin:0 auto; text-align: center;}
-.box_footer h1 {text-align:center; color:#fff054; font-size:20px; font-family: 'Istok Web', sans-serif; }
-.box_footer li {list-style:none; }
-.box_footer li a { color:#fff; font-family: 'Istok Web', sans-serif; font-size:20px;}
+/* DEBATE PAGE*/
+.deb_question {width:94%; height:auto; background-color:#FFED85; padding:2% 3%;}
+.deb_read_the_article {text-align:center; padding-top:5px;}
+.deb_read_the_article a {color:#2d2d2d; font-size:14px;}
+.deb_resultsvote {width:80%; margin:0 auto;}
+.agree_vote {width:45%; text-align:right; font-family: 'Istok Web'; color:#66d48d; padding:1% 2%; font-size:14px; float:left; margin-right:1%;}
+.disagree_vote {width:45%; text-align:left; font-family: 'Istok Web'; color:#6b8593; padding:1% 2%; font-size:14px; float:left; margin-left:1%;}
+.deb_more_questions p {color:#3d3d3d; font-family: 'Istok Web', sans-serif; text-align:center; font-size:14px;}
+.deb_vote {width:80%; margin:15px auto;}
+.btn {width:44%; float:left; text-align:center; padding:2%; margin-left:1%; margin-right:1%;}
+.btn a:link, .btn a:hover, .btn a:visited {color:#ffffff;}
 
-.copyright { text-align:center; padding-top:40px;}
-.copyright h6 {font-size:14px; color:#fff;}
+.deb_commentarea_agree {width:100%; margin:1% auto; background-color:#66d48d;}
+.deb_commentarea_disagree {width:100%; margin:1% auto; background-color:#6b8593;}
+
+.deb_userscomment {width:100%; margin-top:1%; padding-top:2%; background-color:#e5e5e5; color:#2d2d2d;}
+.deb_userscomment a:link,.deb_userscomment a:visited,.deb_userscomment a:hover {color:#2d2d2d; font-family: 'Istok Web', sans-serif; text-decoration:none;}
+.deb_userscomment  h1 {font-size:20px; padding:5px;}
+.deb_agreecomment {width:92%; margin:5px auto; background-color:#66d48d; padding:2% 4%;}
+.deb_disagreecomment {width:92%; margin:5px auto; background-color:#6b8593;; padding:4%; text-align:right;}
+.deb_agreecomment p, .deb_disagreecomment p {font-family: 'Istok Web', sans-serif; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;}
+.deb_disagreecomment p { text-align:right;}
+.deb_agreecomment span, .deb_disagreecomment span {font-family: 'Istok Web', sans-serif; font-size:10px; color:#ffffff; text-transform:uppercase;}
+
+.agreecomment-open {width:92%; margin:5px auto; background-color:#66d48d; padding:2% 4%;}
+.disagreecomment-open {width:92%; margin:5px auto; background-color:#6b8593;; padding:2% 4%;}
+.disagreecomment-open p, .agreecomment-open p {font-family: 'Istok Web', sans-serif; font-size:14px;}
+.disagreecomment-open span, .agreecomment-open span {font-family: 'Istok Web', sans-serif; font-size:10px; color:#ffffff; text-transform:uppercase;}
+.replaycomment {width:86%; margin:5px auto; border-top: 1px solid #ffffff; padding:2%;}
+.replaycomment h4 {font-family: 'Istok Web', sans-serif; text-decoration:none; font-size:12px;}
+.replaycomment p {font-family: 'Istok Web', sans-serif; font-size:12px;}
 
 
 
-@media all and (min-width: 1081px) {
-	#container{ display:none;}}
+/* CONTACT */
+.contact_box {padding-top:30px;}
+.photo_head img{width:100%; vertical-align:middle;}
+
+/* FOOTER */
+footer {padding-top:20px; padding-bottom:20px;  background-color:#445055; margin-top:20px;}
+.box_footer {width:100%; margin:0 auto; text-align: center;}
+.box_footer ul  {text-align:center;padding-bottom:20px;}
+.box_footer li {list-style:none; display:inline-block; margin-left:2%; margin-right:2%;}
+.box_footer li a { color:#445055; font-family: 'Istok Web', sans-serif; font-size:20px;}
+
+
+.box_footer ul.social-media-icons li {list-style:none; display:inline-block; margin-left:2%; margin-right:2%; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; -o-border-radius: 8px; background-color:#fbf6a3 !important; width:30px !important; height:30px !important;}
+.box_footer ul.social-media-icons li a { color:#445055 !important; font-family: 'Istok Web', sans-serif; font-size:20px;}
+
+.box_footer ul.social-media-icons li a i
+{
+vertical-align:middle;
+
+}
+
+.box_footer div#most-viewed-imp ul li{color:#fbf6a3 !important; font-family: "bebasregular"; font-size:11px;padding:0px;margin:0px;}
+.box_footer div#most-viewed-imp ul li a {color:#fbf6a3 !important; font-family: "bebasregular"; font-size:11px;padding:0px;margin:0px;}
+.box_footer div#most-viewed-imp ul li a:hover
+{
+text-decoration:underline;
+}
+.copyright {text-align:center;}
+
+
+.login
+{
+position:absolute;top:65px;left:236px;
+}
+#login_area
+{
+margin-top:37px;padding-left:20px;display:none;
+}
+
+input#username, input#password
+{
+-webkit-appearance: none;
+border-radius: 0;
+}
+
+/***FIRST STYLE THE BUTTON***/
+input#submit_btn_blue{
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+padding:5px 5px; /*add some padding to the inside of the button*/
+background:#464e5b; /*the colour of the button*/
+/*border:1px solid #33842a; required or the default border for the browser will appear*/
+/*give the button curved corners, alter the size as required*/
+-webkit-appearance: none;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-o-border-radius: 10px;
+border-radius: 10px;
+/*give the button a drop shadow*/
+/*style the text*/
+color:#fff39d;
+font-size:12px;
+height:20px;
+margin-top:2px;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#submit_btn_blue:hover, input#submit_btn_blue:focus{
+background-color :#43524f; /*make the background a little darker*/
+/*reduce the drop shadow size to give a pushed button effect*/
+}
+
+
+
+div.loadimg
+{
+background-image:url(images/loading-img.gif);
+background-repeat:no-repeat;
+background-position:center;
+}
+
+.click_blocker
+{
+display:none;
+width:100%;
+height:100%;
+top:40px;
+position:fixed;
+z-index:1536
+}
+
+
+
+
+
+
+
+
+
+
+/*@media all and (min-width: 1081px) {
+	#container{ display:none;}}*/
 
 
 

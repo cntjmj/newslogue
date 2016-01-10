@@ -2,7 +2,7 @@
 	//require_once dirname(__FILE__).'/nl-config.php';
 	require_once dirname(__FILE__).'/nl-init.php';
 	require_once dirname(__FILE__).'/common/nl-common.php';
-	require_once dirname(__FILE__).'/class/nl-auth-class.php';
+	require_once dirname(__FILE__).'/class/nl-auth-temp.php';
     //session_start();
 
     // PHP Debugging through Firefox
