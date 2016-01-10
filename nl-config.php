@@ -22,8 +22,8 @@
 		
 		class CONFIG_PATH {
 			const GLOBAL_WWW_BASE = "http://www.nl.com/"; //"http://localhost/newslogue/";
-			const CLOBAL_M_BASE = "http://m.nl.com/"; //"http://localhost/newslogue/m/";
-			const CLOBAL_API_BASE = "http://api.nl.com"; //"http://localhost/newslogue/api/";
+			const GLOBAL_M_BASE = "http://m.nl.com/"; //"http://localhost/newslogue/m/";
+			const GLOBAL_API_BASE = "http://api.nl.com"; //"http://localhost/newslogue/api/";
 			
 			const GLOBAL_DOMAIN = "nl.com";
 		};
@@ -46,5 +46,6 @@
 	
 	class CONFIG {
 		const ALLOW_ANONYMOUS = 1;
+		const GLOBAL_DEFAULTTIMEZONE = "Australia/Melbourne";
 	}
 ?>

@@ -1,23 +1,27 @@
 <?php
-	require_once dirname(__FILE__).'/../nl-config.php';
-	require_once dirname(__FILE__).'/../common/nl-common.php';
+	require_once __DIR__.'/../nl-config.php';
+	require_once __DIR__.'/../common/nl-common.php';
+	require_once __DIR__.'/nl-coder-class.php';
+	require_once __DIR__.'/nl-database-class.php';
+	require_once __DIR__.'/nl-user-class.php';
 
 class Auth {
 	private static $instance;
 	
 	private $auth = array("userID" => 0, "displayName" => "");
+	private $db;
 
 	private function __construct() {
 		if (isset($_SESSION["userID"]))
 			$this->auth["userID"] = $_SESSION["userID"];
 		if (isset($_SESSION["displayName"]))
 			$this->auth["displayName"] = $_SESSION["displayName"];
+		
+		$this->db = new Database();
 	}
 	
-	private static function genInstance() {
-		Auth::$instance = new Auth();
-		
-		if (0 == Auth::$instance->getUserID() && CONFIG::ALLOW_ANONYMOUS) {
+	private static function buildInstance($instance) {
+		if (0 == $instance->getUserID() && CONFIG::ALLOW_ANONYMOUS) {
 			if (!isset($_COOKIE["tempID"])) {
 
 				$tempID = uniqid();
@@ -31,8 +35,8 @@ class Auth {
 			}
 			
 			$anonymousID = "-".substr(hexdec($tempID),7);
-			Auth::$instance->setUserID($anonymousID);
-			Auth::$instance->setDisplayName($_SESSION["displayName"]);
+			$instance->setUserID($anonymousID);
+			$instance->setDisplayName($_SESSION["displayName"]);
 		}
 	}
 
@@ -43,10 +47,51 @@ class Auth {
 	protected function setDisplayName($name) {
 		$this->auth["displayName"] = $name;
 	}
+	
+	public function login($emailaddress, $password) {
+		$emailaddress = Coder::cleanXSS($this->db, $emailaddress);
+		$password = sha1($password);
+
+		$query = "select userID from user_registration where emailaddress=\"$emailaddress\" and pwd=\"$password\" and userStatus='active'";
+		
+		$result = $this->db->query($query);
+		
+		if (!is_array($result) || count($result)<1 || !isset($result[0]["userID"]))
+			throw new Exception("incorrect email address or password", -1);
+
+		$userID = $result[0]["userID"];
+		if ($userID <= 0)
+			throw new Exception("current user is not allowed to login", -1);
+		
+		$user = new User($userID);
+		$userInfo = $user->getArray();
+				
+		if (!is_array($userInfo) || !isset($userInfo["user"]))
+			throw new Exception("could not retrieve user information", -1);
+		
+		$_SESSION["userID"] = $userID;
+		$_SESSION["displayName"] = $userInfo["user"]["displayName"];
+		$_SESSION["fullname"] = $userInfo["user"]["fullname"];	// deprecated
+		
+		$this->setUserID($userID);
+		$this->setDisplayName($_SESSION["displayName"]);
+		
+		return $this;
+	}
+	
+	public function logout() {
+		session_unset();
+		$this->setUserID(0);
+		$this->setDisplayName("");
+		Auth::buildInstance($this);
+		return $this;
+	}
 
 	public static function getInstance() {
-		if (!isset(Auth::$instance))
-			Auth::genInstance();
+		if (!isset(Auth::$instance)) {
+			Auth::$instance = new Auth();
+			Auth::buildInstance(Auth::$instance);
+		}
 		
 		return Auth::$instance;
 	}

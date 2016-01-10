@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/* Elegant Aero */
+.elegant-aero {
+    margin-left:auto;
+    margin-right:auto;
+    padding: 20px 0;
+     font-family: 'Istok Web', sans-serif;
+	font-size:12px;
+    color: #2d2d2d;
+}
+/*.elegant-aero h1 {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 10px 10px 10px 20px;
+    display: block;
+    background: #C0E1FF;
+    border-bottom: 1px solid #B8DDFF;
+    margin: -20px -20px 15px;
+}
+.elegant-aero h1>span {
+    display: block;
+    font-size: 11px;
+} */
+.elegant-aero {width:80%;}
+
+.elegant-aero label>span {
+    float: left;
+    color: #2d2d2d;
+}
+.elegant-aero label {
+    display: block;
+    margin:0;
+	text-align:center;
+}
+.elegant-aero label>span {
+	font-family: 'Istok Web', sans-serif; 
+    float: left;
+    width: 20%;
+	margin-top:8px;
+    text-align: right;
+    font-weight: bold;
+	font-size:14px;
+}
+.elegant-aero input[type="text"], .elegant-aero input[type="email"], .elegant-aero textarea, .elegant-aero select {
+    color: #2D2D2D;
+    width: 70%;
+    padding: 0px 0px 0px 5px;
+    border: 1px solid #C5E2FF;
+    background: #FBFBFB;
+    outline: 0;
+    -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
+    box-shadow: inset 0px 1px 6px #ECF3F5;
+    font: 200 12px/25px Arial, Helvetica, sans-serif;
+    height: 30px;
+    line-height:15px;
+    margin: 2px 6px 16px 0px;
+}
+.elegant-aero textarea{
+    height:100px;
+    padding: 5px 0px 0px 5px;
+    width: 100%;
+	margin-top:8px;
+}
+.elegant-aero select {
+    background: #fbfbfb url('down-arrow.png') no-repeat right;
+    background: #fbfbfb url('down-arrow.png') no-repeat right;
+   appearance:none;
+    -webkit-appearance:none; 
+   -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 70%;
+}
+.elegant-aero .button{
+	margin:0 auto;
+    padding: 10px 30px 10px 30px;
+    background: #2d2d2d;
+    border: none;
+    color: #66d48d;
+   /* box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;*/
+    
+}
+.elegant-aero .button:hover{
+
+}
+.elegant-aero .button2{
+	margin:0 auto;
+    padding: 10px 30px 10px 30px;
+    background: #2d2d2d;
+    border: none;
+    color:#6b8593;
+  	/*box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;*/
+
+}
+.elegant-aero .button2:hover{
+
+}

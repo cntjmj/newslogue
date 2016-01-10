@@ -1,6 +1,6 @@
 <?php
-	require_once dirname(__FILE__).'/nl-coder-class.php';
-	require_once dirname(__FILE__).'/nl-database-class.php';
+	require_once __DIR__.'/nl-coder-class.php';
+	require_once __DIR__.'/nl-database-class.php';
 
 class NewsList {
 	private $num_per_page, $page_num, $categoryID, $summary_len;
@@ -39,12 +39,12 @@ class NewsList {
 				inner join `category` c on na.categoryID = c.categoryID
 				where na.newsStatus = 'active'";
 		
-		if ($this->categoryID != "")
+		if ($this->categoryID != "" && $this->categoryID > 0)
 			$query .= " and na.categoryID = ".$this->categoryID;
 		
 		$query .= " order by na.createdDateTime desc";
 		$query .= " limit $start_record, $this->num_per_page";
-
+		
 		$newsArray = $this->db->query($query);
 
 		if (is_array($newsArray) && count($newsArray) > 0) {
@@ -99,7 +99,7 @@ class News {
 	protected function loadNews() {
 		$this->newsID = $this->db->real_escape_string($this->newsID);
 
-		$query = "select * from newsarticle na inner join `category` c 
+		$query = "select *, na.createdDateTime as nacreatedDateTime from newsarticle na inner join `category` c 
 				on na.categoryID = c.categoryID where newsID = $this->newsID";
 
 		$result = $this->db->query($query);

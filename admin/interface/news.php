@@ -153,7 +153,7 @@
                         <li>
                         	<div class="field_label">News Banner</div>
                         	<div class="field_input" >
-                        	    <div style="width:480px; height:240px; overflow:hidden; background-size:cover; background-position: center center; background-image:url({{newsBannerSource}})"></div>
+                        		<div style="width:480px; height:240px; overflow:hidden; background-size:cover; background-position: center center; background-image:url({{newsBannerSource}})"></div>
                         		<!--img src="{{newsBannerSource}}"-->
                         		<!-- 
                                 <input type="file" size="8" name="banner" />

@@ -9,5 +9,6 @@
 		}
 	}
 	
+	date_default_timezone_set(CONFIG::GLOBAL_DEFAULTTIMEZONE);
 	start_session();
 ?>

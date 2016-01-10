@@ -12,3 +12,6 @@ RewriteRule ^news\/([^/]*)\/reply\/([^/]*)$ reply.php?newsID=$1&replyID=$2 [QSA,
 RewriteRule ^news\/([^/]*)\/reply\/([^/]*)\/([^/]*)$ reply.php?newsID=$1&replyID=$2&subReplyID=$3 [QSA,NC,L]
 RewriteRule ^news\/([^/]*)\/vote$ vote.php?newsID=$1 [QSA,NC,L]
 RewriteRule ^user\/([^/]*)\/notification$ notification.php?userID=$1 [QSA,NC,L]
+
+RewriteRule ^category$ category.php [QSA,NC,L]
+RewriteRule ^category\/([^/]*)$ category.php?categoryID=$1 [QSA,NC,L]
