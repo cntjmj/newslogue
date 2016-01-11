@@ -1,4 +1,5 @@
 <?php
+	require_once __DIR__."/../nl-config.php";
     session_start();
 
 //    PHP DEGUBING
@@ -9,9 +10,10 @@
 //    require_once('FirePHPCore/fb.php');
 //    ob_start();
 
-    $whitelist = array('localhost','www.nl.com', '127.0.0.1');
+    //$whitelist = array('localhost','www.nl.com', '127.0.0.1');
 
-    if(!in_array($_SERVER['HTTP_HOST'], $whitelist))
+    //if(!in_array($_SERVER['HTTP_HOST'], $whitelist))
+    if (isProductEnv())
     {
         $GLOBAL_WEB_ROOT                = "http://". $_SERVER['HTTP_HOST'] . "/";
         $connection = new mysqli('localhost', 'newslogu_sizzo', 'newslogue!123', 'newslogu_v1');
@@ -19,8 +21,8 @@
     else
     {
 
-        $GLOBAL_WEB_ROOT                = "http://www.nl.com/";
-        $connection = new mysqli('127.0.0.1', 'root', 'passw0rd', 'newslogu_v1');
+        $GLOBAL_WEB_ROOT                = CONFIG_PATH::GLOBAL_WWW_BASE; //"http://www.nl.com/";
+        $connection = new mysqli(CONFIG_DB::HOSTNAME, CONFIG_DB::USERNAME, CONFIG_DB::PASSWORD, CONFIG_DB::INSTNAME);
         
         error_reporting(-1);
     	ini_set("display_errors", 1);

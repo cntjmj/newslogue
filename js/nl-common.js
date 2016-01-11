@@ -7,6 +7,12 @@ var PRODCONFIG = {
 };
 
 var TESTCONFIG = {
+	/**
+	 * MUST CHANGE THESE SETTINGS
+	 * ACCORDING TO YOUR TEST ENV,
+	 * SO THAT YOUR SYSTEM COULD BE UP AND RUNNING.
+	 *                        AFTER THAT, HAVE FUN!
+	 */
 	GLOBAL_API_BASE:		"http://api.nl.com/",
 	GLOBAL_THUMBNAIL_BASE:	"http://www.nl.com/uploads/banner/thumbnail/"
 };

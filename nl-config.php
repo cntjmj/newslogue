@@ -1,18 +1,26 @@
 <?php
    	function isTestEnv() {
-		$local = array('localhost', 'www.nl.com', 'm.nl.com', "api.nl.com");
-
-	    if(in_array($_SERVER['HTTP_HOST'], $local))
-			return true;
-	    else
-	    	return false;
-	}
+		return !isProductEnv();
+   	}
 	
 	function isProductEnv() {
-		return !isTestEnv();
+		$pro = array('www.newslogue.com', 'm.newslogue.com', "api.newslogue.com");
+		
+		if(in_array($_SERVER['HTTP_HOST'], $pro))
+			return true;
+		else if (strpos($_SERVER['HTTP_HOST'], ".newslogue.com"))
+			return true;
+		else
+			return false;
 	}
 	
 	if (isTestEnv()) {	// Test Environment
+		/**
+		 * MUST CHANGE THESE SETTINGS
+		 * ACCORDING TO YOUR TEST ENV,
+		 * SO THAT YOUR SYSTEM COULD BE UP AND RUNNING.
+		 *                        AFTER THAT, HAVE FUN!
+		 */
 		class CONFIG_DB {
 			const HOSTNAME = "127.0.0.1";
 			const USERNAME = "root";
@@ -21,9 +29,9 @@
 		};
 		
 		class CONFIG_PATH {
-			const GLOBAL_WWW_BASE = "http://www.nl.com/"; //"http://localhost/newslogue/";
-			const GLOBAL_M_BASE = "http://m.nl.com/"; //"http://localhost/newslogue/m/";
-			const GLOBAL_API_BASE = "http://api.nl.com"; //"http://localhost/newslogue/api/";
+			const GLOBAL_WWW_BASE = "http://www.nl.com/";
+			const GLOBAL_M_BASE = "http://m.nl.com/";
+			const GLOBAL_API_BASE = "http://api.nl.com/";
 			
 			const GLOBAL_DOMAIN = "nl.com";
 		};
