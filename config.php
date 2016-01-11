@@ -36,9 +36,10 @@
 
     include_once "common/function.php";
     
-    $whitelist = array('localhost', 'www.nl.com', 'm.nl.com',"api.nl.com");
+    //$whitelist = array('www.newslogue.com', 'm.newslogue.com',"api.newslogue.com");
 
-    if(!in_array($_SERVER['HTTP_HOST'], $whitelist))
+    //if(in_array($_SERVER['HTTP_HOST'], $whitelist))
+    if (isProductEnv())
     {
         $GLOBAL_WEB_ROOT                = "http://". $_SERVER['HTTP_HOST'] ."/";
     
@@ -52,7 +53,7 @@
         
         $database->databaseType = "mysqli";
         
-        $connection = new mysqli('127.0.0.1', 'root', 'passw0rd', 'newslogu_v1');
+        $connection = new mysqli(CONFIG_DB::HOSTNAME, CONFIG_DB::USERNAME, CONFIG_DB::PASSWORD, CONFIG_DB::INSTNAME);
         
         
         
