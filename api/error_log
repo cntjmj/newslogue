@@ -1,7 +1,0 @@
-[27-Nov-2015 09:17:25 UTC] PHP Parse error:  syntax error, unexpected '[' in /home/newslogu/public_html/class/nl-news-class.php on line 85
-[27-Nov-2015 09:18:11 UTC] PHP Parse error:  syntax error, unexpected '[' in /home/newslogu/public_html/class/nl-news-class.php on line 85
-[27-Nov-2015 09:24:21 UTC] PHP Parse error:  syntax error, unexpected '[' in /home/newslogu/public_html/class/nl-news-class.php on line 86
-[01-Dec-2015 10:20:37 UTC] PHP Warning:  require_once(../class/nl-auth-class.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/newslogu/public_html/api/auth.php on line 2
-[01-Dec-2015 10:20:37 UTC] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '../class/nl-auth-class.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/newslogu/public_html/api/auth.php on line 2
-[01-Dec-2015 10:24:00 UTC] PHP Warning:  require_once(/home/newslogu/public_html/class/../common/nl-common.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/newslogu/public_html/class/nl-auth-class.php on line 3
-[01-Dec-2015 10:24:00 UTC] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '/home/newslogu/public_html/class/../common/nl-common.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/newslogu/public_html/class/nl-auth-class.php on line 3
