@@ -48,10 +48,30 @@
 			}
 		);
 	};
-
-	var userLogin = function($scope, $http) {
+	
+	var submitAuthInfo = function($scope, $http, postData) {
 		var urlAuth = CONFIG.GLOBAL_API_BASE+'/auth';
 		
+		$http({method: 'post', url: urlAuth, data: $.param(postData)}).success(
+				function(data){
+					if (angular.isDefined(data.userID)) {
+						parseAuthInfo($scope, $http, data);
+						$scope.user.password = "";
+
+						$("#login_area").slideUp("fast");
+						$("#category_list").css("margin-top","37px");				
+					} else {
+						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
+						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
+						
+						// TODO:
+						alert(errCode+" "+errMesg);
+					}
+				});
+	};
+
+	var userLogin = function($scope, $http) {
+
 		if (!$scope.loginform.emailaddress.$valid ||
 			!$scope.loginform.password.$valid) {
 			//TODO:
@@ -62,22 +82,8 @@
 				emailaddress: $scope.user.emailaddress,
 				password: $scope.user.password
 			};
-		$http({method: 'post', url: urlAuth, data: $.param(postData)}).success(
-			function(data){
-				if (angular.isDefined(data.userID)) {
-					parseAuthInfo($scope, $http, data);
-					$scope.user.password = "";
 
-					$("#login_area").slideUp("fast");
-					$("#category_list").css("margin-top","37px");				
-				} else {
-					var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
-					var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
-					
-					// TODO:
-					alert(errCode+" "+errMesg);
-				}
-			});
+		submitAuthInfo($scope, $http, postData);
 	};
 	
 	var userLogout = function($scope, $http) {
@@ -103,6 +109,43 @@
 				return userLogout($scope, $http);
 			}
 		};
+	};
+	
+	var setupFaceBook = function($scope, $http) {
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '540497959441744',
+				xfbml      : true,
+				version    : 'v2.4'
+				});
+		};
+
+		$(document).on("click", "#login_with_facebook", function(){
+			FB.login(function(response) {
+				if (response.authResponse) {
+					FB.api('/me', {fields: 'id,name,email'}, function(meresponse) {
+						var postData = {
+								fbName:		meresponse.name,
+								fbEmail:	meresponse.email,
+								fbID:		meresponse.id
+							};
+						submitAuthInfo($scope, $http, postData);
+					});
+				} else {
+					// TODO:
+					var postData = {fbID:"954430261282373",fbName:"Minghua Lu",fbEmail:"minghua.lu@163.com"}
+					submitAuthInfo($scope, $http, postData);
+				}
+			},{scope: 'email'});
+		});
+
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 	};
 
 	var loadCategoryList = function($scope, $http) {
@@ -416,6 +459,7 @@
 		 */
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
 		loadCategoryList($scope, $http);
 		
 		/**

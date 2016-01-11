@@ -48,6 +48,27 @@ class Auth {
 		$this->auth["displayName"] = $name;
 	}
 	
+	public function fbLogin($fbEmail, $fbID, $fbName) {
+		$fbEmail = $this->db->real_escape_string($fbEmail);
+		$fbID = $this->db->real_escape_string($fbID);
+		$fbName = $this->db->real_escape_string($fbName);
+		
+		$query = "select * from user_registration where fbID=\"$fbID\"";
+		$result = $this->db->query($query);
+		if (!is_array($result) || count($result) < 1)
+			throw new Exception("unregistered user", -1);
+		
+		if ($fbEmail != $result[0]['fbEmail'] || $fbName != $result[0]['fbName']) {
+			// TODO:
+		}
+		
+		$_SESSION["userID"] = $result[0]['userID'];
+		$_SESSION["fullname"] = $fbName;
+		$_SESSION["emailaddress"] = $fbEmail;
+		
+		return this;
+	}
+	
 	public function login($emailaddress, $password) {
 		$emailaddress = Coder::cleanXSS($this->db, $emailaddress);
 		$password = sha1($password);
@@ -63,9 +84,15 @@ class Auth {
 		if ($userID <= 0)
 			throw new Exception("current user is not allowed to login", -1);
 		
+		$this->setupSession($userID);
+		
+		return $this;
+	}
+	
+	private function setupSession($userID) {
 		$user = new User($userID);
 		$userInfo = $user->getArray();
-				
+		
 		if (!is_array($userInfo) || !isset($userInfo["user"]))
 			throw new Exception("could not retrieve user information", -1);
 		
@@ -75,8 +102,6 @@ class Auth {
 		
 		$this->setUserID($userID);
 		$this->setDisplayName($_SESSION["displayName"]);
-		
-		return $this;
 	}
 	
 	public function logout() {
