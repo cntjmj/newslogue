@@ -132,9 +132,9 @@
 						submitAuthInfo($scope, $http, postData);
 					});
 				} else {
-					// TODO:
-					var postData = {fbID:"954430261282373",fbName:"Minghua Lu",fbEmail:"minghua.lu@163.com"}
-					submitAuthInfo($scope, $http, postData);
+					// TODO: error handler
+					// TO DEL: var postData = {fbID:"954430261282373",fbName:"Minghua Lu",fbEmail:"minghua.lu@163.com"}
+					// TO DEL: submitAuthInfo($scope, $http, postData);
 				}
 			},{scope: 'email'});
 		});

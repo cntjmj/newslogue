@@ -54,19 +54,20 @@ class Auth {
 		$fbName = $this->db->real_escape_string($fbName);
 		
 		$query = "select * from user_registration where fbID=\"$fbID\"";
+
 		$result = $this->db->query($query);
 		if (!is_array($result) || count($result) < 1)
 			throw new Exception("unregistered user", -1);
 		
 		if ($fbEmail != $result[0]['fbEmail'] || $fbName != $result[0]['fbName']) {
-			// TODO:
+			// TODO: update user profile
 		}
 		
-		$_SESSION["userID"] = $result[0]['userID'];
-		$_SESSION["fullname"] = $fbName;
-		$_SESSION["emailaddress"] = $fbEmail;
+		$userID = $result[0]['userID'];
+
+		$this->setupSession($userID);
 		
-		return this;
+		return $this;
 	}
 	
 	public function login($emailaddress, $password) {
