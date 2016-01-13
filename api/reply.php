@@ -8,13 +8,21 @@
 		if (is_get()) {
 			$newsID = _get("newsID", 0);
 			$replyID = _get("replyID", 0);
+			$userID = _get("userID", 0);
 			$withSubReplies = _get("withSubReplies", true);
 		
 			if ($replyID > 0) {
 				$reply = new Reply($replyID, $withSubReplies);
 				echo $reply->getJson();
 			} else if ($newsID > 0) {
-				$replies = new ReplyList($newsID, $withSubReplies);	
+				$replies = new NewsReplyList($newsID, $withSubReplies);	
+				echo $replies->getJson();
+			} else if ($userID > 0) {
+				$auth = Auth::getInstance();
+				if ($userID != $auth->getUserID())
+					throw new Exception("unauthorised operation", -1);
+				
+				$replies = new UserReplyList($userID);
 				echo $replies->getJson();
 			}
 		} else if (is_post()){

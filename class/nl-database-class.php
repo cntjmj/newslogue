@@ -75,7 +75,8 @@ class Database {
 	}
 	
 	public function update($query) {
-		echo "update";
+		$this->mysqli->query($query);
+		return $this->mysqli->affected_rows;
 	}
 	
 	public function delete($query) {
