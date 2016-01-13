@@ -39,7 +39,8 @@ class Notification {
 		$this->resultArr["notification"]["count"] = $this->db->query($query);
 
 		if ($this->num_per_page > 0) {
-			$query = "select *, nr.createdDateTime as nrcreatedDateTime from news_reply nr
+			$query = "select nr.*, na.*, ur.userID, ur.displayName, ur.fullname, ur.fbName,
+					nr.createdDateTime as nrcreatedDateTime from news_reply nr
 					inner join user_registration ur
 					on nr.userID = ur.userID
 					inner join (select newsID, newsPermaLink from newsarticle) na

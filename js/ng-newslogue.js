@@ -216,8 +216,9 @@
 							data.newsMetaList[i].newsSource = "//"+data.newsMetaList[i].newsSource;
 						
 						var newsSite = data.newsMetaList[i].newsSource;
-						newsSite = newsSite.substr(newsSite.indexOf('.')+1);
+						newsSite = newsSite.substr(newsSite.indexOf('//')+2);
 						newsSite = newsSite.substr(0, newsSite.indexOf('/'));
+						//newsSite = newsSite.substr(newsSite.indexOf('.')+1);
 						data.newsMetaList[i].newsSite = newsSite.toUpperCase();
 					}
 					$.merge($scope.newsMetaList, data.newsMetaList);
@@ -488,6 +489,8 @@
 		getNews($scope, $http, newsID);
 		getCommentsByNewsID($scope, $http, newsID);
 		getVoteByNewsID($scope, $http, newsID);
+		
+		$scope.replyList = [];
 
 		$scope.bUserVoteAgree = function() {
 			return bUserVoteAgree($scope);

@@ -1,5 +1,5 @@
 <?php
-	require_once dirname(__FILE__).'/nl-database-class.php';
+	require_once __DIR__.'/nl-database-class.php';
 
 class User {
 	private $userID;
@@ -43,6 +43,21 @@ class User {
 				$this->db->query($query);
 			}
 		}
+	}
+	
+	public function updateUser($attrArr) {
+		if (!is_array($attrArr) || count($attrArr) < 1)
+			return false;
+
+		$query = "update `user_registration` set";
+		foreach ($attrArr as $key => $value) {
+			$key = $this->db->real_escape_string($key);
+			$value = $this->db->real_escape_string($value);
+			$query .= " $key = \"$value\",";
+		}
+		$query = substr($query, 0, $query.length-1) . " where userID =" . $this->userID;
+		
+		return 0 < $this->db->query($query);
 	}
 	
 	private function loadUser() {

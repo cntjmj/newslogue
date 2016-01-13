@@ -58,12 +58,14 @@ class Auth {
 		$result = $this->db->query($query);
 		if (!is_array($result) || count($result) < 1)
 			throw new Exception("unregistered user", -1);
-		
-		if ($fbEmail != $result[0]['fbEmail'] || $fbName != $result[0]['fbName']) {
-			// TODO: update user profile
-		}
-		
+
 		$userID = $result[0]['userID'];
+
+		if ($fbEmail != $result[0]['fbEmail'] || $fbName != $result[0]['fbName']) {
+			$attr = array("fbEmail" => $fbEmail, "fbName" => $fbName);
+			$user = new User($userID);
+			$user->updateUser($attr);
+		}
 
 		$this->setupSession($userID);
 		
