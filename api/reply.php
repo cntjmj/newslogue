@@ -68,7 +68,7 @@
 			if ($subReplyID > 0) {
 				echo $replyObj->getJson();
 			} else {
-				echo json_encode(["errCode"=>0, "errMessage"=>"deletion succeeded", "replyID"=>$replyID]);
+				echo json_encode(array("errCode"=>0, "errMessage"=>"deletion succeeded", "replyID"=>$replyID));
 			}
 		}
 	} catch (Exception $e) {
