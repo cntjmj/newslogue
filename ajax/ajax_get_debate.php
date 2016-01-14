@@ -90,7 +90,7 @@
 				    <div>
 				    <!--a href="news/<?php echo $newsRstArr["newsID"] ?>/<?php echo $newsRstArr["newsPermalink"] ?>"-->
 				    <a href="<?=(false===stripos($newsRstArr["newsSource"],"http")?"http://".$newsRstArr["newsSource"]:$newsRstArr["newsSource"])?>" target="_blank">
-				      <img src="
+				      <img class="debate_image" src="
 				      												<?php
 																		$newsBannerSource = $newsRstArr['newsBannerSource'];
 																		if (false === strpos($newsBannerSource, "://"))

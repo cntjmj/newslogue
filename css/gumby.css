@@ -1350,6 +1350,12 @@ img, object, embed { max-width: 100%; height: auto; }
 
 img { -ms-interpolation-mode: bicubic; }
 
+.debate_image {
+  object-fit: cover;
+  width: 640px;
+  height: 480px;
+}
+
 #map_canvas img, .map_canvas img { max-width: none !important; }
 
 /* Tile Grid */

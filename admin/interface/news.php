@@ -137,6 +137,7 @@
                         echo "<div class='".$notificationClass."'>".$notificationMsg."</div>";
                 ?>
                 </div>
+                
                 <form method="post" enctype="multipart/form-data" id="user_form" name="user_form" ng-app="nlapp" ng-controller="adminController"
                 	action="<?=$_SERVER["REQUEST_URI"]?>">
                     <ul id="form_list" >
@@ -220,13 +221,14 @@
                             </div>
                             <div class="clr"></div>
                         </li>
-                        <li>
+
+                        <!--<li>
                             <div class="field_label">News Tag</div>
                             <div class="field_input">
                                 <?=generateInput("text","newsTag","","newsTag",@$getDetailsRstArray["newsTag"])?>
                             </div>
                             <div class="clr"></div>
-                        </li>
+                        </li> -->
                         
 						<li>
 							<div class="field_label">News Content</div>
@@ -586,8 +588,8 @@ var cropYAxis = 0;
                 	errormsg += "News Title is required.<br>";
                 if (document.getElementsByName('newsPermalink')[0].value == "")
                     errormsg += "News Permalink is required.<br>";
-                if (document.getElementsByName('newsTag')[0].value == "")
-                    errormsg += "News Tag is required.<br>";
+                //if (document.getElementsByName('newsTag')[0].value == "")
+                //    errormsg += "News Tag is required.<br>";
                 if (CKEDITOR.instances.newsContent.getData() == "")
                     errormsg += "News Content is required.<br>";
                 if (document.getElementsByName('newsQuestion')[0].value == "")

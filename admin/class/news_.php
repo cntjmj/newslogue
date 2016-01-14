@@ -11,7 +11,7 @@
             $newsTitle = $admin_database->cleanXSS($postVar["newsTitle"]);
             $newsDesc = $admin_database->cleanXSS($postVar["newsDesc"]);
             $newsPermalink = str_ireplace(" ","-",$admin_database->cleanXSS($postVar["newsPermalink"]));
-            $newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
+            //$newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
             $newsContent = $admin_database->cleanXSS($postVar["newsContent"]);
             $newsQuestion = $admin_database->cleanXSS($postVar["newsQuestion"]);
 
@@ -32,8 +32,8 @@
 
                 if($newsPermalink == "")
                     $errorArray[] = "News Permalink is required.";
-                if($newsTag == "")
-                    $errorArray[] = "News Tag is required.";
+                //if($newsTag == "")
+                //    $errorArray[] = "News Tag is required.";
                 if($newsContent == "")
                     $errorArray[] = "News Content is required.";
                 if($newsQuestion == "")
@@ -56,7 +56,9 @@
             $newsTitle = $admin_database->cleanXSS($postVar["newsTitle"]);
             $newsDesc = $admin_database->cleanXSS($postVar["newsDesc"]);
             $newsPermalink = str_ireplace(" ","-",$admin_database->cleanXSS($postVar["newsPermalink"]));
-            $newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
+            //$newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
+            // set newsTag as ""
+            $newsTag = "";
             $newsContent = $admin_database->cleanXSS($postVar["newsContent"]);
             $newsStartDate = $admin_database->cleanXSS($postVar["newsStartDate"]);
             $newsStatus = $admin_database->cleanXSS(@$postVar["newsStatus"]);
@@ -121,7 +123,8 @@
             $newsTitle = $admin_database->cleanXSS($postVar["newsTitle"]);
             $newsDesc = $admin_database->cleanXSS($postVar["newsDesc"]);
             $newsPermalink = str_ireplace(" ","-",$admin_database->cleanXSS($postVar["newsPermalink"]));
-            $newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
+            //$newsTag = $admin_database->cleanXSS($postVar["newsTag"]);
+            $newsTag = "";
             $newsContent = $admin_database->cleanXSS($postVar["newsContent"]);
             $newsStartDate = $admin_database->cleanXSS($postVar["newsStartDate"]);
             $newsStatus = $admin_database->cleanXSS(@$postVar["newsStatus"]);
@@ -133,7 +136,6 @@
             $newsSource = $admin_database->cleanXSS(@$postVar['newsSource']);
 
             $nowDateTime = date("Y-m-d H:i:s");
-            $adminID = $_SESSION["adminID"];
 
             $variable = array();
             $extraSQL = "";
@@ -152,7 +154,7 @@
             $newsStartDateArr = explode("-",$newsStartDate);
             $newsStartDate = $newsStartDateArr[2]."-".$newsStartDateArr[1]."-".$newsStartDateArr[0];
 
-
+            // Dont need to update adminID for this news
             $qry = "update newsarticle set
                     ".$extraSQL."
                     categoryID = ?,
@@ -168,7 +170,6 @@
                     newsQuestion= ?,
                     newsStartDate= ?,
                     newsStatus= ?,
-                    adminID=?,
                     updatedDateTime = ?
                     where newsID = ?";
             $variable[] = array("i", $categoryID);
@@ -187,11 +188,8 @@
             $variable[] = array("s", $newsQuestion);
             $variable[] = array("s", $newsStartDate);
             $variable[] = array("s", $newsStatus);
-            $variable[] = array("s", $adminID);
             $variable[] = array("s", $nowDateTime);
             $variable[] = array("i", $newsID);
-
-
 
             $result = $admin_database->query("update",$qry,$connection,$variable);
 
