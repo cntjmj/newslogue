@@ -6,7 +6,7 @@ class User {
 	private $userArr = array();
 	private $db;
 
-	public function __construct($userID) {
+	public function __construct($userID=0) {
 		$this->userID = $userID;
 		$this->db = new Database();
 	}
@@ -23,13 +23,35 @@ class User {
 	}
 
 	public static function fillDisplayName(&$user) {
-		if ($user["displayName"] == "" || $user["displayName"] == "undefined") {
-			if ($user["fullname"] != "" && $user["fullname"] != "undefined")
+		if (!isset($user["displayName"]) || $user["displayName"] == "" || $user["displayName"] == "undefined") {
+			if (isset($user["fullame"]) && $user["fullname"] != "" && $user["fullname"] != "undefined")
 				$user["displayName"] = $user["fullname"];
-			else if ($user["fbName"] != "" && $user["fbName"] != "undefined")
+			else if (isset($user["fbName"]) && $user["fbName"] != "" && $user["fbName"] != "undefined")
 				$user["displayName"] = $user["fbName"];
 		}
 		return $user;
+	}
+	
+	public function createUser($fields) {
+		$userID = 0;
+
+		if (isset($fields["fbID"])) {
+			$userID = $this->createFBUser($fields);
+		} else if ($field["emailaddress"]) {
+			$userID = $this->createLocalUser($fields);
+		} else {
+			throw new Exception("incorrect parameters", -1);
+		}
+
+		if ($userID <= 0) {
+			$this->userID = 0;
+			$this->userArr = array();
+			throw new Exception("error occurred when creating user", -1);
+		}
+		
+		$this->userID = $userID;
+		$this->loadUser();
+		return $this;
 	}
 	
 	public function createAnonymous($anonymousID) {
@@ -45,17 +67,17 @@ class User {
 		}
 	}
 	
-	public function updateUser($attrArr) {
-		if (!is_array($attrArr) || count($attrArr) < 1)
+	public function updateUser($fields) {
+		if (!is_array($fields) || count($fields) < 1)
 			return false;
 
 		$query = "update `user_registration` set";
-		foreach ($attrArr as $key => $value) {
-			$key = $this->db->real_escape_string($key);
-			$value = $this->db->real_escape_string($value);
+		foreach ($fields as $key => $value) {
+			$key = Coder::cleanXSS($this->db, $key);
+			$value = Coder::cleanXSS($this->db, $value);
 			$query .= " $key = \"$value\",";
 		}
-		$query = substr($query, 0, $query.length-1) . " where userID =" . $this->userID;
+		$query .=" updatedDateTime=now() where userID =" . $this->userID;
 		
 		return 0 < $this->db->query($query);
 	}
@@ -76,6 +98,50 @@ class User {
 			User::fillDisplayName($model);
 
 		return $model;
+	}
+	
+	private function createFBUser($fields) {
+		if (!isset($fields["fbID"]) || !isset($fields["fbName"]) || !isset($fields["fbEmail"]))
+			throw new Exception("incorrect parameters", -1);
+
+		User::fillDisplayName($fields);
+		$keys = $values = "(";
+		foreach ($fields as $key => $value) {
+			$key = Coder::cleanXSS($this->db, $key);
+			$value = Coder::cleanXSS($this->db, $value);
+			$fields[$key] = $value;
+			$keys .= "$key, ";
+			$values .= "\"$value\", ";
+		}
+		$keys .= "pwd, userStatus, createdDateTime, updatedDateTime)";
+		$values .= "\"\", \"active\", now(), now())";
+		
+		$query = "select count(*) from user_registration where fbEmail=\"".$fields['fbEmail']."\"";
+		if (0 < $this->db->query($query))
+			throw new Exception("user exsits", -1);
+		
+		$query = "insert into user_registration $keys values $values";
+		return $this->db->query($query);
+	}
+	
+	private function createLocalUser($fields) {
+		if (!isset($fields['emailaddress']) || !isset($fields['displayName']) || !isset($fields['pwd']))
+			throw new Exception("incorrect parameters", -1);
+		
+		$keys = $values = "(";
+		foreach ($fields as $key => $value) {
+			$key = Coder::cleanXSS($this->db, $key);
+			$value = Coder::cleanXSS($this->db, $value);
+			if ($key == 'pwd')
+				$value = Auth::encrypt($value);
+			$fields[$key] = $value;
+			$keys .= "$key, ";
+			$values .= "\"$value\", ";
+		}
+		$keys .= "userStatus, createdDateTime, updatedDateTime)";
+		$values .= ", \"pending\", now(), now())";
+		
+		// TODO: a looooooooot of things
 	}
 }
 ?>

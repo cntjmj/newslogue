@@ -4,13 +4,16 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^news$ news.php [QSA,NC,L]
 RewriteRule ^auth$ auth.php [QSA,NC,L]
+
+RewriteRule ^news$ news.php [QSA,NC,L]
 RewriteRule ^news\/([^/]*)$ news.php?newsID=$1 [QSA,NC,L]
 RewriteRule ^news\/([^/]*)\/reply$ reply.php?newsID=$1 [QSA,NC,L]
 RewriteRule ^news\/([^/]*)\/reply\/([^/]*)$ reply.php?newsID=$1&replyID=$2 [QSA,NC,L]
 RewriteRule ^news\/([^/]*)\/reply\/([^/]*)\/([^/]*)$ reply.php?newsID=$1&replyID=$2&subReplyID=$3 [QSA,NC,L]
 RewriteRule ^news\/([^/]*)\/vote$ vote.php?newsID=$1 [QSA,NC,L]
+
+RewriteRule ^user$ user.php [QSA,NC,L]
 RewriteRule ^user\/([^/]*)\/notification$ notification.php?userID=$1 [QSA,NC,L]
 RewriteRule ^user\/([^/]*)\/reply$ reply.php?userID=$1 [QSA,NC,L]
 

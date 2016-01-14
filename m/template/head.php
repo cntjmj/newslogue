@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="<?=CONFIG_PATH::GLOBAL_M_BASE?>css/menu.css"><!--CSS MENU-->
 	<link rel="stylesheet" href="<?=CONFIG_PATH::GLOBAL_M_BASE?>css/magnific-popup.css"> <!--CSS POPUP-->
 
-
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/jquery.min.js"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/angular.min.js"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/angular-sanitize.min.js"></script>
