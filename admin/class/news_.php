@@ -136,8 +136,6 @@
             $newsSource = $admin_database->cleanXSS(@$postVar['newsSource']);
 
             $nowDateTime = date("Y-m-d H:i:s");
-            //$adminID = $_SESSION["adminID"];
-            $adminID = 11;
 
             $variable = array();
             $extraSQL = "";
@@ -155,27 +153,6 @@
             }
             $newsStartDateArr = explode("-",$newsStartDate);
             $newsStartDate = $newsStartDateArr[2]."-".$newsStartDateArr[1]."-".$newsStartDateArr[0];
-
-            /*
-            $qry = "update newsarticle set
-                    ".$extraSQL."
-                    categoryID = ?,
-                    newsPermalink= ?,
-
-                    newsBannerSource= ?,
-                    newsSource= ?,
-
-                    newsTitle= ?,
-                    newsDesc = ?,
-                    newsTag= ?,
-                    newsContent= ?,
-                    newsQuestion= ?,
-                    newsStartDate= ?,
-                    newsStatus= ?,
-                    adminID=?,
-                    updatedDateTime = ?
-                    where newsID = ?"; 
-            */
 
             // Dont need to update adminID for this news
             $qry = "update newsarticle set
@@ -211,7 +188,6 @@
             $variable[] = array("s", $newsQuestion);
             $variable[] = array("s", $newsStartDate);
             $variable[] = array("s", $newsStatus);
-            //$variable[] = array("s", $adminID);
             $variable[] = array("s", $nowDateTime);
             $variable[] = array("i", $newsID);
 
