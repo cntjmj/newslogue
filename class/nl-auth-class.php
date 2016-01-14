@@ -48,6 +48,10 @@ class Auth {
 		$this->auth["displayName"] = $name;
 	}
 	
+	public static function encrypt($password) {
+		return sha1($password);
+	}
+	
 	public function fbLogin($fbEmail, $fbID, $fbName) {
 		$fbEmail = $this->db->real_escape_string($fbEmail);
 		$fbID = $this->db->real_escape_string($fbID);
@@ -74,14 +78,18 @@ class Auth {
 	
 	public function login($emailaddress, $password) {
 		$emailaddress = Coder::cleanXSS($this->db, $emailaddress);
-		$password = sha1($password);
+		$password = Coder::cleanXSS($this->db, $password);
+		$password = Auth::encrypt($password);
 
-		$query = "select userID from user_registration where emailaddress=\"$emailaddress\" and pwd=\"$password\" and userStatus='active'";
+		$query = "select userID, userStatus from user_registration where emailaddress=\"$emailaddress\" and pwd=\"$password\""; //and userStatus='active'";
 		
 		$result = $this->db->query($query);
 		
 		if (!is_array($result) || count($result)<1 || !isset($result[0]["userID"]))
 			throw new Exception("incorrect email address or password", -1);
+		
+		if ($result[0]["userStatus"] != 'active')
+			throw new Exception("user's email address is not verified", -1);
 
 		$userID = $result[0]["userID"];
 		if ($userID <= 0)

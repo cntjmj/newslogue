@@ -33,17 +33,18 @@
 				$userID = $auth->getUserID();
 				
 				$newsID = _get("newsID", 0);	// here, we have to GET params in POST method
-				$replyID = _get("replyID", 0);	// this issue would be gone if use any framework
+				$replyID = _get("replyID", 0);
 				
 				$replyStatement = _post("replyStatement", ""); // deprecated in current design
 				$replyContent = _post("replyContent", "");
 				$replyType = _post("replyType", "");
-				
-				if ($newsID != 0) {
-					$replyObj = new Reply();
-					$replyObj->saveReply($replyID, $newsID, $userID, $replyStatement, $replyContent, $replyType);
-					$result = $replyObj->getArray();
-				}
+
+				if ($newsID <= 0 || $replyType == "" || $replyContent == "")
+					throw new Exception("missing parameters", -1);
+
+				$replyObj = new Reply();
+				$replyObj->saveReply($replyID, $newsID, $userID, $replyStatement, $replyContent, $replyType);
+				$result = $replyObj->getArray();
 			}
 			
 			echo json_encode($result);

@@ -120,7 +120,7 @@
 				});
 		};
 
-		$(document).on("click", "#login_with_facebook", function(){
+		$scope.loginWithFacebook = function(){
 			FB.login(function(response) {
 				if (response.authResponse) {
 					FB.api('/me', {fields: 'id,name,email'}, function(meresponse) {
@@ -137,7 +137,26 @@
 					// TO DEL: submitAuthInfo($scope, $http, postData);
 				}
 			},{scope: 'email'});
-		});
+		};
+		
+		$scope.signUpWithFacebook = function(){
+			FB.login(function(response) {
+				if (response.authResponse) {
+					FB.api('/me', {fields: 'id,name,email'}, function(meresponse) {
+						var postData = {
+								fbName:		meresponse.name,
+								fbEmail:	meresponse.email,
+								fbID:		meresponse.id
+							};
+						signUpUser($scope, $http, postData);
+					});
+				} else {
+					// TODO: error handler
+					// TO DEL: var postData = {fbID:"12345",fbName:"Minghua Lu",fbEmail:"minghua.lu@263.com"}
+					// TO DEL: signUpUser($scope, $http, postData);
+				}
+			},{scope: 'email'});
+		};
 
 		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -436,7 +455,47 @@
 	};
 	
 	/**
-	 * 50. Newslogue Angular Application
+	 * 4. Sign Up Function Area
+	 */
+	var signUpUser = function($scope, $http, postData) {
+		var urlUser = CONFIG.GLOBAL_API_BASE+'/user';
+
+		$http({method: 'post', url: urlUser, data: $.param(postData)}).success(
+				function(data){
+					if (angular.isDefined(data.errCode) && data.errCode == 0) {
+						// TODO:
+						alert(data.errMessage);
+					} else {
+						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
+						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
+						
+						// TODO:
+						$scope.signup.errMessage = errMesg;
+					}
+				});
+	};
+	
+	var submitSignupForm = function($scope, $http) {
+		if (false == $scope.signupform.displayName.$valid ||
+			false == $scope.signupform.emailaddress.$valid ||
+			false == $scope.signupform.pwd.$valid ||
+			false == $scope.signupform.cpwd.$valid) {
+			$scope.signup.errMessage = "please fill out all required fields";
+		} else if ($scope.signup.pwd != $scope.signup.cpwd) {
+			$scope.signup.errMessage = "inconsistant password";
+		} else {
+			$scope.signup.errMessage = "";
+			var postData = {
+				emailaddress:	$scope.signup.emailaddress,
+				displayName:	$scope.signup.displayName,
+				pwd:			$scope.signup.pwd
+			};
+			signUpUser($scope, $http, postData);
+		}
+	};
+
+	/**
+	 * 50.1 Newslogue Angular Application
 	 */
 
 	var nlapp = angular.module("nlapp", ['ngSanitize', 'infinite-scroll']);
@@ -451,21 +510,21 @@
 	});
 	
 	/**
-	 * 50.1 Controller for Index Page
+	 * 50.2 Controller for Index Page
 	 */
 	
 	nlapp.controller("IndexController", function($scope, $http){
 		/**
-		 * setup head, header, login/logout, navigator
+		 * setup head, header, login/logout
 		 */
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
-		loadCategoryList($scope, $http);
 		
 		/**
 		 * setup scope models specific to index page
 		 */
+		loadCategoryList($scope, $http);
 		initLazyLoading();
 		initMagnificPopup();
 
@@ -480,7 +539,7 @@
 	});
 	
 	/**
-	 * 50.2 Controller for DebateController
+	 * 50.3 Controller for Debate Page
 	 */
 
 	nlapp.controller("DebateController", function($scope, $http){
@@ -530,5 +589,25 @@
 		
 		$scope.removeReply = function(replyID, subReplyID) {
 			return removeReply($scope, $http, replyID, subReplyID);
+		};
+	});
+	
+	/**
+	 * 50.4 Controller for Sign Up Page
+	 */
+	nlapp.controller("SignupController", function($scope, $http){
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+
+		$scope.signup = {
+				displayName: "",
+				emailaddress: "",
+				pwd: "",
+				cpwd: "",
+				errMessage: "",
+				submitSignupForm: function() {
+					submitSignupForm($scope, $http);
+				}
 		};
 	});
