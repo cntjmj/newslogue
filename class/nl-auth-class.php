@@ -78,7 +78,7 @@ class Auth {
 	
 	public function login($emailaddress, $password) {
 		$emailaddress = Coder::cleanXSS($this->db, $emailaddress);
-		$password = Coder::cleanXSS($this->db, $password);
+		//$password = Coder::cleanXSS($this->db, $password);
 		$password = Auth::encrypt($password);
 
 		$query = "select userID, userStatus from user_registration where emailaddress=\"$emailaddress\" and pwd=\"$password\""; //and userStatus='active'";
