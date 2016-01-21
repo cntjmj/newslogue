@@ -1,5 +1,7 @@
 <?php
 	require_once __DIR__.'/nl-database-class.php';
+	require_once __DIR__.'/nl-coder-class.php';
+	require_once __DIR__.'/nl-mailer-class.php';
 
 class User {
 	private $userID;
@@ -12,7 +14,7 @@ class User {
 	}
 
 	public function getArray() {
-		if ($this->userArr == null)
+		if ($this->userArr == null && userID != 0)
 			$this->loadUser();
 
 		return $this->userArr;
@@ -20,6 +22,10 @@ class User {
 	
 	public function getJson() {
 		return json_encode($this->getArray());
+	}
+	
+	public function getUserID() {
+		return $this->userID;
 	}
 
 	public static function fillDisplayName(&$user) {
@@ -36,8 +42,16 @@ class User {
 		$userID = 0;
 
 		if (isset($fields["fbID"])) {
+			$query = "select count(1) from user_registration where fbID=\"".
+						Coder::cleanXSS($this->db, $fields["fbID"])."\"";
+			if (0 < $this->db->query($query))
+				throw new Exception("user already exists", -1);
 			$userID = $this->createFBUser($fields);
-		} else if ($field["emailaddress"]) {
+		} else if ($fields["emailaddress"]) {
+			$query = "select count(1) from user_registration where emailaddress=\"".
+						Coder::cleanXSS($this->db, $fields["emailaddress"])."\"";
+			if (0 < $this->db->query($query))
+				throw new Exception("user already exists", -1);
 			$userID = $this->createLocalUser($fields);
 		} else {
 			throw new Exception("incorrect parameters", -1);
@@ -80,6 +94,24 @@ class User {
 		$query .=" updatedDateTime=now() where userID =" . $this->userID;
 		
 		return 0 < $this->db->query($query);
+	}
+	
+	public function VerifyCode($emailaddress,$uniqCode) {
+		$emailaddress = Coder::cleanXSS($this->db, $emailaddress);
+		$uniqCode = Coder::cleanXSS($this->db, $uniqCode);
+		
+		$query = "select userID from user_registration where emailaddress=\"$emailaddress\" and uniqCode=\"$uniqCode\" and userStatus=\"pending\"";
+		$result = $this->db->query($query);
+
+		if (is_array($result) && count($result) > 0 && isset($result[0]["userID"])) {
+			$userID = $result[0]["userID"];
+			$query = "update user_registration set userStatus=\"active\", uniqCode=\"\" where userID=$userID";
+			$this->db->query($query);
+			$this->userID = $userID;
+			$this->loadUser();
+		}
+		
+		return $this;
 	}
 	
 	private function loadUser() {
@@ -126,22 +158,32 @@ class User {
 	
 	private function createLocalUser($fields) {
 		if (!isset($fields['emailaddress']) || !isset($fields['displayName']) || !isset($fields['pwd']))
-			throw new Exception("incorrect parameters", -1);
+			throw new Exception("incorrect parameters", -11);
 		
 		$keys = $values = "(";
 		foreach ($fields as $key => $value) {
 			$key = Coder::cleanXSS($this->db, $key);
-			$value = Coder::cleanXSS($this->db, $value);
 			if ($key == 'pwd')
 				$value = Auth::encrypt($value);
+			else
+				$value = Coder::cleanXSS($this->db, $value);
 			$fields[$key] = $value;
 			$keys .= "$key, ";
 			$values .= "\"$value\", ";
 		}
-		$keys .= "userStatus, createdDateTime, updatedDateTime)";
-		$values .= ", \"pending\", now(), now())";
+		$uniqCode = Coder::createRandomCode();
 		
-		// TODO: a looooooooot of things
+		$mailer = new Mailer();
+		$result = $mailer->sendVerification($fields['emailaddress'], $fields['displayName'], $uniqCode);
+
+		if ($result == false)
+			throw new Exception("failed to send verification email", -1);
+
+		$keys .= "uniqCode, userStatus, createdDateTime, updatedDateTime)";
+		$values .= "\"$uniqCode\", \"pending\", now(), now())";
+
+		$query = "insert into user_registration $keys values $values";
+		return $this->db->query($query);
 	}
 }
 ?>

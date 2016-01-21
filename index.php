@@ -1,3 +1,12 @@
+<?php
+	require_once 'nl-init.php';
+	require_once './common/nl-common.php';
+	
+	if (is_mobile()) {
+		header("location: ".CONFIG_PATH::GLOBAL_M_BASE);
+		exit();
+	}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,7 +35,8 @@ a{
 	<a href="mailto:joewong@newslogue.com" target="_blank">
 		<img src="logo.jpg" >
 		<p style="color:#FFF;">Community Sourced Debates</p>
-		<p style="color:#FFF;">Newslogue is under periodical maintenance status.</p>
+		
+		<p style="color:#FFF;">Please visit us using mobile device.<!--Newslogue is under periodical maintenance status.--></p>
 	</a>
 </div>
 </body>

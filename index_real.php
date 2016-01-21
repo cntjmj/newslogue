@@ -99,6 +99,7 @@
 							
 							$createdDateTime = strtotime($val["nacreatedDateTime"]);
 							$createdDateTime = date("F d, Y",$createdDateTime);
+							$newsStartDate = date("F d, Y", strtotime($val["newsStartDate"]));
 							$newsAllReplyRstArr = $news->DisplayAllReplyDetails(1,10000000000,$val["newsID"]);
 							$agreeAmt = $disagreeAmt = 0;
 							if(is_array($newsAllReplyRstArr["List"]) && count($newsAllReplyRstArr["List"]) > 0)
@@ -142,7 +143,7 @@
 										 ?>										
 									</div>
 								</a>	
-								<div class="feed-cat-date"><?php echo $val["categoryName"]." | ".$createdDateTime?> </div>
+								<div class="feed-cat-date"><?php echo $val["categoryName"]." | ".$newsStartDate//createdDateTime?> </div>
 								<div class="feed-question clearfix">
 									<div class="feed-quote quote-open"><img src="img/quote-mark-open.png"></div>
 									<div class="feed-question-text"><?php echo $val["newsQuestion"]?></div>

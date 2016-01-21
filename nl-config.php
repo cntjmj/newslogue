@@ -8,7 +8,7 @@
 		
 		if(in_array($_SERVER['HTTP_HOST'], $pro))
 			return true;
-		else if (strpos($_SERVER['HTTP_HOST'], ".newslogue.com"))
+		else if (false !== strpos($_SERVER['HTTP_HOST'], "newslogue.com"))
 			return true;
 		else
 			return false;

@@ -33,9 +33,18 @@
 				$emailaddress = _post("emailaddress", "");
 				$displayName = _post("displayName", "");
 				$pwd = _post("pwd", "");
+				$cpwd = _post("cpwd", "");
 
 				if ($emailaddress == "" || $displayName == "" || $pwd == "")
 					throw new Exception("incorrect parameters", -1);
+
+				/*
+				 * cpwd field is optional, because
+				 * the client should be responsible
+				 * for password checking
+				 */
+				if ($cpwd != "" && $cpwd != $pwd)
+					throw new Exception("inconsistent password", -1);
 
 				$fields = array(
 						"emailaddress" => $emailaddress,
@@ -43,7 +52,9 @@
 						"pwd" => $pwd
 				);
 
-				$user->createUser($fields);
+				if (0 >= $user->createUser($fields)->getUserID())
+					throw new Exception("failed to register user", -1);
+
 				echo json_encode(array("errCode"=>0, "errMessage"=>"an verification email has been sent to your email address"));
 			}
 		}
