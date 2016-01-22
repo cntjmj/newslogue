@@ -30,7 +30,7 @@
 				<h5 style="margin-top:5px;">{{news.newsSite}}</h5>
 			</div>
 			<div class="ind_debate">
-				<a href="javascript:;"> DEBATE </a>
+				<a href="/debate/{{news.newsID}}" target="_blank"> DEBATE </a>
 			</div>
 			<div class="border"></div>
 			<div class="clear"></div>

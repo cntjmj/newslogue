@@ -14,7 +14,7 @@ class User {
 	}
 
 	public function getArray() {
-		if ($this->userArr == null && userID != 0)
+		if ($this->userArr == null && $this->userID != 0)
 			$this->loadUser();
 
 		return $this->userArr;

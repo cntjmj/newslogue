@@ -189,6 +189,9 @@
 	 */
 	
 	var initLazyLoading = function() {
+		if (typeof(Blazy) != "function")
+			return;
+
 		//Lazy loading images plugin
 		(function() {
 			// Initialize
@@ -198,7 +201,8 @@
 	
 	var initMagnificPopup = function() {
 		var scrollTop = 0;
-		$('#index_main_section').magnificPopup({
+		//$('#index_main_section').magnificPopup({
+		$('main').magnificPopup({
 			delegate: '.popup-external-iframe',
 		    type: 'iframe',
 		    callbacks: {
@@ -311,6 +315,7 @@
 	};
 
 	var bUserVoteAgree = function($scope) {
+		if (angular.isDefined($scope.vote))
 		for (i in $scope.vote.agree.votes) {
 			if ($scope.userID == $scope.vote.agree.votes[i].userID) {
 				return true;
@@ -321,6 +326,7 @@
 	};
 
 	var bUserVoteDisagree = function($scope) {
+		if (angular.isDefined($scope.vote))
 		for (i in $scope.vote.disagree.votes) {
 			if ($scope.userID == $scope.vote.disagree.votes[i].userID)
 				return true;
@@ -543,13 +549,38 @@
 	 */
 
 	nlapp.controller("DebateController", function($scope, $http){
-
+		/**
+		 * setup head, header, login/logout
+		 */
 		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+		
+		/**
+		 * setup scope models specific to debate page
+		 */
+		initMagnificPopup();
+
 		getNews($scope, $http, newsID);
 		getCommentsByNewsID($scope, $http, newsID);
 		getVoteByNewsID($scope, $http, newsID);
 		
 		$scope.replyList = [];
+		$scope.str2date = str2date;
+
+		/**
+		 * setup vote functions
+		 */
+		$scope.agreeAreaValid = true;
+		$scope.disagreeAreaValid = true;
+
+		$scope.submitAgree = function() {
+			submitVote($scope, $http, "agree");
+		};
+		
+		$scope.submitDisagree = function() {
+			submitVote($scope, $http, "disagree");
+		};
 
 		$scope.bUserVoteAgree = function() {
 			return bUserVoteAgree($scope);
@@ -558,35 +589,25 @@
 		$scope.bUserVoteDisagree = function() {
 			return bUserVoteDisagree($scope);
 		};
-		
+
+		/**
+		 * setup reply functions
+		 */
 		$scope.bUserLikeThisReply = function(reply) {
 			return bUserLikeThisReply($scope, reply);
 		};
-		
-		$scope.str2date = str2date;
-		
-		$scope.submitAgree = function() {
-			submitVote($scope, $http, "agree");
-		};
-		
-		$scope.submitDisagree = function() {
-			submitVote($scope, $http, "disagree");
-		};
-		
-		$scope.agreeAreaValid = true;
-		$scope.disagreeAreaValid = true;
 
 		$scope.submitReply = function(replyType, replyID) {
 			return submitReply($scope, $http, replyType, replyID);
 		}; 
-		
+
 		$scope.subreplyArea = [];
 		$scope.subreplyAreaNotValid = [];
-		
+
 		$scope.submitSubreply = function(replyType, replyID, index) {
 			return submitSubreply($scope, $http, replyType, replyID, index);
 		};
-		
+
 		$scope.removeReply = function(replyID, subReplyID) {
 			return removeReply($scope, $http, replyID, subReplyID);
 		};

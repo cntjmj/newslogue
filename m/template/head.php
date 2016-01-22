@@ -13,6 +13,7 @@
 
 	<title><?=$title?></title>
 
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?=CONFIG_PATH::GLOBAL_M_BASE?>css/style.css"> <!--CSS-->
 	<link rel="stylesheet" href="<?=CONFIG_PATH::GLOBAL_M_BASE?>font-awesome-4.4.0/css/font-awesome.min.css"> <!-- FONT AWESOME -->
 	<link rel='stylesheet' href="<?=CONFIG_PATH::GLOBAL_M_BASE?>css/gfont.css"><!-- GOOGLE FONT -->
