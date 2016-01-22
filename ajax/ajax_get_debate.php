@@ -1,5 +1,5 @@
 <?php
-	include_once _DIR__."/../config.php";
+	include_once __DIR__."/../config.php";
 	$newsID = $database->cleanXSS($_GET["id"]);
 	$newsRstArr = $news->GetDetails($newsID);
 	$newsAllVotedRstArr = $news->DisplayAllVotedDetails(1,10000000000,$newsID);
