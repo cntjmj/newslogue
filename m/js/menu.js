@@ -96,6 +96,7 @@ $("#cssmenu").click(function() {
 		
 		$("#login_area").hide();
 		$("#category_list").css("margin-top","37px");	
+				$(".debate_head_main").css("margin-top","37px");
 	}
 	else
 	{
@@ -118,6 +119,8 @@ $(".login_user" ).click(function() {
 	$("#cssmenu ul").css("display","none");
 	$("#login_area").slideDown("slow");
 	$("#category_list").css("margin-top","0px");
+	$(".debate_head_main").css("margin-top","0px");
+	
 });
 
 $(document).mouseup(function (e)
@@ -132,7 +135,8 @@ $(document).mouseup(function (e)
 		//$("#cssmenu ul").removeClass("open");
 		//$("#cssmenu ul").css("display","none");
 		$(container).slideUp("fast");
-		$("#category_list").css("margin-top","37px");	
+		$("#category_list").css("margin-top","37px");
+		$(".debate_head_main").css("margin-top","37px");
     }
     
 	var cssmenu = $("#cssmenu");

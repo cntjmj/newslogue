@@ -31,7 +31,7 @@
 		if (angular.isDefined(data.userID)) {
 			$scope.userID = data.userID;
 			$scope.displayName = data.displayName;
-				
+
 			if ($scope.userID > 0) {
 				getNotificationInfo($scope, $http);
 				$(".show_after_logon").show();
@@ -353,6 +353,7 @@
 		if (angular.isDefined(data.reply) && data.reply.replyID > 0) {
 			for (i in $scope.replyList) {
 				if ($scope.replyList[i].replyID == data.reply.replyID) {
+					data.reply.unfold = $scope.replyList[i].unfold;
 					$scope.replyList[i] = data.reply;
 					return true;
 				}
@@ -460,6 +461,13 @@
 				});
 	};
 	
+	var toggleReplyArea = function($scope, $http, index) {
+		if ($scope.replyList[index].unfold != "yes")
+			$scope.replyList[index].unfold = "yes";
+		else
+			$scope.replyList[index].unfold = "no";
+	}
+	
 	/**
 	 * 4. Sign Up Function Area
 	 */
@@ -555,7 +563,7 @@
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
-		
+
 		/**
 		 * setup scope models specific to debate page
 		 */
@@ -610,6 +618,10 @@
 
 		$scope.removeReply = function(replyID, subReplyID) {
 			return removeReply($scope, $http, replyID, subReplyID);
+		};
+		
+		$scope.toggleReplyArea = function(index) {
+			return toggleReplyArea($scope, $http, index);
 		};
 	});
 	
