@@ -30,7 +30,7 @@ class User {
 
 	public static function fillDisplayName(&$user) {
 		if (!isset($user["displayName"]) || $user["displayName"] == "" || $user["displayName"] == "undefined") {
-			if (isset($user["fullame"]) && $user["fullname"] != "" && $user["fullname"] != "undefined")
+			if (isset($user["fullname"]) && $user["fullname"] != "" && $user["fullname"] != "undefined")
 				$user["displayName"] = $user["fullname"];
 			else if (isset($user["fbName"]) && $user["fbName"] != "" && $user["fbName"] != "undefined")
 				$user["displayName"] = $user["fbName"];

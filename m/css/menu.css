@@ -970,12 +970,12 @@ background-color: #72c489;
 padding-left:20px;
 padding-right:20px;
     color: #FFFFFF;
-
+    border-bottom:solid 5px #3d3e3e;
 }
 .last-reply
 {border-bottom:solid 5px #3d3e3e; border-top:solid 5px #3d3e3e;}
 .other_replys_section
-{padding:20px 20px 10px 20px;background-color:#6c8794;border-top:solid 5px #3d3e3e;}
+{padding:20px 20px 10px 20px;background-color:#6c8794;border-bottom:solid 5px #3d3e3e;}
 
 .debate_date
 {
@@ -1008,7 +1008,7 @@ width:70%;
 color:#2d2d2d;
 padding-left:4px;
 position:relative;
-
+text-align:left;
 	
 }
 
@@ -1038,7 +1038,7 @@ float: none;
 {padding-top:3px;}
 
 .debate_user_actual_comments
-{color:#2c2d2d; width:90%; padding-left:4px;}
+{color:#2c2d2d; width:90%; padding-left:4px; text-align:left;font-size: 12px; font-family: 'arial';}
 
 .replys_debate_comment-icon .fa-comment, .debate_comment-icon .fa-comment
 {
@@ -1224,7 +1224,7 @@ padding-top: 10px;
 
 .cl1
 {
-border-top: solid 2px #fff;margin:0 auto; width:85%;
+border-top: solid 2px #fff;margin:0 auto; width:90%;
 }
 
 .comments_txt, .reply_txt
@@ -1360,7 +1360,8 @@ color:#fff;}
 {
 background-color: #72c489;
 
-padding:20px;
+padding-top:20px;
+padding-bottom:20px;
     text-align: center;
 
 }

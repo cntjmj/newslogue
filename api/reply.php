@@ -39,7 +39,7 @@
 				$replyContent = _post("replyContent", "");
 				$replyType = _post("replyType", "");
 
-				if ($newsID <= 0 || $replyType == "" || $replyContent == "")
+				if ($newsID <= 0 || $replyType == "" || ($replyType != "like" && $replyContent == ""))
 					throw new Exception("missing parameters", -1);
 
 				$replyObj = new Reply();

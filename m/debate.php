@@ -78,6 +78,69 @@
 			</div>
 			<div id="debate_area">DEBATE</div>
 		</section>
+		<div ng-repeat="reply in replyList" class="{{reply.replyType=='agree'?'debate-comments':'other_replys_section'}}">
+			<div class="{{reply.replyType=='agree'?'top_agree_reply':'reply_top'}}">
+				<div class="debate_comments_section">
+					<div ng-show="reply.replyType=='agree'" class="debate_user-icon"><i class="fa fa-user fa-2x"></i></div>
+					<div ng-show="reply.replyType=='agree'" class="debate_username" style="padding-top:5px;">{{reply.displayName}}</div>
+					<div ng-show="reply.replyType=='agree'" class="debate_date">{{str2date(reply.replyCreatedDateTime) | date:'dd-MM-yy'}}</div>
+					<div ng-show="reply.replyType!='agree'" class="debate_date_replys">{{str2date(reply.replyCreatedDateTime) | date:'dd-MM-yy'}}</div>
+					<div ng-show="reply.replyType!='agree'" class="debate_username_replys">{{reply.displayName}}</div>
+					<div ng-show="reply.replyType!='agree'" class="debate_user-icon_replys"><i class="fa fa-user fa-2x"></i></div>
+				</div>
+				<div class="debate_comments_section">
+					<div ng-show="reply.replyType=='agree'" class="debate_comment-icon"><i class="fa fa-comment fa"></i></div>
+					<div ng-show="reply.replyType=='agree'" class="debate_user_actual_comments"
+						ng-click="toggleReplyArea($index)" ng-bind-html="reply.replyContent" 
+						style="white-space:{{reply.unfold=='yes'?'normal':'nowrap'}};overflow:hidden;text-overflow:ellipsis">
+					</div>
+					<div ng-show="reply.replyType!='agree'" class="empty_cls">&nbsp;</div>
+					<div ng-show="reply.replyType!='agree'" class="replys_debate_user_actual_comments"
+						ng-click="toggleReplyArea($index)" ng-bind-html="reply.replyContent"
+						style="white-space:{{reply.unfold=='yes'?'normal':'nowrap'}};overflow:hidden;text-overflow:ellipsis">
+					</div>
+					<div ng-show="reply.replyType!='agree'" class="replys_debate_comment-icon"><i class="fa fa-comment fa"></i></div>
+				</div>
+				<div class="debate_comments_section">
+					<div ng-show="reply.replyType=='agree'" class="debate_reply_icon"><i class="fa fa-reply"></i></div> 
+					<div ng-show="reply.replyType=='agree'" class="debate_reply_count"><a href="javascript:;" ng-click="toggleReplyArea($index)" class="agree-open-comment-box-reply-btn">REPLY {{reply.subReplies.count}}</a></div>
+					<div ng-show="reply.replyType=='agree'" class="debate_likes_status"><i ng-click="submitReply('like', reply.replyID)" class="fa fa-2x {{bUserLikeThisReply(reply)?'fa-heart':'fa-heart-o'}}"></i></div>
+					<div ng-show="reply.replyType!='agree'" class="empty_cls">&nbsp;</div>
+					<div ng-show="reply.replyType!='agree'" class="replys_debate_user_likes_status">
+						<i ng-click="submitReply('like', reply.replyID)" class="fa fa-2x {{bUserLikeThisReply(reply)?'fa-heart':'fa-heart-o'}}"></i> 
+						<a href="javascript:;" ng-click="toggleReplyArea($index)" class="disagree-open-comment-box-reply-btn">REPLY {{reply.subReplies.count}}</a>
+					</div>
+					<div ng-show="reply.replyType!='agree'" class="replys_debate_comment-icon"><i class="fa fa-reply"></i></div>
+				</div>
+			</div>
+			<div class="{{reply.replyType=='agree'?'agree-reply-comment-box':'disagree-reply-comment-box reply-comment'}}"
+				style="display:{{reply.unfold=='yes'?'block':'none'}};text-align:center">
+				<form ng-submit="submitSubreply(reply.replyType, reply.replyID, $index)" class="elegant-aero">
+					<div style="font-size: 17px; font-family: 'bebasregular', sans-serif; line-height: 17px; color:{{reply.replyType=='agree'?'#2d2d2d':'#FFFFFF'}};text-align:center"> ADD A REPLY</div>
+					<label>
+						<textarea id="reply-comment-txtbox" ng-model="subreplyArea[$index]" STYLE="width: 80%; padding: 25px; -webkit-appearance: none; -moz-border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; border: solid 3px #2d2d2d; margin-top: 10px; height: 50px;" required name="reply-comment-txtbox" placeholder="YOUR REPLY…"></textarea>
+					</label>
+					<div>
+						<label>
+							<input type="submit" value="Send" class="{{reply.replyType=='agree'?'submit_btn_agree-reply-comment':'submit_btn_disagree-reply-comment'}}" />
+						</label>
+					</div>
+				</form>
+				<div ng-repeat="sub in reply.subReplies.list" class="cl1" style="margin-top:10px;">
+					<div style="padding-top:20px;">
+						<div class="debate_comments_section">
+							<div class="debate_user-icon"><i class="fa fa-user fa-2x"></i></div>
+							<div class="debate_username" style="padding-top:5px;">{{sub.displayName}}</div>
+							<div class="debate_date">{{str2date(sub.subreplyCreatedDateTime) | date:'dd-MM-yy'}}</div>
+						</div>
+						<div class="debate_comments_section">
+							<div class="debate_comment-icon"><i class="fa fa-comment fa"></i></div>
+							<div class="debate_user_actual_comments" ng-bind-html="sub.replyContent"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
 <?php 
 	htmlFooter();

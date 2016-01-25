@@ -78,8 +78,29 @@ height:0px;
 }
 
 .ind_title_article h4 a {font-size:10px; color:#f8f1a9;}
-.ind_debate { width:40%; background-color:#444f55; margin:0 auto; text-align:center; padding:2% 1% 1% 1%; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 15px; -o-border-radius: 15px; position:relative;}
-.ind_debate a {margin-top:15px;font-size:15px;font-family: 'bebasregular', sans-serif; line-height:15px; vertical-align:middle;}
+.ind_debate { width:35%;  margin:0 auto; text-align:center; padding:2% 1% 1% 1%;  position:relative;}
+/*
+.ind_debate a {margin-top:15px;font-size:15px;font-family: 'bebasregular', sans-serif; line-height:15px; vertical-align:middle;background-color:#444f55;-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; -o-border-radius: 10px; padding:10px;}
+*/
+
+.ind_debate a {
+    /* margin-top: 15px; */
+    font-size: 15px;
+    font-family: 'bebasregular', sans-serif;
+    line-height: 18px;
+    /* vertical-align: middle; */
+    background-color: #444f55;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    border-radius: 13px;
+    -o-border-radius: 13px;
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+    height: 15px;
+
+}
+
 .border {width:80%; margin:0 auto; height:1px; background-color:#B3B3B3; margin-top:20px;}
 
 /* LOAD MORE */
