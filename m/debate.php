@@ -78,7 +78,7 @@
 			</div>
 			<div id="debate_area">DEBATE</div>
 		</section>
-		<div ng-repeat="reply in replyList" class="{{reply.replyType=='agree'?'debate-comments':'other_replys_section'}}">
+		<div ng-repeat="reply in replyList" class="{{reply.replyType=='agree'?'debate-comments':'other_replys_section'}}" id="C{{reply.replyID}}">
 			<div class="{{reply.replyType=='agree'?'top_agree_reply':'reply_top'}}">
 				<div class="debate_comments_section">
 					<div ng-show="reply.replyType=='agree'" class="debate_user-icon"><i class="fa fa-user fa-2x"></i></div>
