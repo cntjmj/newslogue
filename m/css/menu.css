@@ -1470,4 +1470,245 @@ color:#FFFFFF;
 padding-top:20px;
 }
 
+.usernotify
+{width:100%;font-size: 12px;font-family: 'arial';padding:10px 0px 10px 0px;border-bottom: solid 1px #000;}
+
+div.usernotify:last-child
+{border: 0px;}
+
+.notifytxt{padding-left:20px; color:#fff;}
+
+.notificationdate
+{padding-top:10px;text-align:right;padding-right:20px;color:#556266;}
+.userdetail
+{color:#EAEAB6;}
+
+.not_read_notify
+{background-color:#80969F; }
+
+.read_notify
+{background-color:#93AFB9; }
+
+.punctuation-sign
+{color:#fff;}
+.notifytxt i{color:#48555B;padding-right:10px;}
+
+
+#user_register
+{background-color:#FEF79F; text-align:center;width:100%;min-height:200px;}
+
+#user_register form input[type="text"], #user_register form input[type="email"], #user_register form input[type="password"] {
+	-webkit-appearance: none;
+border-radius: 5px;
+
+-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -o-border-radius: 5px; 
+border: solid 2px #454F58;
+
+
+
+margin-top: 2px;
+    padding-left: 10px;
+    padding-top: 0px;
+    height: 20px;
+    width: 145px;
+  
+    font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 10px;
+
+
+
+	
+	
+}
+
+
+
+
+
+#user_register form input[type="radio"]{
+vertical-align:middle; margin-left:5px;background-color: red; 
+
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+#user_edit_section
+{width:100%;background-color:#ccffff; text-align:center;}
+
+
+#user_register form div span.user_label{font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 12px;padding-right:5px; display:block;}
+
+
+#user_register div {
+	padding-top:10px;
+    color: #455056;
+    font-family: "bebasregular";
+    font-size: 12px;
+	background-color:#FEF79F;
+    }
+
+#user_register .txt_gender div{padding-top:0px !important;}
+	
+#user_register .txt_submit
+{padding-bottom:20px; padding-top:30px;}
+
+.txt_gender div{text-align:center;width:70px; margin:0 auto;}
+
+
+.txt_gender div span.user_label
+{text-align:left;}
+
+.txt_gender div span.user_label input{float:right; margin-top:2px;}
+
+.reqTxt, .errTxt
+{color:#cc0000 !important;}
+
+.succTxt
+{color:#00cc00 !important;}
+
+.profile_circular
+{
+width: 120px;
+	height: 120px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	
+}
+#profile_photo
+{float:left;width:50%;position:relative;}
+#add_profile_photo
+{float:left;width:50%;position:relative; text-align:left;margin-top:20px;}
+
+#profile_img_section
+{width:100%;position:relative;float:left; padding-top:20px;padding-bottom:20px;}
+
+#add_profile_photo span, #add_profile_photo a
+{margin-left:20px;}
+#add_profile_photo a#upload_link
+{color:#455056 !important; font-family: "bebasregular"; font-size: 12px; line-height:20px; text-decoration:underline;}
+
+#profile_photo img{ float:right;}
+
+.uploadbtn
+{display:none;}
+.userentries
+{margin-top:0px !important;}
+ .userentries span
+{ display:block;}
+.usermoreinfo
+{font-family: "bebasregular";
+    line-height: 15px;
+    font-size: 11px;padding-top:10px;}
+
+	
+	.userdetailtxt
+{
+	padding-top:10px;
+	height: 10px;	
+    width: 100px;
+	font-size:10px;
+	padding-top:10px;}
+	
+	
+.profilevalbox
+{-webkit-appearance: none;
+   
+    border: solid 1px #454F58;
+    margin-top: 2px;
+    padding-left: 5px;
+    padding-top: 0px;
+    height: 20px;
+    width: 100px;
+    font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 10px;
+	background-color:#fff;}
+	
+	
+#question_section textarea {
+    width: 60%;
+    padding: 20px;
+    -webkit-appearance: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    border: solid 3px #2d2d2d;
+    margin-top: 10px;
+    height: 50px;
+}
+	
+	
+	
+	#question_section #question_submit_btn  {
+    cursor: pointer;
+    padding: 6px 5px;
+    background: #2d2d2d;
+    -webkit-appearance: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    height: 20px;
+    margin-top: 12px;
+    width: 82px;
+    height: 24px;
+    border: 0px;
+    font-family: "bebasregular";
+}
+
+#question_section
+{text-align:center;padding-top:20px;padding-bottom:20px;}
+	#question_section .que_heading
+	{	font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 15px;}
+	#question_section .que_second_heading
+	{	font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 15px;}
+	
+	#user_edit_section
+	{
+		
+	padding-top:20px;	
+	padding-bottom:20px;	
+		background-color: #445055;
+		
+	}
+	#user_edit_section div
+	{padding-top:20px;}
+	#user_edit_section div a
+	{
+		font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 15px;
+	text-decoration:underline;
+	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 /* Debate page ends here */

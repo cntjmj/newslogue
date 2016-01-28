@@ -34,7 +34,8 @@ class Auth {
 				$_SESSION["displayName"] = "Anonymous User";
 			}
 			
-			$anonymousID = "-".substr(hexdec($tempID),7);
+			//$anonymousID = "-".substr(hexdec($tempID),7);
+			$anonymousID = 0 - substr(hexdec($tempID),7);
 			$instance->setUserID($anonymousID);
 			$instance->setDisplayName($_SESSION["displayName"]);
 		}
@@ -100,7 +101,7 @@ class Auth {
 		return $this;
 	}
 	
-	private function setupSession($userID) {
+	public function setupSession($userID) {
 		$user = new User($userID);
 		$userInfo = $user->getArray();
 		

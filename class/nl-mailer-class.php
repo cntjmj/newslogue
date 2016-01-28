@@ -32,7 +32,7 @@ class Mailer {
 						You have registered with Newslogue. Please click on the link below to verify your account.
 					</div>
 					<div>
-						<a href="%sverify.php?uniqCode=%s&emailaddress=%s" target="_blank">Verify Your Accout</a>
+						<a href="%sverify/%s/%s" target="_blank">Verify Your Accout</a>
 					</div>
 					<div style="margin-top: 40px;">
 						Greatly Welcomed by<br />

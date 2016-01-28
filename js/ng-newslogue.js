@@ -133,13 +133,14 @@
 					});
 				} else {
 					// TODO: error handler
-					// TO DEL: var postData = {fbID:"954430261282373",fbName:"Minghua Lu",fbEmail:"minghua.lu@163.com"}
+					// TO DEL: var postData = {fbID:"12345",fbName:"FB User",fbEmail:"fbuser@12345.com"}
 					// TO DEL: submitAuthInfo($scope, $http, postData);
 				}
 			},{scope: 'email'});
 		};
 		
 		$scope.signUpWithFacebook = function(){
+			$scope.signup.errMessage = "";
 			FB.login(function(response) {
 				if (response.authResponse) {
 					FB.api('/me', {fields: 'id,name,email'}, function(meresponse) {
@@ -152,7 +153,7 @@
 					});
 				} else {
 					// TODO: error handler
-					// TO DEL: var postData = {fbID:"12345",fbName:"Minghua Lu",fbEmail:"minghua.lu@263.com"}
+					// TO DEL: var postData = {fbID:"12345",fbName:"FB User",fbEmail:"fbuser@12345.com"}
 					// TO DEL: signUpUser($scope, $http, postData);
 				}
 			},{scope: 'email'});
@@ -177,6 +178,10 @@
 			});
 		$scope.selectedCategoryID = selectedCategoryID;
 	};
+	
+	var goHome = function() {
+		window.location.href = '/';
+	}
 	
 	/**
 	 * 1.2 Footer Functions
@@ -466,8 +471,22 @@
 			$scope.replyList[index].unfold = "yes";
 		else
 			$scope.replyList[index].unfold = "no";
-	}
-	
+	};
+
+	var setupScroll2Reply = function($scope, $http) {
+		var anchor = '#C' + document.location.href.split("#")[1];
+		var scroll2Reply = function() {
+			if ($($scope.anchor).length > 0) {
+				$('body').scrollTop($($scope.anchor).offset().top);
+				clearInterval($scope.interval);
+			}
+		};
+
+		if (anchor != '#C') {
+			$scope.anchor = anchor;
+			$scope.interval = setInterval(scroll2Reply, 1000);
+		}
+	};
 	/**
 	 * 4. Sign Up Function Area
 	 */
@@ -477,15 +496,14 @@
 		$http({method: 'post', url: urlUser, data: $.param(postData)}).success(
 				function(data){
 					if (angular.isDefined(data.errCode) && data.errCode == 0) {
-						// TODO:
-						alert(data.errMessage);
+						$scope.signup.succMessage = data.errMessage;
 					} else {
 						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
 						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
-						
-						// TODO:
+
 						$scope.signup.errMessage = errMesg;
 					}
+					$scope.signup.submitting = 0;
 				});
 	};
 	
@@ -498,6 +516,7 @@
 		} else if ($scope.signup.pwd != $scope.signup.cpwd) {
 			$scope.signup.errMessage = "inconsistant password";
 		} else {
+			$scope.signup.submitting = 1;
 			$scope.signup.errMessage = "";
 			var postData = {
 				emailaddress:	$scope.signup.emailaddress,
@@ -575,6 +594,8 @@
 		
 		$scope.replyList = [];
 		$scope.str2date = str2date;
+		
+		setupScroll2Reply($scope, $http);
 
 		/**
 		 * setup vote functions
@@ -632,6 +653,8 @@
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
+		
+		$scope.goHome = goHome;
 
 		$scope.signup = {
 				displayName: "",
@@ -639,6 +662,8 @@
 				pwd: "",
 				cpwd: "",
 				errMessage: "",
+				succMessage: "",
+				submitting: 0,
 				submitSignupForm: function() {
 					submitSignupForm($scope, $http);
 				}
