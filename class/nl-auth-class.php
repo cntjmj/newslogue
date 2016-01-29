@@ -114,12 +114,15 @@ class Auth {
 		
 		$this->setUserID($userID);
 		$this->setDisplayName($_SESSION["displayName"]);
+		
+		Auth::workaroundSaveSessionID($userID);
 	}
 	
 	public function logout() {
 		session_unset();
 		$this->setUserID(0);
 		$this->setDisplayName("");
+		Auth::workaroundDeleteSessionID();
 		Auth::buildInstance($this);
 		return $this;
 	}
@@ -127,6 +130,7 @@ class Auth {
 	public static function getInstance() {
 		if (!isset(Auth::$instance)) {
 			Auth::$instance = new Auth();
+			Auth::workaroundLoadUserBasedOnSessionID(Auth::$instance);
 			Auth::buildInstance(Auth::$instance);
 		}
 		
@@ -155,6 +159,53 @@ class Auth {
 	
 	public function canVote() {
 		return ($this->auth["userID"]!=0);
+	}
+	
+	/**
+	 * the following 5 functions should be removed
+	 * once we resolve the issue with production server
+	 * 
+	 */
+	private static function bWorkaround() {
+		return isProductEnv();
+	}
+	
+	private static function giveMeTheSessionID() {
+		return session_id();
+	}
+
+	private static function workaroundSaveSessionID($userID) {
+		if (Auth::bWorkaround()) {
+			$sessionID = Auth::giveMeTheSessionID();
+			$db = new Database();
+			$query = "update user_registration set sessionID=\"$sessionID\" where userID=\"$userID\"";
+			$db->query($query);
+		}
+	}
+	
+	private static function workaroundDeleteSessionID() {
+		if (Auth::bWorkaround()) {
+			$sessionID = Auth::giveMeTheSessionID();
+			$db = $db = new Database();
+			$query = "update user_registration set sessionID=\"\" where sessionID=\"$sessionID\"";
+			$db->query($query);
+		}
+	}
+	
+	private static function workaroundLoadUserBasedOnSessionID($instance) {
+		if (Auth::bWorkaround()) {
+			if (0 == $instance->getUserID()) {
+				$sessionID = Auth::giveMeTheSessionID();
+				$db = new Database();
+				$query = "select userID from user_registration where sessionID=\"$sessionID\"";
+				$result = $db->query($query);
+				if (is_array($result) && count($result)>0) {
+					$userID = $result[0]['userID'];
+					if ($userID > 0)
+						$instance->setupSession($userID);
+				}
+			}
+		}
 	}
 }
 ?>
