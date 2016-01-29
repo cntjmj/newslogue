@@ -16,7 +16,8 @@
 		$user = new User();
 		$user->VerifyCode($emailaddress, $uniqCode);
 		if ($user->getUserID() > 0) {
-			Auth::getInstance()->setupSession($user->getUserID());
+			$auth = Auth::getInstance();
+			$auth->setupSession($user->getUserID());
 			if (is_mobile())
 				header("location: ".CONFIG_PATH::GLOBAL_M_BASE);
 			else
