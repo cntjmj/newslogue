@@ -3,6 +3,7 @@
 	require_once "template/template.php";
 	
 	$categoryID = _get("categoryID", 0);
+	$newsStatus = _get("newsStatus", "");
 	$ngController = "IndexController";
 	$title = "Newslogue Home";
 
@@ -13,7 +14,8 @@
 	<div id="container">
 <?php
 	htmlHeader();
-	htmlNav();
+	if ($newsStatus == "")
+		htmlNav();
 ?>
 	<main id="index_main_section" infinite-scroll='loadmore()' infinite-scroll-disabled='!ready2scroll'>
 		<section ng-repeat="news in newsMetaList" class="article_content">
@@ -43,6 +45,7 @@
 	<div id='index_click_blocker' class="click_blocker"></div>
 	<script>
 		var selectedCategoryID = <?=$categoryID?>;
+		var newsStatus = "<?=$newsStatus?>";
 	</script>
 	<script src="<?=CONFIG_PATH::GLOBAL_M_BASE?>js/lazy-loading-js.js" type="text/javascript"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_M_BASE?>js/magnific-popup.js"></script>

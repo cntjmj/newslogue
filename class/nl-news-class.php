@@ -4,6 +4,7 @@
 
 class NewsList {
 	private $num_per_page, $page_num, $categoryID, $summary_len;
+	private $newsStatus = "active";
 	private $newsMetaArr = array();
 	private $total_news_num = -1;
 	private $db;
@@ -28,6 +29,13 @@ class NewsList {
 		return $this->newsMetaArr;
 	}
 
+	public function setNewsStatus($newsStatus) {
+		if ($this->newsStatus != $newsStatus) {
+			$this->MetaArr = array();
+			$this->newsStatus = $newsStatus;
+		}
+	}
+
 	protected function loadNewsList() {
 		$this->num_per_page = $this->db->real_escape_string($this->num_per_page);
 		$this->page_num = $this->db->real_escape_string($this->page_num);
@@ -37,7 +45,7 @@ class NewsList {
 
 		$query = "select *,na.createdDateTime as nacreatedDateTime from `newsarticle` na 
 				inner join `category` c on na.categoryID = c.categoryID
-				where na.newsStatus = 'active'";
+				where na.newsStatus = '".$this->newsStatus."'";
 		
 		if ($this->categoryID != "" && $this->categoryID > 0)
 			$query .= " and na.categoryID = ".$this->categoryID;

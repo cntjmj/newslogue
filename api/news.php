@@ -13,8 +13,11 @@
 		$page_num = _get("page_num",0);
 		$categoryID = _get("categoryID","");
 		$summary_len = _get("summary_len",0);
+		$newsStatus = _get("newsStatus", "");
 		
 		$newsList = new NewsList($page_num, $num_per_page, $categoryID, $summary_len);
+		if ($newsStatus != "")
+			$newsList->setNewsStatus($newsStatus);
 	
 		echo $newsList->getJson();
 	}
