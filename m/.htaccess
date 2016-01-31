@@ -7,6 +7,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^home$ index.php [QSA,NC,L]
 RewriteRule ^home\/([^/]*)$ index.php?categoryID=$1 [QSA,NC,L]
 RewriteRule ^home\/([^/]*)\/([^/]*)$ index.php?categoryID=$1 [QSA,NC,L]
+RewriteRule ^preview8999$ index.php?newsStatus=pending [QSA,NC,L]
 
 RewriteRule ^debate\/([^/]*)$ debate.php?newsID=$1 [QSA,NC,L]
 RewriteRule ^debate\/([^/]*)\/([^/]*)$ debate.php?newsID=$1 [QSA,NC,L]

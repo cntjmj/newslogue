@@ -232,7 +232,8 @@
 		$scope.ready2scroll = false;
 		var param = {
 				page_num: $scope.nextPage,
-				categoryID: $scope.selectedCategoryID
+				categoryID: $scope.selectedCategoryID,
+				newsStatus: newsStatus
 			};
 		$http({method: 'GET', url: CONFIG.GLOBAL_API_BASE+'/news', params: param}).success(
 			function (data, status, headers, config, statusText) {
