@@ -9,6 +9,17 @@
 		return isset($_POST[$param])?$_POST[$param]:$default;
 	}
 	
+	function _put($param, $default = null) {
+		static $__put = null;
+		
+		if ($__put == null) {
+			$input = file_get_contents("php://input");
+			$__put = json_decode($input, true);
+		}
+		
+		return isset($__put[$param])?$__put[$param]:$default;
+	}
+	
 	function is_get() {
 		return $_SERVER['REQUEST_METHOD']=="GET"?true:false;
 	}

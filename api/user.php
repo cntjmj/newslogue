@@ -5,7 +5,19 @@
 	require_once 'api_headers.php';
 	
 	try {
-		if (is_post()) {
+		if (is_get()) {
+			$userID = _get('userID', 0);
+			
+			if ($userID <= 0)
+				throw new Exception("user does not exists", -1);
+			
+			$auth = Auth::getInstance();
+			if ($auth->getUserID() != $userID)
+				throw new Exception("unauthorized", -1);
+			
+			$user = new User($userID);
+			echo $user->getJson();
+		} else if (is_post()) {
 			$fields = array();
 
 			$fbID = _post("fbID", "");
@@ -57,6 +69,27 @@
 
 				echo json_encode(array("errCode"=>0, "errMessage"=>"an verification email has been sent to your email address"));
 			}
+		} else if (is_put()) {
+			$userID = _get('userID', 0);
+			$displayName = _put("displayName", "");
+			$fullname = _put("fullname", "");
+				
+			if ($userID <= 0)
+				throw new Exception("user does not exists", -1);
+					
+			$auth = Auth::getInstance();
+			if ($auth->getUserID() != $userID)
+				throw new Exception("unauthorized", -1);
+			
+			if ($displayName == "" || $fullname == "")
+				throw new Exception("missing fields", -1);
+			
+			$fields = array("displayName"=>$displayName, "fullname"=>$fullname);
+
+			$user = new User($userID);
+			$user->updateUser($fields);
+			
+			echo json_encode(array("errCode"=>0));
 		}
 	} catch (Exception $e) {
 		$result = array("errCode" => $e->getCode(), "errMessage" => $e->getMessage());

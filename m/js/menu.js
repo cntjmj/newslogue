@@ -19,7 +19,7 @@
           '<a href="'+href+'" class="newslogue_logo">' + 
             '<img src="/images/logo.jpg" alt="Newslogue Logo" />' +
           '</a>'+
-          '<a href="javascript:;" title="User Profile" class="userprofile_icon show_after_logon" style="display:none">'+
+          '<a href="/profile" title="User Profile" class="userprofile_icon show_after_logon" style="display:none">'+
             '<i class="fa fa-user"></i>'+
           '</a>'+
           '<a href="javascript:;" title="Notification" class="notification_icon show_after_logon" style="display:none">'+
