@@ -12,4 +12,5 @@ RewriteRule ^preview8999$ index.php?newsStatus=pending [QSA,NC,L]
 RewriteRule ^debate\/([^/]*)$ debate.php?newsID=$1 [QSA,NC,L]
 RewriteRule ^debate\/([^/]*)\/([^/]*)$ debate.php?newsID=$1 [QSA,NC,L]
 
+RewriteRule ^profile$ profile.php [QSA,NC,L]
 RewriteRule ^registration$ registration.php [QSA,NC,L]

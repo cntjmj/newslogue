@@ -1476,7 +1476,7 @@ padding-top:20px;
 div.usernotify:last-child
 {border: 0px;}
 
-.notifytxt{padding-left:20px; color:#fff;}
+.notifytxt{padding-left:20px;padding-right:20px; color:#fff;}
 
 .notificationdate
 {padding-top:10px;text-align:right;padding-right:20px;color:#556266;}
@@ -1495,7 +1495,7 @@ div.usernotify:last-child
 
 
 #user_register
-{background-color:#FEF79F; text-align:center;width:100%;min-height:200px;}
+{background-color:#FEF79F; text-align:center;width:100%;min-height:150px;}
 
 #user_register form input[type="text"], #user_register form input[type="email"], #user_register form input[type="password"] {
 	-webkit-appearance: none;
@@ -1703,12 +1703,27 @@ width: 120px;
 	
 		
 	}
+	.notoppad
+	{padding-top:0px !important;}
+	.debate_reply_txt
+	{border-top:solid 1px #000;padding-top:10px; margin-left:20px;}
 	
 	
+	.debate_reply_txt .debate_reply_dt
+	{text-align:right;color:#EAEAB6;padding-bottom:10px;padding-top:10px; width:100%;}
+	.debate_comments_dt{text-align:right;color:#EAEAB6;padding-bottom:10px;padding-top:10px;}
+	.debate_comments_txt_style{color:#EAEAB6;}
+	.debate_comments_txt_main{border-top:solid 1px #000;padding-top:10px;}
+	.debate_tracking_txt
+	{color:#fff;}
 	
-	
-	
-	
-	
+	.debate_tracking_container
+	{padding-left:20px;padding-right:20px;text-align: left;margin: 0 auto;}
+	.debate_tracking_date
+	{text-align:right;color:#556266}
+	.debate_tracking_replys_count
+	{text-align:left;color:#EAEAB6;}
+	.debate_comments_txt
+	{display:none;padding-top:10px;text-align:left;color:#fff;}
 	
 /* Debate page ends here */

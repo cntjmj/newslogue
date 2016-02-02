@@ -91,7 +91,8 @@
 		$http({method: 'delete', url: urlAuth}).success(
 			function(data){
 				parseAuthInfo($scope, $http, data);
-				$scope.user.password = "";
+				//$scope.user.password = "";
+				window.location.href="/";
 			});
 		$("#cssmenu #menu-button").removeClass("menu-opened");
 		$("#cssmenu ul").removeClass("open");
@@ -527,6 +528,53 @@
 			signUpUser($scope, $http, postData);
 		}
 	};
+	
+	/**
+	 * 5. Profile Function Area
+	 */
+	var loadProfile = function($scope, $http) {
+		var urlUser = CONFIG.GLOBAL_API_BASE+'/user/'+userID;
+		$http({method: 'get', url: urlUser}).success(function(data) {
+			if (angular.isDefined(data.user)) {
+				$scope.profile.displayName = data.user.displayName;
+				$scope.profile.fullname = data.user.fullname;
+				if ($scope.profile.fullname == "")
+					$scope.profile.fullname = $scope.profile.displayName;
+			}
+		});
+	};
+		
+		
+	var submitProfileForm = function($scope, $http) {
+		$scope.profile.errMessage = '';
+		$scope.profile.succMessage = '';
+
+		if (false == $scope.profileform.displayName.$valid ||
+			false == $scope.profile.fullname.$valid) {
+			$scope.profile.errMessage = "please fill out all required fields";
+		} else {
+			$scope.profile.submitting = 1;
+			var urlUser = CONFIG.GLOBAL_API_BASE+'/user/'+userID;
+			var userData = {
+				displayName: $scope.profile.displayName,
+				fullname: $scope.profile.fullname
+			};
+
+			$http({method: 'put', url: urlUser, data: userData}).success(function(data) {
+				if (angular.isDefined(data.errCode)) {
+					if (data.errCode == 0) {
+						$scope.profile.succMessage = "user profile updated";
+						$scope.profile.editing = 0;
+					} else {
+						$scope.profile.errMessage = data.errMessage;
+					}
+				} else {
+					$scope.profile.errMessage = "service not available";
+				}
+				$scope.profile.submitting = 0;
+			});
+		}
+	};
 
 	/**
 	 * 50.1 Newslogue Angular Application
@@ -669,4 +717,29 @@
 					submitSignupForm($scope, $http);
 				}
 		};
+	});
+	
+	/**
+	 * 50.5 Controller for User Profile Page
+	 */
+	nlapp.controller("ProfileController", function($scope, $http){
+		getAuthInfo($scope, $http);
+
+		var profile = {
+			editing: 0,
+			displayName: '',
+			fullname: '',
+			succMessage: '',
+			errMessage: '',
+			submitting: 0,
+			loadProfile: function() {
+				return loadProfile($scope, $http);
+			},
+			submitProfileForm: function() {
+				return submitProfileForm($scope, $http);
+			}
+		};
+		
+		profile.loadProfile();
+		$scope.profile = profile;
 	});
