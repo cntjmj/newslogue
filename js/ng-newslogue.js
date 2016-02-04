@@ -27,6 +27,26 @@
 		}
 	};
 
+	/**
+	 * name: resetReadflag
+	 * function: reset the value of notification readflag in table 'news_reply'
+	 */
+	var resetReadflag = function($scope, $http, replyID) {
+		var postData = {
+				ReplyID: replyID,
+				//UserID:	userID
+				//ReplyID: 308,
+				//UserID: -46282339
+			};
+			
+		var urlNotification = CONFIG.GLOBAL_API_BASE+"/user/"+$scope.userID+"/notification";
+
+		$http({	method: 'post', url: urlNotification, data: $.param(postData)}).success(
+			function(data, status, headers, config, statusText){;
+				getNotificationInfo($scope, $http);
+			});
+	};
+
 	var parseAuthInfo = function($scope, $http, data) {
 		if (angular.isDefined(data.userID)) {
 			$scope.userID = data.userID;
@@ -742,4 +762,26 @@
 		
 		profile.loadProfile();
 		$scope.profile = profile;
+	});
+	
+	/**
+	 * 50.6 Controller for Notification Page
+	 */
+	nlapp.controller("NotificationController", function($scope, $http){
+		/**
+		 * setup head, header, login/logout
+		 */
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+
+		getNotificationInfo($scope, $http);
+		$scope.str2date = str2date;
+
+		$scope.readNotification = function(replyID, readflag) {
+			if (readflag == 0)
+			{
+				resetReadflag($scope, $http, replyID);
+			}
+		};
 	});

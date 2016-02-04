@@ -22,7 +22,7 @@
           '<a href="/profile" title="User Profile" class="userprofile_icon show_after_logon" style="display:none">'+
             '<i class="fa fa-user"></i>'+
           '</a>'+
-          '<a href="javascript:;" title="Notification" class="notification_icon show_after_logon" style="display:none">'+
+          '<a href="/notification" title="Notification" class="notification_icon show_after_logon" style="display:none">'+
             '<i class="fa fa-comments"></i>'+
             '<span class="top_notification" id="top_notification_number"></span>'+
           '</a><div id="menu-button"></div>');
