@@ -43,9 +43,9 @@ class Notification {
 					nr.createdDateTime as nrcreatedDateTime from news_reply nr
 					inner join user_registration ur
 					on nr.userID = ur.userID
-					inner join (select newsID, newsPermaLink from newsarticle) na
+					inner join (select newsID, newsPermaLink,newsTitle from newsarticle) na
 					on nr.newsID = na.newsID
-					where nr.readflag = 0 and nr.userID != $this->userID and parentReplyID in
+					where nr.readflag in (0,1) and nr.userID != $this->userID and parentReplyID in
 					(select replyID from news_reply where userID=$this->userID)
 					order by nr.createdDateTime desc;";
 			
@@ -72,6 +72,14 @@ class Notification {
 			User::fillDisplayName($model);
 	
 			return $model;
+	}
+
+	public function updateReadflag($replyID) {
+		$replyID = $this->db->real_escape_string($replyID);
+
+		$query = "update news_reply set readflag=1 where replyID='".$replyID."' limit 1";
+
+		$this->db->query($query);
 	}
 }
 ?>
