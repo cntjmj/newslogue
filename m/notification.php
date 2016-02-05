@@ -28,7 +28,7 @@
       				<div class="notifytxt">
       					<span><i class="{{notification.replyType=='like' ? 'fa fa-heart' : 'fa fa-reply'}}"></i></span>
       					<span class="userdetail">{{notification.displayName}}</span> 
-      					{{notification.replyType=='like' ? 'likes' : 'replied'}} your comment about <i>{{notification.newsTitle}}</i>{{notification.replyID}}{{notification.userID}}
+      					{{notification.replyType=='like' ? 'likes' : 'replied'}} your comment about <i>{{notification.newsTitle}}</i>
       				</div>
       				<div class="notificationdate">{{str2date(notification.createdDateTime) | date:'dd/MM/yy'}}</div>
       			</div>
