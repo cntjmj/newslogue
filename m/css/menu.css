@@ -1473,8 +1473,8 @@ padding-top:20px;
 .usernotify
 {width:100%;font-size: 12px;font-family: 'arial';padding:10px 0px 10px 0px;border-bottom: solid 1px #000;}
 
-div.usernotify:last-child
-{border: 0px;}
+//div.usernotify:last-child
+//{border: 0px;}
 
 .notifytxt{padding-left:20px;padding-right:20px; color:#fff;}
 
@@ -1711,7 +1711,7 @@ width: 120px;
 	
 	.debate_reply_txt .debate_reply_dt
 	{text-align:right;color:#EAEAB6;padding-bottom:10px;padding-top:10px; width:100%;}
-	.debate_comments_dt{text-align:right;color:#EAEAB6;padding-bottom:10px;padding-top:10px;}
+	.debate_comments_dt{text-align:right;color:#EAEAB6;padding-bottom:10px;padding-top:25px;}
 	.debate_comments_txt_style{color:#EAEAB6;}
 	.debate_comments_txt_main{border-top:solid 1px #000;padding-top:10px;}
 	.debate_tracking_txt
@@ -1724,6 +1724,71 @@ width: 120px;
 	.debate_tracking_replys_count
 	{text-align:left;color:#EAEAB6;}
 	.debate_comments_txt
-	{display:none;padding-top:10px;text-align:left;color:#fff;}
+	{padding-top:10px;text-align:left;color:#fff;}
+	
+	
+	.debate_reply_dt
+	{padding-top:25px !important;}
+	
+	
+	
+	.fpemailcontainer .fa-user {
+    /* text-align: right; */
+    color: #fff!important;
+    padding-left: 18px;
+}
+	.fpemailcontainer
+	{width: 234px;
+    margin: 0 auto;
+    text-align: center;
+    }
+	
+	.fpsubmit{width: 65%;
+    text-align: center;
+    margin: 0 auto;
+	padding:10px;
+    }
+	.fgicon
+	{width:50%;text-align:left;float:left;position:absolute;}
+	.fgemail
+	{width:50%;float:left;position:absolute;}
+	.fpstyle
+	{background-color:red;}
+	
+	
+	#fpemail
+	{margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: -1px;
+    padding-left: 20px;
+    padding-top: 0px;
+    height: 17px;
+    width: 159px;
+    border: 0px;
+    color: #464f56;
+    font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 10px;
+    margin-left: 13px;}
+	
+.forget_email_caption{font-family: bebasregular;
+    font-size: 12px;
+    color: #455056;
+    line-height: 25px;
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+   
+  }
+	.debate_comments_left_txt
+	{width:95%;float:left;}
+	.debate_remove
+	{width:5%;float:left; text-align:right;}
+	
+	.debate_remove .fa
+	{
+	color:#F01D2C;
+	font-size:16px;
+	}
 	
 /* Debate page ends here */

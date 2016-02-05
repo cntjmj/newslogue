@@ -82,7 +82,7 @@
 		<section id="user_edit_section"> 		
 			<div><a href="javascript:;" ng-click="profile.editing=1">EDIT YOUR PROFILE</a><br/></div>
 			<div><a href="javascript:;">CHANGE YOUR PASSWORD</a><br/></div>
-			<div><a href="javascript:;">DEBATE TRACKING PAGE</a><br/></div>
+			<div><a href="/track">DEBATE TRACKING PAGE</a><br/></div>
 		</section>
 		<!--section id="question_section"> 		
 			<div class="que_heading">ANY QUESTION or suggestion?</div>
