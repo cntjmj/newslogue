@@ -27,6 +27,7 @@
 			</div>
 		</div>
 	</footer>
+	</div>
 <?php
 	}
 ?>

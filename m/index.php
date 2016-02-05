@@ -10,9 +10,6 @@
 	htmlBegin($ngController);
 	htmlHead($title);
 	htmlBodyBegin();
-?>
-	<div id="container">
-<?php
 	htmlHeader();
 	if ($newsStatus == "")
 		htmlNav();
@@ -41,7 +38,6 @@
 <?php 
 	htmlFooter();
 ?>
-	</div>
 	<div id='index_click_blocker' class="click_blocker"></div>
 	<script>
 		var selectedCategoryID = <?=$categoryID?>;

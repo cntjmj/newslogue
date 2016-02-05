@@ -94,7 +94,8 @@ class UserReplyList extends ReplyList {
 				$this->replyArr['newsList'][$idx] = array(
 						"newsID"=>$news['news']['newsID'],
 						"newsTitle"=>$news['news']['newsTitle'],
-						"newsQuestion"=>$news['news']['newsQuestion']
+						"newsQuestion"=>$news['news']['newsQuestion'],
+						"newsCreatedDateTime"=>$news['news']['nacreatedDateTime']
 				);
 				
 				$newsReplyListObj = new NewsReplyList($row['newsID']);
@@ -327,23 +328,29 @@ class Reply {
 	}
 	
 	public function getReplyUserID($subReplyID = 0) {
-		$userID = "";
-
 		if ($this->replyResult == null)
 			$this->loadReply();
 		
 		if (is_array($this->replyResult) && isset($this->replyResult["reply"])) {
 			if ($subReplyID == 0) {
-				$userID = $this->replyResult["reply"]["userID"];
-			} else if (is_array($this->replyResult["reply"]["subReplies"]) && $this->replyResult["reply"]["subReplies"]["count"] > 0) {
+				return $this->replyResult["reply"]["userID"];
+			}
+			
+			if (is_array($this->replyResult["reply"]["subReplies"]) && $this->replyResult["reply"]["subReplies"]["count"] > 0) {
 				foreach ($this->replyResult["reply"]["subReplies"]["list"] as $id => $arr) {
 					if ($arr["replyID"] == $subReplyID)
-						$userID = $arr["userID"];
+						return $arr["userID"];
 				}
 			}
+			
+			if (is_array($this->replyResult["reply"]["likes"]) && $this->replyResult["reply"]["likes"]["count"] > 0) {
+				foreach ($this->replyResult["reply"]["likes"]["list"] as $id => $arr) {
+					if ($arr["replyID"] == $subReplyID)
+						return $arr["userID"];
+				}
+			}
+				
 		}
-
-		return $userID;
 	}
 	
 	public function removeReply($subReplyID = 0) {

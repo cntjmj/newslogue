@@ -3,6 +3,7 @@
 	
 	function htmlHeader() {
 ?>
+	<div id="container">
 	<header>
 		<div id='cssmenu'>
 			<ul>

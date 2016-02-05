@@ -9,11 +9,7 @@
 	htmlBegin($ngController);
 	htmlHead($title);
 	htmlBodyBegin();
-?>
-	<div id="container">
-<?php
 	htmlHeader();
-	//htmlNav();
 ?>
 	<main>
 		<section>
@@ -145,7 +141,6 @@
 <?php 
 	htmlFooter();
 ?>
-	</div>
 	<div id='index_click_blocker' class="click_blocker"></div>
 	<script>
 		var newsID = <?=$newsID?>;

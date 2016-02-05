@@ -595,6 +595,31 @@
 			});
 		}
 	};
+	
+	/**
+	 * 6. Debate Tracking Functions
+	 */
+	var loadUserDebate = function($scope, $http, userID) {
+		var urlUserDebate = CONFIG.GLOBAL_API_BASE+'/user/'+userID+"/reply";
+		$http({method: 'get', url: urlUserDebate}).success(function(data){
+			if (angular.isDefined(data.newsList)) {
+				for (var i in $scope.track.newsList) {
+					if ($scope.track.newsList[i].showComment != true)
+						continue;
+					
+					for (var j in data.newsList) {
+						if ($scope.track.newsList[i].newsID == data.newsList[j].newsID) {
+							data.newsList[j].showComment = true;
+							break;
+						}
+					}
+				}
+				$scope.track.newsList = data.newsList;
+			} else {
+				// TODO: error handling
+			}
+		});
+	}
 
 	/**
 	 * 50.1 Newslogue Angular Application
@@ -744,8 +769,9 @@
 	 */
 	nlapp.controller("ProfileController", function($scope, $http){
 		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
 
-		var profile = {
+		$scope.profile = {
 			editing: 0,
 			displayName: '',
 			fullname: '',
@@ -760,8 +786,7 @@
 			}
 		};
 		
-		profile.loadProfile();
-		$scope.profile = profile;
+		$scope.profile.loadProfile();
 	});
 	
 	/**
@@ -784,4 +809,33 @@
 				resetReadflag($scope, $http, replyID);
 			}
 		};
+	});
+	
+	/**
+	 * 50.7 Controller for Debate Tracking
+	 */
+
+	nlapp.controller("TrackController", function($scope, $http){
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		
+		$scope.track = {
+			newsList: [],
+			str2date: str2date,
+			loadUserDebate: function() {
+				return loadUserDebate($scope, $http, userID);
+			},
+			removeReply: function(newsID, replyID, subReplyID) {
+				var urlReply = CONFIG.GLOBAL_API_BASE+"/news/"+newsID+"/reply/"+replyID;
+				if (angular.isDefined(subReplyID) && subReplyID > 0)
+					urlReply += "/"+subReplyID;
+				
+				$http({method: 'delete', url: urlReply}).success(
+					function(data, status, headers, config, statusText) {
+						loadUserDebate($scope, $http, userID);
+					});
+			}
+		};
+
+		$scope.track.loadUserDebate();
 	});
