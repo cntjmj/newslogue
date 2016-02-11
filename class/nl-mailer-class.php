@@ -23,6 +23,22 @@ class Mailer {
 		return $this->phpmailer->Send();
 	}
 	
+	public function sendEnquiry($from, $displayName, $message) {
+		if ($from == "" || $displayName == "" || $message =="")
+			return false;
+		
+		$html = sprintf(Mailer::CONTACT_US_ENQUIRY, $displayName, $from, $message);
+		
+		//$this->phpmailer->AddAddress("service@newslogue.com");
+		$this->phpmailer->AddAddress("minghua.lu@163.com");
+		$this->phpmailer->SetFrom($from, $displayName);
+		$this->phpmailer->Subject = "User Inquiry by $displayName";
+		$this->phpmailer->AltBody = 'To view the message, please use an HTML compatible email viewer!';
+		$this->phpmailer->MsgHTML($html);
+		
+		return $this->phpmailer->Send();
+	}
+	
 	const ACCOUNT_VERIFICATION = '
 		<table width="600" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
 			<tr>
@@ -41,6 +57,21 @@ class Mailer {
 				</td>
 			</tr>
 		</table>';
+	
+	const CONTACT_US_ENQUIRY = '
+				<table width="600" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+                    <tr>
+                        <td>
+                            <div style="margin-bottom:20px;">
+                                Sender Name : %s<br/>
+                                Sender E-mail : %s
+                                <hr>
+                            </div>                            
+                            <div></div>
+                            <div style="margin-top: 20px;font:14px arial, sans-serif;"><pre>%s</pre></div>
+                        </td>
+                    </tr>
+                </table>';
 }
 
 /*~ originally phpmailer.php

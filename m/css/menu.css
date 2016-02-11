@@ -1792,3 +1792,141 @@ width: 120px;
 	}
 	
 /* Debate page ends here */
+
+/*Contact CSS starts here*/
+
+#user_contact form input[type="text"], #user_contact form input[type="email"], #user_contact form textarea{
+	-webkit-appearance: none;
+border-radius: 5px;
+margin-left:10px;
+-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -o-border-radius: 5px; 
+border: solid 2px #454F58;
+
+
+
+margin-top: 2px;
+    padding-left: 10px;
+    padding-top: 0px;
+    height: 20px;
+    width: 145px;
+  
+    font-family: "bebasregular";
+    line-height: 20px;
+    font-size: 10px;
+
+
+
+	
+	
+}
+
+#user_contact div {
+	padding-top:10px;
+	text-align:center;
+    color: #455056;
+    font-family: "bebasregular";
+    font-size: 12px;
+    }
+	
+#user_contact div.submit{
+	padding-top:10px;
+	text-align:center;
+	size: 35px;
+    color: #455056;
+    font-family: "bebasregular";
+    font-size: 12px;
+    }
+	
+#submit {
+	cursor: pointer;
+	padding: 5px 5px;
+	width:60px;
+	border: 10px;
+	color: white;
+	background-color: #455056;
+	font-family: "bebasregular";
+	font-size: 12px;
+	text-align:center;
+	border-radius: 10px;
+	height:20px;
+	margin-top: 2px;
+	}
+	
+	#company_info
+	{background-color: #455056;min-height:200px;}
+	
+	
+	#company_info a
+	{
+		padding-top:10px;
+	line-height:20px;
+    color: #fbf6a3;
+    font-family: "bebasregular";
+    font-size: 12px;
+	text-decoration:underline;
+	}
+	
+#company_info div {
+	padding-top:10px;
+	line-height:20px;
+    color: #fbf6a3;
+    font-family: "bebasregular";
+    font-size: 12px;
+	}
+	
+#company_info h2 {
+	padding:20px;
+	background-color: #455056;
+    color: #fbf6a3;
+    font-family: "bebasregular";
+    font-size: 17px;
+	font-weight:normal;
+	}
+	
+#company_info p {
+	padding-left: 1cm;
+	line-height: 150%;
+}	
+
+#company_info i {		
+
+}
+
+#company_info span{
+}
+.comp-google
+{width:50%;float:left;text-align:center;}
+.comp-address
+{width:50%;float:left; text-align:left;}
+.comp-info
+{text-align:center;margin:0 auto;padding:20px;}
+#faq div  {
+    color: #455056;
+    font-family: "bebasregular";
+    font-size: 12px;
+	}
+	
+#faq h2  {
+	
+	
+	padding:20px;
+	font-family: "bebasregular";
+    font-size: 17px;
+	font-weight:normal;
+	
+	
+    color: #455056;
+    
+	}
+	
+#faq p {
+	padding-left: 1cm;
+	line-height: 150%
+}
+
+#user_contact .fa-lg
+{font-size:24px; line-height:24px;}
+
+#user_contact form span i{vertical-align:top;}
+
+/*Contacts CSS ends here*/

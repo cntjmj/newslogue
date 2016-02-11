@@ -7,7 +7,7 @@
 	<header>
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='javascript:;'>Articles</a></li>
+				<!--li><a href='javascript:;'>Articles</a></li-->
 				<li><a href='javascript:;'>About us</a></li>
 				<li><a href='javascript:;'>Contact</a></li>
 				<li ng-hide="userID>0"><a href='javascript:;' class="login_user">Login</a></li>

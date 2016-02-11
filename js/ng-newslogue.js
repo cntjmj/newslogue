@@ -839,3 +839,59 @@
 
 		$scope.track.loadUserDebate();
 	});
+	
+	/**
+	 * 50.8 Controller for Conteact Us
+	 */
+	var loadUserContactInfo = function($scope, $http) {
+		if (userID > 0) {
+			var urlUser = CONFIG.GLOBAL_API_BASE+'/user/'+userID;
+			$http({method: 'get', url: urlUser}).success(function(data) {
+				if (angular.isDefined(data.user)) {
+					$scope.contact.displayName = data.user.displayName;
+					if (data.user.emailaddress != "")
+						$scope.contact.emailaddress = data.user.emailaddress;
+					else
+						$scope.contact.emailaddress = data.user.fbEmail;
+				}
+			});
+		}
+	};
+
+	var submitContactForm = function($scope, $http) {
+		$scope.contact.submitted = false;
+		if ($scope.contactForm.$valid) {
+			$scope.contact.submitting = true;
+			var urlContact = CONFIG.GLOBAL_API_BASE+'/contact';
+			var postData = {
+				displayName: $scope.contact.displayName,
+				emailaddress: $scope.contact.emailaddress,
+				message: $scope.contact.message
+			};
+			$http({method:'post', url: urlContact, data: $.param(postData)}).success(function(data){
+				$scope.contact.submitting = false;
+				$scope.contact.submitted = true;
+				$scope.contact.message = '';
+			});
+		}
+	};
+
+	nlapp.controller("ContactController", function($scope, $http){
+	    getAuthInfo($scope, $http);
+	    setupLoginForm($scope, $http);
+	    
+	    $scope.contact = {
+	        displayName: '',
+	        emailaddr: '',
+	        submitting: false,
+	        submitted: false,
+	        loadUserContactInfo: function() {
+	        	return loadUserContactInfo($scope, $http);
+	        },
+	        submitForm: function() {
+	            return submitContactForm($scope, $http);
+	        }
+	    };
+	    
+	    $scope.contact.loadUserContactInfo();
+	});

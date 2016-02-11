@@ -6,7 +6,7 @@
 	<!--FOOTER-->         
 	<footer>
 		<div class="box_footer">
-			<ul class="social-media-icons">
+			<!--ul class="social-media-icons">
 				<li><a href="javascript:;"><i class="fa fa-facebook fa-1x"></i></a></li>
 				<li><a href="javascript:;"><i class="fa fa-twitter fa-1x"></i></a></li>
 				<li><a href="javascript:;"><i class="fa fa-instagram fa-1x"></i></a></li>
@@ -21,7 +21,7 @@
 					<li>-</li>
 					<li><a href="javascript:;">TERMS OF USE</a></li>
 				</ul>
-			</div>
+			</div-->
 			<div class="copyright">
 				<h6>Copyright 2016 &copy; NEWSLOGUE - All rights reserved.</h6>
 			</div>
