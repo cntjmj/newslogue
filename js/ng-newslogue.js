@@ -995,6 +995,8 @@
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
 
+		$scope.goHome = goHome;
+
 		$scope.changepwd = {
 				password: "",
 				errMessage: "",

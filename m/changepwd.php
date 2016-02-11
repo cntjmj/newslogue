@@ -27,6 +27,7 @@
 			<div class="succTxt" ng-show="changepwd.succMessage!=''">{{changepwd.succMessage}}</div>
 			<div class="txt_submit">
 				<input type="submit" value="continue" id="submit_btn_blue" ng-hide="changepwd.succMessage!=''" {{changepwd.submitting?"disabled":""}}/><br/>
+				<input type="button" value="HOME" id="submit_btn_blue" ng-show="changepwd.succMessage!=''" ng-click="goHome()"/><br/>
 			</div>
 		</form>
 	</section>
