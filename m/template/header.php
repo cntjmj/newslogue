@@ -27,7 +27,7 @@
 					</div>
 					<div class="login">
 						<input type="submit" value="LOGIN" id="submit_btn_blue" ng-click="user.login()" /><br/>
-						<a href="javascript:;">FORGOT PASSWORD?</a><br/>
+						<a href="/recovery">FORGOT PASSWORD?</a><br/>
 						<a href="javascript:;">FORGOT USERNAME?</a>
 					</div>
 				</form>

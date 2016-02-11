@@ -18,3 +18,9 @@ RewriteRule ^profile$ profile.php [QSA,NC,L]
 RewriteRule ^registration$ registration.php [QSA,NC,L]
 RewriteRule ^track$ track.php [QSA,NC,L]
 RewriteRule ^contact$ contact.php [QSA,NC,L]
+
+RewriteRule ^recovery$ recovery.php [QSA,NC,L]
+RewriteRule ^recovery\/([^/]*)$ recovery.php?emailaddress=$1 [QSA,NC,L]
+
+RewriteRule ^changepwd$ changepwd.php [QSA,NC,L]
+RewriteRule ^changepwd\/([^/]*)\/([^/]*)$ changepwd.php?uniqCode=$1&emailaddress=$2 [QSA,NC,L]
