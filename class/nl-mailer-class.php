@@ -37,6 +37,41 @@ class Mailer {
 		
 		return $this->phpmailer->Send();
 	}
+
+  public function recoveryEmail($emailaddress, $displayName, $uniqCode) 
+  {
+    if ($emailaddress == "" || $uniqCode == "")
+      return false;
+
+    $html = sprintf(Mailer::PASSWORD_RESET, $displayName, CONFIG_PATH::GLOBAL_M_BASE, $uniqCode, $emailaddress);
+
+    $this->phpmailer->AddAddress($emailaddress);
+    $this->phpmailer->SetFrom("forgotPassword@newslogue.com", "Newslogue");
+    $this->phpmailer->Subject = "Newslogue Forgot Password";
+    $this->phpmailer->AltBody = 'To view the message, please use an HTML compatible email viewer!'; // optional - MsgHTML will create an alternate automatically
+    $this->phpmailer->MsgHTML($html);
+
+    return $this->phpmailer->Send();
+  }
+
+  const PASSWORD_RESET = '
+    <table width="600" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+      <tr>
+        <td>
+          <div style="margin-bottom:20px;">Hi %s!</div>
+          <div style="">
+            Please click on the link below to reset your password.
+          </div>
+          <div>
+            <a href="%schangepwd?uniqCode=%s&emailaddress=%s" target="_blank">Reset your password</a>
+          </div>
+          <div style="margin-top: 40px;">
+            Greatly Welcomed by<br />
+            The Team at Newslogue
+          </div>
+        </td>
+      </tr>
+    </table>';
 	
 	const ACCOUNT_VERIFICATION = '
 		<table width="600" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">

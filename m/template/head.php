@@ -25,6 +25,8 @@
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/angular-sanitize.min.js"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/ng-infinite-scroll.min.js"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_WWW_BASE?>js/nl-common.js"></script>
+
+	<base href="/" />    <!-- use anjuarjs location service, have to add this line -->
 </head>
 <?php
 	}

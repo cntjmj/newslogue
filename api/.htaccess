@@ -24,3 +24,7 @@ RewriteRule ^category\/([^/]*)$ category.php?categoryID=$1 [QSA,NC,L]
 RewriteRule ^verify\/([^/]*)\/([^/]*)$ verify.php?uniqCode=$1&emailaddress=$2 [QSA,NC,L]
 
 RewriteRule ^contact$ contact.php [QSA,NC,L]
+
+RewriteRule ^recovery$ recovery.php [QSA,NC,L]
+RewriteRule ^recovery\/([^/]*)$ recovery.php?emailaddress=$1 [QSA,NC,L]
+RewriteRule ^recovery\/([^/]*)\/([^/]*)$ recovery.php?uniqCode=$1&emailaddress=$2 [QSA,NC,L]

@@ -621,6 +621,72 @@
 		});
 	}
 
+	//forgot pwd: step one, send recovary email
+	var pwdRecovaryForm = function($scope, $http) {
+		if ($scope.forgetpwdform.emailaddress.$valid == false) 
+		{
+			$scope.forgetpwd.errMessage = "please fill out this field";
+		} 
+		else 
+		{
+			$scope.forgetpwd.submitting = 1;
+			$scope.forgetpwd.errMessage = "";
+			var postData = {
+					step : 1,
+					emailaddress:	$scope.forgetpwd.emailaddress
+			};
+
+			var urlUser = CONFIG.GLOBAL_API_BASE+'/recovery';
+
+			$http({method: 'post', url: urlUser, data: $.param(postData)}).success(
+				function(data){
+					if (angular.isDefined(data.errCode) && data.errCode == 0) {
+						$scope.forgetpwd.succMessage = data.errMessage;
+					} else {
+						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
+						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
+
+						$scope.forgetpwd.errMessage = errMesg;
+					}
+					$scope.forgetpwd.submitting = 0;
+				}
+			);
+		}		
+	};
+
+	//forgot pwd: step two, reset new password
+	var pwdChangeForm = function($scope, $http) {
+		if ($scope.changepwdform.password.$valid == false) 
+			$scope.changepwd.errMessage = "please fill out this field";
+		else 
+		{
+			$scope.changepwd.submitting = 1;
+			$scope.changepwd.errMessage = "";
+			var postData = {
+					step : 2,
+					password:	$scope.changepwd.password,
+					emailaddress:   $scope.changepwd.emailaddress,
+					uniqCode: 		$scope.changepwd.uniqCode 
+			};
+
+			var urlUser = CONFIG.GLOBAL_API_BASE+'/recovery';
+
+			$http({method: 'post', url: urlUser, data: $.param(postData)}).success(
+				function(data){
+					if (angular.isDefined(data.errCode) && data.errCode == 0) {
+						$scope.changepwd.succMessage = data.errMessage;
+					} else {
+						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
+						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
+
+						$scope.changepwd.errMessage = errMesg;
+					}
+					$scope.changepwd.submitting = 0;
+				}
+			);
+		}		
+	};
+
 	/**
 	 * 50.1 Newslogue Angular Application
 	 */
@@ -639,6 +705,11 @@
 	/**
 	 * 50.2 Controller for Index Page
 	 */
+
+	// enable location privider service
+	nlapp.config(function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    });
 	
 	nlapp.controller("IndexController", function($scope, $http){
 		/**
@@ -895,3 +966,51 @@
 	    
 	    $scope.contact.loadUserContactInfo();
 	});
+
+	/**
+	 * 50.10 Controller for user find password
+	 */
+	nlapp.controller("ForgetpwdController", function($scope, $http){
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+
+		$scope.forgetpwd = {
+				emailaddress: "",
+				errMessage: "",
+				succMessage: "",
+				submitting: 0,
+				pwdRecovaryForm: function() {
+					pwdRecovaryForm($scope, $http);
+				}
+		};
+	});
+
+	/**
+	 * 50.11 Controller for user change password
+	 */
+	nlapp.controller("ChangepwdController", function($scope, $http, $location){
+
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+
+		$scope.changepwd = {
+				password: "",
+				errMessage: "",
+				succMessage: "",
+				submitting: 0,
+				emailaddress: $location.search().emailaddress,
+				uniqCode: $location.search().uniqCode,
+				pwdChangeForm: function() {
+					pwdChangeForm($scope, $http);
+				}
+		};
+	});
+
+		// enable location privider service
+	nlapp.config(function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    });
+	
+
