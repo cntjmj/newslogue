@@ -7,11 +7,9 @@
 		$emailaddress = _post("emailaddress", "");
 		$displayName = _post("displayName", "");
 		$message = _post("message", "");
-		
-		echo $emailaddress.$displayName.$message;
 
 		$mailer = new Mailer();
 		$mailer->sendEnquiry($emailaddress, $displayName, $message);
-		echo json_encode(['errCode' => 0]);
+		echo json_encode(array('errCode' => 0));
 	}
 ?>
