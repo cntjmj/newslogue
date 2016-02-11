@@ -29,8 +29,7 @@ class Mailer {
 		
 		$html = sprintf(Mailer::CONTACT_US_ENQUIRY, $displayName, $from, $message);
 		
-		//$this->phpmailer->AddAddress("service@newslogue.com");
-		$this->phpmailer->AddAddress("minghua.lu@163.com");
+		$this->phpmailer->AddAddress("service@newslogue.com");
 		$this->phpmailer->SetFrom($from, $displayName);
 		$this->phpmailer->Subject = "User Inquiry by $displayName";
 		$this->phpmailer->AltBody = 'To view the message, please use an HTML compatible email viewer!';
