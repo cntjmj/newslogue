@@ -38,6 +38,7 @@ class Recovery
 			throw new Exception("failed to send change password email", -1);
 	}
 
+	// change pwd through email and uniqcode
 	public function changePwd($email, $ucode, $newPwd)
 	{
 		$query = "select count(1) from user_registration where emailaddress=\"".
@@ -54,6 +55,17 @@ class Recovery
 				emailaddress=\"$email\" and uniqCode=\"$ucode\" limit 1";
 			$this->db->query($query);
 		}
+	}
+
+	// chanage pwd through userID
+	public function resetPwd($userID, $newPwd)
+	{
+			$auth = Auth::getInstance();
+			$newPwd = Auth::encrypt($newPwd);
+
+			$query = "update user_registration set pwd=\"$newPwd\" where 
+				userID=\"$userID\" limit 1";
+			$this->db->query($query);
 	}
 }
 

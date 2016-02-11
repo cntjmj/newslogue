@@ -662,11 +662,13 @@
 		{
 			$scope.changepwd.submitting = 1;
 			$scope.changepwd.errMessage = "";
+
 			var postData = {
-					step : 2,
+					step : ($scope.userID <= 0 ? 2 : 3),
 					password:	$scope.changepwd.password,
 					emailaddress:   $scope.changepwd.emailaddress,
-					uniqCode: 		$scope.changepwd.uniqCode 
+					uniqCode: 		$scope.changepwd.uniqCode,
+					uid : $scope.userID
 			};
 
 			var urlUser = CONFIG.GLOBAL_API_BASE+'/recovery';
@@ -1008,6 +1010,18 @@
 					pwdChangeForm($scope, $http);
 				}
 		};
+
+  		// Set the default value of inputType
+  		$scope.inputType = 'password';
+  
+  		// Hide & show password function
+  		$scope.hideShowPassword = function(){
+    	if ($scope.inputType == 'password')
+      		$scope.inputType = 'text';
+    	else
+      		$scope.inputType = 'password';
+  };
+
 	});
 
 		// enable location privider service
