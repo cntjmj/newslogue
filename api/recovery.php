@@ -42,6 +42,20 @@
 					echo json_encode(array("errCode"=>0, "errMessage"=>"You has changed your password"));
 				}
 			}
+			else if ($step == 3)		// change passpword in the profile page, change password according to userID
+			{
+				$newPwd = _post("password", "");
+				$userID = _post("uid", "");
+				$auth = Auth::getInstance();
+
+				if ($auth->getUserID() != $userID)
+					throw new Exception("unauthorized", -1);
+				{
+					$re = new Recovery();
+					$re->resetPwd($userID, $newPwd);
+					echo json_encode(array("errCode"=>0, "errMessage"=>"You has changed your password"));
+				}
+			}
 		}
 	}
 	catch(Exception $e)

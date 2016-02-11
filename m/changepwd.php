@@ -11,7 +11,7 @@
 <main>
 	<section>
 		<div class="debate_head_main" style="margin-bottom:20px;">
-			<div class="debate_heading"><span class="debate_title">Forgot Password</span></div>
+			<div class="debate_heading"><span class="debate_title">Reset Password</span></div>
 		</div>  
 	</section>
 
@@ -20,7 +20,11 @@
 
 			<div id="newpwd">
 				<span class="user_label">NEW PASSWORD</span>
-				<input type="password" name="password" ng-model="changepwd.password" required id="password" placeholder="NEW PASSWORD">
+				<input type="{{inputType}}" name="password" ng-model="changepwd.password" required id="password" placeholder="NEW PASSWORD">
+
+				<input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
+				<label for="checkbox" ng-if="passwordCheckbox">Hide</label>
+  				<label for="checkbox" ng-if="!passwordCheckbox">Show</label> 
 			</div>
 
 			<div class="errTxt" ng-show="changepwd.errMessage!=''">{{changepwd.errMessage}}</div>
