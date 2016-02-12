@@ -11,7 +11,7 @@
 		{
 			$step = _post("step", "");
 
-			if ($step == 1)
+			if ($step == 1)		// send change pwd email
 			{
 				$emailaddress = _post("emailaddress", "");
 				if ($emailaddress == "")
@@ -24,7 +24,7 @@
 						been sent to your email address"));
 				}
 			}
-			else if ($step == 2)
+			else if ($step == 2)	// click url in email to reset pwd
 			{
 				$email = _post("emailaddress", "");
 				$ucode = _post("uniqCode", "");
@@ -42,8 +42,9 @@
 					echo json_encode(array("errCode"=>0, "errMessage"=>"You has changed your password"));
 				}
 			}
-			else if ($step == 3)		// change passpword in the profile page, change password according to userID
+			else if ($step == 3)		// change passpword in the profile page, according to userID
 			{
+				$currPwd = _post("currpwd", "");
 				$newPwd = _post("password", "");
 				$userID = _post("uid", "");
 				$auth = Auth::getInstance();
@@ -52,7 +53,7 @@
 					throw new Exception("unauthorized", -1);
 				{
 					$re = new Recovery();
-					$re->resetPwd($userID, $newPwd);
+					$re->resetPwd($userID, $currPwd, $newPwd);
 					echo json_encode(array("errCode"=>0, "errMessage"=>"You has changed your password"));
 				}
 			}

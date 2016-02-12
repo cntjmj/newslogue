@@ -656,8 +656,10 @@
 
 	//forgot pwd: step two, reset new password
 	var pwdChangeForm = function($scope, $http) {
-		if ($scope.changepwdform.password.$valid == false) 
-			$scope.changepwd.errMessage = "please fill out this field";
+		if ($scope.changepwdform.password.$valid == false || $scope.changepwdform.cpwd.$valid == false) 
+			$scope.changepwd.errMessage = "please fill out these fields";
+		else if ($scope.changepwd.password != $scope.changepwd.cpwd)
+			$scope.changepwd.errMessage = "inconsistant password";
 		else 
 		{
 			$scope.changepwd.submitting = 1;
@@ -665,6 +667,7 @@
 
 			var postData = {
 					step : ($scope.userID <= 0 ? 2 : 3),
+					currpwd : $scope.changepwd.currpwd,
 					password:	$scope.changepwd.password,
 					emailaddress:   $scope.changepwd.emailaddress,
 					uniqCode: 		$scope.changepwd.uniqCode,
@@ -703,12 +706,17 @@
 			    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 		  };
 	});
+
+	// enable location privider service
+	nlapp.config(function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    });
 	
 	/**
 	 * 50.2 Controller for Index Page
 	 */
 
-	// enable location privider service
+	// Enable location privider service
 	nlapp.config(function($locationProvider) {
         $locationProvider.html5Mode(true);
     });
@@ -1001,6 +1009,8 @@
 
 		$scope.changepwd = {
 				password: "",
+				cpwd: "",
+				currpwd: "",
 				errMessage: "",
 				succMessage: "",
 				submitting: 0,
@@ -1011,22 +1021,16 @@
 				}
 		};
 
+		/*
   		// Set the default value of inputType
   		$scope.inputType = 'password';
-  
   		// Hide & show password function
   		$scope.hideShowPassword = function(){
     	if ($scope.inputType == 'password')
       		$scope.inputType = 'text';
     	else
       		$scope.inputType = 'password';
-  };
-
+  		};
+		*/
 	});
-
-		// enable location privider service
-	nlapp.config(function($locationProvider) {
-        $locationProvider.html5Mode(true);
-    });
-	
 
