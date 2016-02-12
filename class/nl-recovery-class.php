@@ -48,7 +48,6 @@ class Recovery
 			throw new Exception("Invalid URL", -1);	
 		else
 		{
-			$auth = Auth::getInstance();
 			$newPwd = Auth::encrypt($newPwd);
 
 			$query = "update user_registration set pwd=\"$newPwd\" where 
@@ -58,14 +57,22 @@ class Recovery
 	}
 
 	// chanage pwd through userID
-	public function resetPwd($userID, $newPwd)
+	public function resetPwd($userID, $currPwd, $newPwd)
 	{
-			$auth = Auth::getInstance();
 			$newPwd = Auth::encrypt($newPwd);
+			$currPwd = Auth::encrypt($currPwd);
 
-			$query = "update user_registration set pwd=\"$newPwd\" where 
-				userID=\"$userID\" limit 1";
-			$this->db->query($query);
+			$query = "select count(1) from user_registration where userID=\"$userID\" 
+				and pwd=\"$currPwd\"";
+
+			if ($this->db->query($query) != 1)
+				throw new Exception("Current password does not correct", -1);
+			else
+			{
+				$query = "update user_registration set pwd=\"$newPwd\" where 
+					userID=\"$userID\" limit 1";
+				$this->db->query($query);
+			}
 	}
 }
 
