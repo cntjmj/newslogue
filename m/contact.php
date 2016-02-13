@@ -49,12 +49,12 @@
 			</div>
 		</section>	
 		<div id="map" style="width:100%; height: 200px"></div>
-		<section id="faq">
+		<!--section id="faq">
 			<div>
 				<h2>FAQ</h2><br>
 				<p>-QUESTION 1?<br>-QUESTION 2?<br>-QUESTION 3?<br>-QUESTION 4?<br>-QUESTION 5?</p>
 			</div>
-		</section><br>
+		</section--><br>
 	</main>
 	<script>var userID = <?=$userID?>;</script>
 	<script	src="http://maps.googleapis.com/maps/api/js"></script>

@@ -9,7 +9,7 @@
 			<ul>
 				<!--li><a href='javascript:;'>Articles</a></li-->
 				<li><a href='javascript:;'>About us</a></li>
-				<li><a href='javascript:;'>Contact</a></li>
+				<li><a href='/contact'>Contact</a></li>
 				<li ng-hide="userID>0"><a href='javascript:;' class="login_user">Login</a></li>
 				<li ng-show="userID>0" ng-click="user.logout()"><a href='javascript:;'>Logout</a></li>
 			</ul>
@@ -28,7 +28,7 @@
 					<div class="login">
 						<input type="submit" value="LOGIN" id="submit_btn_blue" ng-click="user.login()" /><br/>
 						<a href="/recovery">FORGOT PASSWORD?</a><br/>
-						<a href="javascript:;">FORGOT USERNAME?</a>
+						<!--a href="javascript:;">FORGOT USERNAME?</a-->
 					</div>
 				</form>
 				<div id="login_others">
