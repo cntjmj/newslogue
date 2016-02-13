@@ -715,11 +715,6 @@
 	/**
 	 * 50.2 Controller for Index Page
 	 */
-
-	// Enable location privider service
-	nlapp.config(function($locationProvider) {
-        $locationProvider.html5Mode(true);
-    });
 	
 	nlapp.controller("IndexController", function($scope, $http){
 		/**
