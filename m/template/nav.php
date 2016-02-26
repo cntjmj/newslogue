@@ -7,7 +7,7 @@
 	<nav>
 		<section>
 			<div id="category_list">
-				<ul>
+				<ul style="display:none">
 					<li><a href="{{selectedCategoryID<=0?'javascript:;':'/home'}}">All</a></li>
 					<li ng-repeat-start="category in categoryList">-</li>
 					<li ng-repeat-end>

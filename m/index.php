@@ -16,9 +16,11 @@
 ?>
 	<main id="index_main_section" infinite-scroll='loadmore()' infinite-scroll-disabled='!ready2scroll'>
 		<section ng-repeat="news in newsMetaList" class="article_content">
-			<div class="ind_question content">
-				<h1> {{news.newsQuestion}} </h1>
-			</div>
+			<a href="/debate/{{news.newsID}}" target="_blank">
+				<div class="ind_question content">
+					<h1> {{news.newsQuestion}} </h1>
+				</div>
+			</a>
 			<a href="{{news.newsSource}}" class="popup-external-iframe">
 				<div class="ind_photo" style="background-image:url('{{news.newsBannerSource}}');">
 				</div>
