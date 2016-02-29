@@ -10,12 +10,12 @@
 				<!--li><a href='javascript:;'>Articles</a></li-->
 				<li><a href='javascript:;'>About us</a></li>
 				<li><a href='/contact'>Contact</a></li>
-				<li ng-hide="userID>0"><a href='javascript:;' class="login_user">Login</a></li>
+				<!--li ng-hide="userID>0"><a href='javascript:;' class="login_user">Login</a></li-->
 				<li ng-show="userID>0" ng-click="user.logout()"><a href='javascript:;'>Logout</a></li>
 			</ul>
 		</div>
 		<section>
-			<div id="login_area" class="ind_question">
+			<div id="login_area" class="ind_question" ng-hide="userID>0">
 				<form class="form" name="loginform" id="loginform" >
 					<div class="txt_username"><i class="fa fa-user fa-1x"></i>
 						<input name="emailaddress" type="email" required ng-model="user.emailaddress"

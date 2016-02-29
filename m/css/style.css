@@ -176,7 +176,7 @@ position:absolute;top:65px;left:236px;width:100px;
 }
 #login_area
 {
-margin-top:37px;padding-left:20px;display:none;
+margin-top:37px;padding-left:20px;#display:none;
 }
 
 input#username, input#password

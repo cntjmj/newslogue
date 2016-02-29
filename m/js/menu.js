@@ -94,7 +94,7 @@ $("#cssmenu").click(function() {
 		$("#container .userprofile_icon").css("opacity","0");
 		*/
 		
-		$("#login_area").hide();
+		//$("#login_area").hide();
 		$("#category_list").css("margin-top","37px");	
 				$(".debate_head_main").css("margin-top","37px");
 	}
@@ -125,6 +125,7 @@ $(".login_user" ).click(function() {
 
 $(document).mouseup(function (e)
 {
+	/*
     var container = $("#login_area");
 
     if (!container.is(e.target) // if the target of the click isn't the container...
@@ -138,6 +139,7 @@ $(document).mouseup(function (e)
 		$("#category_list").css("margin-top","37px");
 		$(".debate_head_main").css("margin-top","37px");
     }
+    */
     
 	var cssmenu = $("#cssmenu");
 
