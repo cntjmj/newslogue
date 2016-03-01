@@ -67,7 +67,13 @@
 				if (0 >= $user->createUser($fields)->getUserID())
 					throw new Exception("failed to register user", -1);
 
-				echo json_encode(array("errCode"=>0, "errMessage"=>"an verification email has been sent to your email address"));
+				/* 
+				 * Function: disable email verification
+				 * Date: 2016/03/01
+				 */
+				//echo json_encode(array("errCode"=>0, "errMessage"=>"an verification email has been sent to your email address"));
+				echo json_encode(array("errCode"=>0, "errMessage"=>"
+					user registered successfully"));
 			}
 		} else if (is_put()) {
 			$userID = _get('userID', 0);

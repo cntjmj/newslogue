@@ -171,8 +171,13 @@ class User {
 			$keys .= "$key, ";
 			$values .= "\"$value\", ";
 		}
-		$uniqCode = Coder::createRandomCode();
 		
+		/*
+		 * Function: disable email verification
+		 * Date: 2016/03/01
+
+		$uniqCode = Coder::createRandomCode();
+
 		$mailer = new Mailer();
 		$result = $mailer->sendVerification($fields['emailaddress'], $fields['displayName'], $uniqCode);
 
@@ -181,6 +186,10 @@ class User {
 
 		$keys .= "uniqCode, userStatus, createdDateTime, updatedDateTime)";
 		$values .= "\"$uniqCode\", \"pending\", now(), now())";
+		*/
+
+		$keys .= "uniqCode, userStatus, createdDateTime, updatedDateTime)";
+		$values .= "\"$uniqCode\", \"active\", now(), now())";
 
 		$query = "insert into user_registration $keys values $values";
 		return $this->db->query($query);
