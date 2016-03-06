@@ -18,6 +18,7 @@ RewriteRule ^profile$ profile.php [QSA,NC,L]
 RewriteRule ^registration$ registration.php [QSA,NC,L]
 RewriteRule ^track$ track.php [QSA,NC,L]
 RewriteRule ^contact$ contact.php [QSA,NC,L]
+RewriteRule ^about$ about.php [QSA,NC,L]
 
 RewriteRule ^recovery$ recovery.php [QSA,NC,L]
 RewriteRule ^recovery\/([^/]*)$ recovery.php?emailaddress=$1 [QSA,NC,L]

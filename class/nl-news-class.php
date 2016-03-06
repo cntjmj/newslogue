@@ -5,6 +5,7 @@
 class NewsList {
 	private $num_per_page, $page_num, $categoryID, $summary_len;
 	private $newsStatus = "active";
+	private $onlyFollowed = 0;
 	private $newsMetaArr = array();
 	private $total_news_num = -1;
 	private $db;
@@ -28,6 +29,10 @@ class NewsList {
 
 		return $this->newsMetaArr;
 	}
+	
+	public function onlyFollowed($userID) {
+		$this->onlyFollowed = $userID;
+	}
 
 	public function setNewsStatus($newsStatus) {
 		if ($this->newsStatus != $newsStatus) {
@@ -43,12 +48,16 @@ class NewsList {
 		
 		$start_record = $this->page_num * $this->num_per_page;
 
-		$query = "select *,na.createdDateTime as nacreatedDateTime from `newsarticle` na 
+		$query = "select *,admin.username, na.createdDateTime as nacreatedDateTime from `newsarticle` na 
 				inner join `category` c on na.categoryID = c.categoryID
+				inner join `administrator` admin on na.adminID = admin.adminID
 				where na.newsStatus = '".$this->newsStatus."'";
 		
 		if ($this->categoryID != "" && $this->categoryID > 0)
 			$query .= " and na.categoryID = ".$this->categoryID;
+		
+		if ($this->onlyFollowed)
+			$query .= " and na.adminID in (select admin_id from editor_user where user_id=".$this->onlyFollowed.")";
 		
 		$query .= " order by na.createdDateTime desc";
 		$query .= " limit $start_record, $this->num_per_page";
