@@ -8,7 +8,7 @@
 		<div id='cssmenu'>
 			<ul>
 				<!--li><a href='javascript:;'>Articles</a></li-->
-				<li><a href='javascript:;'>About us</a></li>
+				<li><a href='/about'>About us</a></li>
 				<li><a href='/contact'>Contact</a></li>
 				<!--li ng-hide="userID>0"><a href='javascript:;' class="login_user">Login</a></li-->
 				<li ng-show="userID>0" ng-click="user.logout()"><a href='javascript:;'>Logout</a></li>

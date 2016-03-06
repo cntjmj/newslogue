@@ -114,6 +114,27 @@ class User {
 		return $this;
 	}
 	
+	/*
+	 * create table editor_user (id bigint auto_increment primary key, user_id bigint not null, admin_id bigint not null);
+	 */
+	public function follow($adminID) {
+		$query = "select * from editor_user where user_id=".$this->userID." and admin_id=".$adminID;
+		$result = $this->db->select($query);
+		if (count($result) > 0) {
+			$query = "delete from editor_user where user_id=".$this->userID." and admin_id=".$adminID;
+			$this->db->delete($query);
+		} else {
+			$query = "insert into editor_user (user_id, admin_id) values (".$this->userID.", $adminID)";
+			$this->db->insert($query);
+		}
+	}
+	
+	public function follows() {
+		$query = "select admin_id from editor_user where user_id=".$this->userID;
+		$result = $this->db->select($query);
+		return $result;
+	}
+	
 	private function loadUser() {
 		$this->userID = $this->db->real_escape_string($this->userID);
 		$query = "select * from user_registration where userid=$this->userID";

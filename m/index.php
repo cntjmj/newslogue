@@ -1,11 +1,16 @@
 <?php 
 	require_once "../nl-init.php";
+	require_once "../class/nl-auth-class.php";
 	require_once "template/template.php";
 	
 	$categoryID = _get("categoryID", 0);
 	$newsStatus = _get("newsStatus", "");
+	$onlyFollowed = _get("onlyFollowed", 0);
 	$ngController = "IndexController";
 	$title = "Newslogue Home";
+	
+	$auth = Auth::getInstance();
+	$userID = $auth->getUserID();
 
 	htmlBegin($ngController);
 	htmlHead($title);
@@ -15,7 +20,18 @@
 		htmlNav();
 ?>
 	<main id="index_main_section" infinite-scroll='loadmore()' infinite-scroll-disabled='!ready2scroll'>
+		<section style="margin-top:40px;" ng-show="follows.length>0">
+			<button class="toggle-button-container {{onlyFollowed?'active':''}}" ng-click="toggleFollowed()" style="width:35px">  
+				<div class="toggle-button-text left" ></div>  
+				<div class="toggle-button-nob"></div>  
+				<div class="toggle-button-text right" ></div>  
+			</button>
+		</section>
 		<section ng-repeat="news in newsMetaList" class="article_content">
+			<div class="writer_follow_unfollow">
+				<i class="fa fa-user"></i> <span class="writer_name">{{news.username}}</span>
+				<span class="fu {{followed(news.adminID)?'follow-writer':'unfollow-writer'}}" ng-click="follow(news.adminID)" ng-show="userID>0"><i class="fa fa-check-circle"></i></span>
+			</div>
 			<a href="/debate/{{news.newsID}}" target="_blank">
 				<div class="ind_question content">
 					<h1> {{news.newsQuestion}} </h1>
@@ -44,6 +60,8 @@
 	<script>
 		var selectedCategoryID = <?=$categoryID?>;
 		var newsStatus = "<?=$newsStatus?>";
+		var userID = "<?=$userID?>";
+		var onlyFollowed = <?=$onlyFollowed?>;
 	</script>
 	<script src="<?=CONFIG_PATH::GLOBAL_M_BASE?>js/lazy-loading-js.js" type="text/javascript"></script>
 	<script src="<?=CONFIG_PATH::GLOBAL_M_BASE?>js/magnific-popup.js"></script>

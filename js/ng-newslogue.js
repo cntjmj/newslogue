@@ -54,6 +54,7 @@
 
 			if ($scope.userID > 0) {
 				getNotificationInfo($scope, $http);
+				loadFollows($scope, $http);
 				$(".show_after_logon").show();
 			} else {
 				$(".show_after_logon").hide();
@@ -79,7 +80,7 @@
 						$scope.user.password = "";
 
 						$("#login_area").slideUp("fast");
-						$("#category_list").css("margin-top","37px");				
+						$("#category_list").css("margin-top","37px");
 					} else {
 						var errCode = angular.isDefined(data.errCode)?data.errCode:-1;
 						var errMesg = angular.isDefined(data.errMessage)?data.errMessage:"service is temporarily unavailable";
@@ -117,6 +118,7 @@
 		$("#cssmenu #menu-button").removeClass("menu-opened");
 		$("#cssmenu ul").removeClass("open");
 		$("#cssmenu ul").css("display","none");
+		$scope.follows = [];
 	};
 	
 	var setupLoginForm = function($scope, $http) {
@@ -254,7 +256,8 @@
 		var param = {
 				page_num: $scope.nextPage,
 				categoryID: $scope.selectedCategoryID,
-				newsStatus: newsStatus
+				newsStatus: newsStatus,
+				onlyFollowed: $scope.onlyFollowed * userID
 			};
 		$http({method: 'GET', url: CONFIG.GLOBAL_API_BASE+'/news', params: param}).success(
 			function (data, status, headers, config, statusText) {
@@ -278,6 +281,41 @@
 			}
 		);
 	};
+	
+	var loadFollows = function($scope, $http) {
+		//alert($scope.userID);
+		if (typeof userID == 'undefined' || userID <= 0)
+			if ($scope.userID > 0)
+				userID = $scope.userID;
+			else
+				return;
+		
+		var url = CONFIG.GLOBAL_API_BASE+'/user/'+userID+'/follow';
+		$http({method:'get', url: url}).success(function (data){
+			if (angular.isDefined(data.follows))
+				$scope.follows = data.follows;
+			else
+				$scope.follows = [];
+		});
+	}
+	
+	var followEditor = function($scope, $http, adminID) {
+		if (userID <= 0)
+			if ($scope.userID > 0)
+				userID = $scope.userID;
+			else
+				return;
+
+		var url = CONFIG.GLOBAL_API_BASE+'/user/'+userID+'/follow/'+adminID;
+		$http({method:'post', url: url}).success(function (data){
+			if (angular.isDefined(data.follows))
+				$scope.follows = data.follows;
+			
+			if ($scope.follows.length == 0 && $scope.onlyFollowed > 0) {
+				$scope.toggleFollowed();
+			}
+		});
+	}
 	
 	/**
 	 * 3. Debate Page Function Area
@@ -730,10 +768,29 @@
 		loadCategoryList($scope, $http);
 		initLazyLoading();
 		initMagnificPopup();
+		loadFollows($scope, $http);
 
 		$scope.ready2scroll = false;
 		$scope.nextPage = 0;
 		$scope.newsMetaList = [];
+		$scope.onlyFollowed = 0;
+		$scope.followed = function(adminID) {
+			for (i in $scope.follows) {
+				if (adminID == $scope.follows[i].admin_id)
+					return true;
+			}
+			
+			return false;
+		};
+		$scope.follow = function(adminID) {
+			followEditor($scope, $http, adminID);
+		}
+		$scope.toggleFollowed = function() {
+			$scope.onlyFollowed = ($scope.onlyFollowed?0:1);
+			$scope.nextPage = 0;
+			$scope.newsMetaList = [];
+			$scope.loadmore();
+		}
 		$scope.loadmore = function() {
 			loadArticles($scope, $http);
 		};
@@ -1029,3 +1086,11 @@
 		*/
 	});
 
+	/*
+	 * 50.12 About Us Controller
+	 */
+	nlapp.controller("AboutController", function($scope, $http){
+		getAuthInfo($scope, $http);
+		setupLoginForm($scope, $http);
+		setupFaceBook($scope, $http);
+	});

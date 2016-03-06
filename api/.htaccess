@@ -17,6 +17,8 @@ RewriteRule ^user$ user.php [QSA,NC,L]
 RewriteRule ^user\/([^/]*)$ user.php?userID=$1 [QSA,NC,L]
 RewriteRule ^user\/([^/]*)\/notification$ notification.php?userID=$1 [QSA,NC,L]
 RewriteRule ^user\/([^/]*)\/reply$ reply.php?userID=$1 [QSA,NC,L]
+RewriteRule ^user\/([^/]*)\/follow$ follow.php?userID=$1 [QSA,NC,L]
+RewriteRule ^user\/([^/]*)\/follow\/([^/]*)$ follow.php?userID=$1&adminID=$2 [QSA,NC,L]
 
 RewriteRule ^category$ category.php [QSA,NC,L]
 RewriteRule ^category\/([^/]*)$ category.php?categoryID=$1 [QSA,NC,L]
