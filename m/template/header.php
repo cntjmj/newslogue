@@ -32,7 +32,11 @@
 					</div>
 				</form>
 				<div id="login_others">
-					<p>OR <a href="/registration">SIGN UP</a> - <a id="login_with_facebook" href="javascript:;" ng-click="loginWithFacebook()">LOGIN WITH FACEBOOK</a></p>
+					<p>OR 
+						<a href="/registration">SIGN UP</a> - 
+						<a id="login_with_facebook" href="javascript:;" ng-click="loginWithFacebook()">LOGIN WITH FACEBOOK</a> -
+						<a id="login_with_gplus" href="javascript:;" ng-click="loginWithGPlus()">LOGIN WITH G+</a>
+					</p>
 				</div>
 			</div>
 		</section>
