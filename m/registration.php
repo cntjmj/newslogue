@@ -17,6 +17,9 @@
 			<div id="signup_fb">
 				<button ng-click="signUpWithFacebook()" id="reg">Sign up with Facebook</button>
         	</div>
+        	<div id="signup_fb">
+				<button ng-click="signUpWithGPlus()" id="reg">Sign up with G+</button>
+        	</div>
 			<form class="form" id="signupform" name="signupform" ng-submit="signup.submitSignupForm()">
 				<!--div id="profile_img_section">
 					<div id="profile_photo"><img src="images/article4.jpg" class="profile_circular" alt="Profile Photo"></div>

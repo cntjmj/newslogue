@@ -133,6 +133,45 @@
 			}
 		};
 	};
+
+
+    var setupGplus = function($scope, $http, GooglePlus) {
+        $scope.signUpWithGPlus = function () {
+            GooglePlus.login().then(function (authResult) {
+                console.log(authResult);
+  
+                GooglePlus.getUser().then(function (user) {
+                    var postData = {
+						fbName:		user.name,
+						fbEmail:	user.email,
+						fbID:		user.id
+					};
+					signUpUser($scope, $http, postData);
+                });
+            }, function (err) {
+              console.log(err);
+            });
+        };
+
+        $scope.loginWithGPlus = function () {
+            GooglePlus.login().then(function (authResult) {
+                console.log(authResult);
+  
+                GooglePlus.getUser().then(function (user) {
+                  	//console.log(user);
+                  	var postData = {
+						fbName:		user.name,
+						fbEmail:	user.email,
+						fbID:		user.id
+					};
+					submitAuthInfo($scope, $http, postData);
+                });
+            }, function (err) {
+              console.log(err);
+            });
+        };
+    };
+    
 	
 	var setupFaceBook = function($scope, $http) {
 		window.fbAsyncInit = function() {
@@ -734,7 +773,7 @@
 	 * 50.1 Newslogue Angular Application
 	 */
 
-	var nlapp = angular.module("nlapp", ['ngSanitize', 'infinite-scroll']);
+	var nlapp = angular.module("nlapp", ['ngSanitize', 'infinite-scroll', 'googleplus']);
 
 	nlapp.config(function($httpProvider) {
 	    //Enable cross domain calls
@@ -749,18 +788,26 @@
 	nlapp.config(function($locationProvider) {
         $locationProvider.html5Mode(true);
     });
+
+    nlapp.config(['GooglePlusProvider', function(GooglePlusProvider) {
+         GooglePlusProvider.init({
+           clientId: '922170667487-ekqk6omib5b4gjo1mqtndji7lelq1isq.apps.googleusercontent.com',
+           apiKey: 'goplusAuth'
+         });
+    }]);
 	
 	/**
 	 * 50.2 Controller for Index Page
 	 */
 	
-	nlapp.controller("IndexController", function($scope, $http){
+	nlapp.controller("IndexController", function($scope, $http, GooglePlus){
 		/**
 		 * setup head, header, login/logout
 		 */
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
+		setupGplus($scope, $http, GooglePlus);
 		
 		/**
 		 * setup scope models specific to index page
@@ -802,13 +849,14 @@
 	 * 50.3 Controller for Debate Page
 	 */
 
-	nlapp.controller("DebateController", function($scope, $http){
+	nlapp.controller("DebateController", function($scope, $http, GooglePlus){
 		/**
 		 * setup head, header, login/logout
 		 */
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
+		setupGplus($scope, $http, GooglePlus);
 
 		/**
 		 * setup scope models specific to debate page
@@ -876,10 +924,11 @@
 	/**
 	 * 50.4 Controller for Sign Up Page
 	 */
-	nlapp.controller("SignupController", function($scope, $http){
+	nlapp.controller("SignupController", function($scope, $http, GooglePlus){
 		getAuthInfo($scope, $http);
 		setupLoginForm($scope, $http);
 		setupFaceBook($scope, $http);
+		setupGplus($scope, $http, GooglePlus);
 		
 		$scope.goHome = goHome;
 
