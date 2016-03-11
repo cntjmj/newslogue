@@ -24,8 +24,8 @@
 
 
 <div id="about-text">
-        <h1>THE NEW WAY FOR DEBATE</h1>
-       <div><p>Newslogue empowers its users to view the world from another perspective. By using social media we create mutual understandings where people share their thoughts and perspectives.</p><p>We aim to arm users with informed and educated viewpoints from diverse backgrounds, ethnicities, cultures and nationalities.</p></div>
+        <h1>THE NEW WAY TO DEBATE</h1>
+       <div><p>Newslogue empowers its users to view the world from another perspective. By using social media we create mutual understanding where people share their thoughts and perspectives.</p><p>We aim to arm users with informed and educated viewpoints from diverse backgrounds, ethnicities, cultures and nationalities.</p></div>
 </div>
 
 <div>
