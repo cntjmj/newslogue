@@ -42,7 +42,7 @@
           </form><br>
 	    </section>
 	    <section id="company_info">
-			<h2>COMPANY INFORMATIONS</h2>
+			<h2>COMPANY INFORMATION</h2>
 			<div class="comp-info">
 				<div class="comp-address">NEWSLOGUE<br />912/530 LITTLE COLLINS ST.<br />MELBOURNE, VIC 3000<br />SERVICE@NEWSLOGUE.COM<br />(03) 9909 7099</div>
 				<!--div class="comp-google"><i class="fa fa-map-marker fa-4x"></i><br/><a href="#">FIND US ON GOOGLE MAPS</a></div-->

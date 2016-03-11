@@ -36,7 +36,7 @@ a{
 		<img src="logo.jpg" >
 		<p style="color:#FFF;">Community Sourced Debates</p>
 		
-		<p style="color:#FFF;">Please visit us using mobile device.<!--Newslogue is under periodical maintenance status.--></p>
+		<p style="color:#FFF;">Please visit us using your mobile device.<!--Newslogue is under periodical maintenance status.--></p>
 	</a>
 </div>
 </body>
