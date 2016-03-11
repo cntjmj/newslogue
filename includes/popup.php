@@ -104,7 +104,7 @@
 
 		<div class="tnc-popup popup">
 			<a href="javascript:;" class="closepopup-btn"><i class="icomo-close"></i></a>
-			<h2>Terms & Condition</h2>
+			<h2>Terms & Conditions</h2>
 			<p class="tnc-sub-title">
 				Acknowledgment and acceptance of General Conditions
 			</p>
