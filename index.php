@@ -33,7 +33,8 @@ a{
 <body>
 <div style="width:600px; height:100px; position:absolute; left:50%; top:50%; margin-left:-300px; margin-top:-50px; text-align:center;">
 	<a href="mailto:joewong@newslogue.com" target="_blank">
-		<img src="logo.jpg" >
+		<!--img src="logo.jpg" -->
+		<img src="png_desktop.png" >
 		<p style="color:#FFF;">Community Sourced Debates</p>
 		
 		<p style="color:#FFF;">Please visit us using your mobile device.<!--Newslogue is under periodical maintenance status.--></p>
